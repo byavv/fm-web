@@ -13,7 +13,7 @@ const webpackMerge = require('webpack-merge'),
 module.exports = function (env) {
 
     const client_for_browser = {
-        target: 'web',      
+        target: 'web',
         module: {
             loaders: [
                 { test: /\.css$/, loader: "raw!postcss" },
@@ -42,7 +42,7 @@ module.exports = function (env) {
         },
         output: {
             path: __dirname + '/build/client',
-            filename: (env == 'development') ? "[name].[hash].js" : "[name].js",        
+            filename: (env == 'development') ? "[name].js" : "[name].[hash].js",
             pathinfo: false,
             publicPath: '/static',
         },
@@ -52,7 +52,7 @@ module.exports = function (env) {
              * Description: Extracts required entry into separate file. Used to avoid 'inline' css in javascript code.
              * See: https://github.com/webpack/extract-text-webpack-plugin
              */
-            new ExtractTextPlugin((env == 'development') ? 'assets/styles/[name].[hash].css' : 'assets/styles/[name].css'),
+            new ExtractTextPlugin((env == 'development') ? 'assets/styles/[name].css' : 'assets/styles/[name].[hash].css'),
             /*
              * Plugin: HtmlWebpackPlugin
              * Description: Automatically adds generated bundles paths to your html file.
@@ -77,7 +77,7 @@ module.exports = function (env) {
             new CopyWebpackPlugin([
                 { from: 'client/assets/img', to: 'assets/img' },
                 { from: 'client/assets/vendors', to: 'assets/vendors' }
-            ]),            
+            ]),
             /*
              * Plugin: DefinePlugin
              * Description:  Define user's variables. 

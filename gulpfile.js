@@ -28,8 +28,8 @@ gulp.task("build:client", (done) => {
     var config = require("./webpack.config")();
     webpack(config.client).run(onWebpackCompleted(done));
 });
-gulp.task("build", ['build:client'], (done) => {
-    runSequence(['build:server'], done);
+gulp.task("build", ['clean'], (done) => {
+    runSequence(["build:client", "build:server"], done);
 });
 gulp.task("build:production", (done) => {
     var config = require("./webpack.config")('production');
