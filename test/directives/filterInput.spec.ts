@@ -1,4 +1,4 @@
-import {describe, xdescribe, it, injectAsync, beforeEach, beforeEachProviders, async, fakeAsync, tick}
+import {describe, xdescribe, it, inject, beforeEach, beforeEachProviders, async, fakeAsync, tick}
 from '@angular/core/testing';
 import {
     ComponentFixture,
@@ -6,7 +6,6 @@ import {
 } from '@angular/compiler/testing';
 import {Component, Output, EventEmitter} from '@angular/core';
 import {DebounceInput} from '../../client/app/shared/directives';
-import {dispatchEvent} from '@angular/platform-browser/testing';
 import {By} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 
@@ -45,7 +44,7 @@ describe('Directive: input for filters panel', () => {
         TestComponentBuilder
     ]);
 
-    beforeEach(injectAsync([TestComponentBuilder], tcb => {
+    beforeEach(inject([TestComponentBuilder], tcb => {
         return tcb
             .createAsync(Container)
             .then(f => {

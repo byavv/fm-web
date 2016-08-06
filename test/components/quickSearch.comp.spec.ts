@@ -1,13 +1,12 @@
 import {provide, ApplicationRef, Component, PLATFORM_DIRECTIVES} from '@angular/core';
 import {FORM_PROVIDERS, FormBuilder} from '@angular/common';
 import {it, xit, describe, expect, afterEach, 
-    beforeEach, async, inject, injectAsync, beforeEachProviders} from '@angular/core/testing';
+    beforeEach, async, inject, beforeEachProviders} from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {QuickSearchComponent} from "../../client/app/quickSearch/components/quickSearchBase";
 import { APP_SERVICES_PROVIDERS, AppController, Api } from '../../client/app/shared/services';
 import {setBaseTestProviders} from '@angular/core/testing';
 import { MockRouter, MockAppController, MockApiService } from '../helpers/mocks';
-import {dispatchEvent} from '@angular/platform-browser/testing';
 import {Router} from '@angular/router-deprecated';
 import {Subject, Observable} from 'rxjs';
 
@@ -45,7 +44,7 @@ describe('COMPONENTS TESTS', () => {
             spyOn(apiBackEnd, 'getMakerModels').and.returnValue(Observable.of([]));
            
         }));
-        beforeEach(injectAsync([TestComponentBuilder], (tcb: TestComponentBuilder) => {
+        beforeEach(inject([TestComponentBuilder], (tcb: TestComponentBuilder) => {
             return tcb
                 .createAsync(QuickSearchComponent)
                 .then(fixture => {

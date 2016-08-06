@@ -3,7 +3,6 @@ import {
     inject,
     async,
     it,
-    injectAsync,
     beforeEach, fakeAsync
 } from '@angular/core/testing';
 
