@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
 import {FORM_DIRECTIVES, Control} from '@angular/common';
-import {ROUTER_DIRECTIVES, RouteParams} from '@angular/router-deprecated';
 import {Api} from '../../../../shared/services/';
 import {Observable, Subscription} from 'rxjs';
 import {ConverterProvider, convertToView, FilterComponent, MakerConverter}  from '../../../../shared/lib/';

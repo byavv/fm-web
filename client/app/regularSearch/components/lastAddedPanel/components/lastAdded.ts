@@ -1,7 +1,7 @@
 import {Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit} from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {TrackerApi} from '../services/trackerApi';
-import {ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 import {LoaderComponent} from "../../../../shared/components/loader/loader";
 
 @Component({

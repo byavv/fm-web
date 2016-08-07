@@ -7,7 +7,7 @@ import {QuickSearchComponent} from "../../client/app/quickSearch/components/quic
 import { APP_SERVICES_PROVIDERS, AppController, Api } from '../../client/app/shared/services';
 import {setBaseTestProviders} from '@angular/core/testing';
 import { MockRouter, MockAppController, MockApiService } from '../helpers/mocks';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Subject, Observable} from 'rxjs';
 
 

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Response} from '@angular/http';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 //let messageKeys = require('../../../../shared/index').keys;
 import {Identity} from'./identity';
 import {Storage} from'./storage';

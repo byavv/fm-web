@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, QueryList} from "@angular/core";
-import {RouteParams, Router, RouteConfig, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from "@angular/router";
 import {STEP_COMPONENTS} from "./steps";
 import {MasterController} from "../../services/masterController";
 import {UsersBackEndApi} from "../../services/usersBackEndApi";
@@ -63,13 +63,14 @@ export class MasterBaseComponent {
     loading: boolean = true;
     constructor(
         private router: Router,
-        private params: RouteParams,
+         private activeRoute: ActivatedRoute,
+     //   private params: RouteParams,
         private master: MasterController,
         private userBackEnd: UsersBackEndApi,
         private api: Api,
         private identity: Identity) {
         // new or update
-        this.id = this.params.get("id");
+        this.id = this.activeRoute.snapshot.params['id']//this.params.get("id");
         if (this.id) {
             this.api.getCar(this.id).subscribe((car: Car) => {
                 this.master.init$.next(car);

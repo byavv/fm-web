@@ -3,7 +3,7 @@ const express = require('express'),
     path = require('path');
 
 const http_port = process.env.HTTP_PORT || 3000
-    , etcd_host = process.env.ETCD_HOST || '192.168.99.100'
+    , etcd_host = process.env.ETCD_HOST || 'localhost'
     , proxy_url = process.env.PROXY_URL || 'http://localhost:3001';
 
 const registry = require('etcd-registry')(`${etcd_host}:4001`);
@@ -11,26 +11,30 @@ const registry = require('etcd-registry')(`${etcd_host}:4001`);
 import 'angular2-universal/polyfills';
 import { Http } from '@angular/http';
 import { Footer } from './components/footer';
+// Angular 2 Universal
 import {
-    provide,
-    enableProdMode,
-    expressEngine,
     REQUEST_URL,
     ORIGIN_URL,
-    BASE_URL,
-    NODE_ROUTER_PROVIDERS,
     NODE_LOCATION_PROVIDERS,
     NODE_HTTP_PROVIDERS,
-    NODE_PRELOAD_CACHE_HTTP_PROVIDERS
+    ExpressEngineConfig,
+    expressEngine
 } from 'angular2-universal';
+// Angular 2
+import { enableProdMode, provide } from '@angular/core';
+
 import {
     TranslateService,
     TranslateLoader,
     TranslateStaticLoader
 } from "ng2-translate/ng2-translate";
+import { provideRouter } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
+// Application
+import { routes } from '../client/app/routes';
 // Root app Component
-import {App} from '../client/app/app';
+import { App } from '../client/app/app';
 
 // Disable Angular 2's "development mode".
 // See: https://angular.io/docs/ts/latest/api/core/enableProdMode-function.html
@@ -57,13 +61,13 @@ function ngApp(req, res) {
     res.render('index', {
         directives: [App, Footer],
         platformProviders: [
-            provide(ORIGIN_URL, { useValue: proxy_url }),
-            provide(BASE_URL, { useValue: baseUrl }),
+            { provide: ORIGIN_URL, useValue: proxy_url },
+            { provide: APP_BASE_HREF, useValue: baseUrl },
         ],
         providers: [
-            NODE_ROUTER_PROVIDERS,
+            NODE_HTTP_PROVIDERS,
+            provideRouter(routes),
             NODE_LOCATION_PROVIDERS,
-            NODE_PRELOAD_CACHE_HTTP_PROVIDERS,
             provide(REQUEST_URL, { useValue: url }),
             provide(TranslateLoader, {
                 useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),

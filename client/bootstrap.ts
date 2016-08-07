@@ -1,27 +1,41 @@
+// The first thing we should do
 import 'angular2-universal/polyfills';
-import { provide, PLATFORM_DIRECTIVES } from '@angular/core';
+// Angular 2
+import { provide, PLATFORM_DIRECTIVES, enableProdMode } from '@angular/core';
 import { Http } from '@angular/http';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { provideRouter } from '@angular/router';
+import { HTTP_PROVIDERS } from '@angular/http';
+// Angular2-universal
+import { prebootComplete } from 'angular2-universal';
+// i18n
 import {
     TranslateLoader,
     TranslateStaticLoader,
     TranslateService
 } from "ng2-translate/ng2-translate";
-import {prebootComplete} from 'angular2-universal';
-import {bootstrap, enableProdMode, BROWSER_ROUTER_PROVIDERS, BROWSER_HTTP_PROVIDERS} from 'angular2-universal';
-
-import {App} from './app/app';
-import {InertLink} from "./app/shared/directives";
+// Redux
+import { provideStore } from '@ngrx/store';
+// Application
+import { App } from './app/app';
+import { InertLink } from "./app/shared/directives";
+import { routes } from './app/routes';
 
 const PROVIDERS = [
-    ...BROWSER_HTTP_PROVIDERS,
-    ...BROWSER_ROUTER_PROVIDERS,
+    ...HTTP_PROVIDERS,
+    provideRouter(routes),
     provide(TranslateLoader, {
         useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),
         deps: [Http]
     }),
     provide(PLATFORM_DIRECTIVES, { useValue: InertLink, multi: true })
 ];
+
 enableProdMode();
-bootstrap(App, PROVIDERS)
-    .then(prebootComplete)
-    .catch(console.error)
+
+document.addEventListener('DOMContentLoaded', () => {
+    bootstrap(App, PROVIDERS)
+        .then(prebootComplete)
+        .catch(console.error)
+});
+

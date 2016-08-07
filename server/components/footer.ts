@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES, Router} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',

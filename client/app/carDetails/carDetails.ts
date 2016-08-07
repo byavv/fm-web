@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Api} from '../shared/services';
-import {ROUTER_DIRECTIVES, RouteParams} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
 import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 @Component({
     selector: 'carDetails',
@@ -13,11 +13,11 @@ export class CarDetailsComponent implements OnInit {
         images: []
     };
 
-    constructor(private apiService: Api, private params: RouteParams) { }
+    constructor(private apiService: Api, private activeRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.apiService
-            .getCar(this.params.get('id'))
+            .getCar(/*this.params.get('id')*/this.activeRoute.snapshot.params['from'])
             .subscribe((car: any) => {
                 this.car = car;
             })

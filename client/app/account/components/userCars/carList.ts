@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UsersBackEndApi} from "../../services/usersBackEndApi"
-import {ROUTER_DIRECTIVES} from "@angular/router-deprecated";
+import {ROUTER_DIRECTIVES} from "@angular/router";
 import {Car} from '../../../shared/models';
 import {LoaderComponent} from "../../../shared/components/loader/loader";
 import {ReplaySubject, Observable} from 'rxjs';

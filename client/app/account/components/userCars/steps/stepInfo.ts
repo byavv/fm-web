@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, Input, EventEmitter, OnDestroy, Host, Optional} from '@angular/core';
-import {Router, RouteParams, OnDeactivate} from "@angular/router-deprecated";
+import {Router} from "@angular/router";
 import {FORM_DIRECTIVES, ControlGroup, Validators, FormBuilder} from '@angular/common';
 import {ShowError} from '../../../directives/showError';
 

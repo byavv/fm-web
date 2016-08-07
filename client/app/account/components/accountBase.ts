@@ -1,8 +1,5 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router, RouteConfig, ROUTER_DIRECTIVES, OnActivate, Instruction} from "@angular/router-deprecated";
-import {ProfileComponent} from './personal/personal';
-import {AccountComponent} from './account/account';
-import {UserCarsComponent} from './userCars/userCarsBase';
+import {Router, ROUTER_DIRECTIVES} from "@angular/router";
 import {UsersBackEndApi} from "../services/usersBackEndApi"
 import {AuthApi} from "../../shared/services/authBackEndApi"
 import {Subscription} from "rxjs";
@@ -46,20 +43,18 @@ import {Subscription} from "rxjs";
         }        
     `]
 })
-@RouteConfig([
+/*@RouteConfig([
     { path: '/profile', name: 'Profile', component: ProfileComponent },
     { path: '/account', name: 'Account', component: AccountComponent },
     { path: '/cars/...', name: 'MyCars', component: UserCarsComponent, useAsDefault: true }
-])
-export class PersonalBase implements OnInit, OnActivate, OnDestroy {
+])*/
+export class AccountBase implements OnInit, OnDestroy {
     private _subscr: Subscription;
 
     constructor(private authBackEnd: AuthApi) { }
-    ngOnInit() { }
-
-    routerOnActivate() {
+    ngOnInit() { 
         this._subscr = this.authBackEnd.authorize().subscribe(() => { });
-    }
+    }  
 
     ngOnDestroy() {
         if (this._subscr)

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Api} from '../../shared/services';
-import {RouteParams, Router, OnReuse, ComponentInstruction} from '@angular/router-deprecated';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Subject, Observable} from "rxjs";
 
 import {AppController} from "../../shared/services";
@@ -36,7 +36,7 @@ import {SizeSpy} from "../directives/rectSpy"
     providers: [SEARCH_SERVICES_PROVIDERS],
     styles: [require('./component.scss')]
 })
-export class CarsSearchComponent implements OnReuse, OnInit {
+export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
     found$: Subject<Array<any>> = new Subject<Array<any>>();
     totalCount: number;
     loading: boolean;
@@ -44,23 +44,32 @@ export class CarsSearchComponent implements OnReuse, OnInit {
     constructor(
         private apiService: Api,
         private router: Router,
-        private params: RouteParams,
+        // private params: RouteParams,
+        private activatedRoute: ActivatedRoute,
         private filterController: FilterController,
         private totalCounter: TotalCounter,
         private appController: AppController
     ) { }
 
-    routerCanReuse() {
-        return true;
-    }
-    routerOnReuse(instruction: ComponentInstruction) {
-        this.appController.init$.subscribe(() => {
-            this._search(this.filterController.updateStateFromRoute(instruction.params));
-        })
-    }
+    /*  routerCanReuse() {
+          return true;
+      }*/
+    /* routerOnReuse(instruction: ComponentInstruction) {
+         this.appController.init$.subscribe(() => {
+             this._search(this.filterController.updateStateFromRoute(instruction.params));
+         })
+     }*/
     ngOnInit() {
+        // first time 
+        this.router.routerState.queryParams.skip(1).subscribe(params => {
+            this._search(this.filterController.updateStateFromRoute(Object.assign({}, params)));
+            //  this._search(this.filterController.updateStateFromRoute(Object.assign({}, this.activatedRoute.snapshot.params, this.router.routerState.snapshot.queryParams)/*this.params.params*/));
+        })
+        this.activatedRoute.params.subscribe((params) => {
+            console.log(params)
+        })
         this.appController.init$.subscribe(() => {
-            this._search(this.filterController.updateStateFromRoute(this.params.params));
+            this._search(this.filterController.updateStateFromRoute(Object.assign(this.activatedRoute.snapshot.params, this.router.routerState.snapshot.queryParams)/*this.params.params*/));
         })
     }
     private _search(filter) {
@@ -81,11 +90,12 @@ export class CarsSearchComponent implements OnReuse, OnInit {
                 console.log(err);
             })
     }
-
+    // happens when any filter value changes
     doSearch(value) {
         if (value) {
             this.filterController.filterState = value;
-            this.router.navigate(['SearchList', this.filterController.convertToRouteParams()]);
+            const searchPrams = this.filterController.convertToRouteParams();
+            this.router.navigate(['/search/', searchPrams.maker], { queryParams: searchPrams });
         }
     }
 }
