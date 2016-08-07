@@ -7,7 +7,7 @@ import {
 } from '@angular/core/testing';
 
 import { BaseRequestOptions, Http, Request, Response, ResponseOptions} from '@angular/http';
-import { Router } from '@angular/router-deprecated';
+import { Router } from '@angular/router';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { provide, Injector } from '@angular/core';
 import { Observable, ReplaySubject } from "rxjs";

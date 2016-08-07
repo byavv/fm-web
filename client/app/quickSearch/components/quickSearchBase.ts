@@ -1,6 +1,6 @@
 import {Component, OnInit, EventEmitter, OnDestroy} from '@angular/core';
 import {FORM_DIRECTIVES, Control, ControlGroup, FormBuilder} from '@angular/common';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {Api} from '../../shared/services/backEndApi';
 import {Observable, Subscription, Subject} from 'rxjs';
 import {AppController} from '../../shared/services/';
@@ -121,6 +121,10 @@ export class QuickSearchComponent implements OnDestroy {
         let searchRequest = Object.assign(model, query, { maker: query.maker.name })
 
         let routeParams = convertToRoute(this.appController.converters, searchRequest);
-        this.router.navigate(['SearchList', routeParams]);
+        const queryParams = {
+            'year': routeParams.year, price: routeParams.price
+        };
+        this.router.navigate([`/search/${routeParams.maker}`], { queryParams: queryParams });
+        // this.router.navigate(["/search", routeParams.maker, routeParams.year, routeParams.price]);
     }
 }

@@ -5,13 +5,13 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label for="maker">Made by</label>
-                        <select class="form-control" name="maker" id="maker" ngControl="maker" [(ngModel)]='maker' [disabled]='loading'>
+                        <select class="form-control" name="maker" id="maker" ngControl="maker" [(ngModel)]='maker' [attr.disabled]='loading'>
                         <option *ngFor="let maker of makers" [ngValue]="maker">{{maker.name}}</option>
                     </select>
                         <show-error *ngIf="submitted" control="maker" [errors]="['required']"></show-error>
                     </div>
                     <div class="col-sm-6"><label for="maker">Model</label>
-                        <select class="form-control" name="model" id="model" ngControl="model" [(ngModel)]='model' [disabled]="loading || !maker">
+                        <select class="form-control" name="model" id="model" ngControl="model" [(ngModel)]='model' [attr.disabled]="loading || !maker">
                         <option *ngFor="let model of models" [ngValue]="model">{{model.name}}</option>
                     </select>
                         <show-error *ngIf="submitted" control="model" [errors]="['required']"></show-error>

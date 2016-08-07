@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {UsersBackEndApi} from "../../services/usersBackEndApi"
 import {Api, Identity} from "../../../shared/services";
 import {ShowError} from '../../directives/showError';

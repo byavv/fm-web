@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Control, ControlGroup} from '@angular/common';
-import {Router} from '@angular/router-deprecated';
+import {Router} from '@angular/router';
 import {UsersBackEndApi} from "../../services/usersBackEndApi"
 import {Api, Identity} from "../../../shared/services";
 
@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
     model: any = {};
     error;
     info;
-    constructor(private usersBackEnd: UsersBackEndApi, private identity: Identity, private router: Router) {
+    constructor(private usersBackEnd: UsersBackEndApi, private identity: Identity) {
         this.personalForm = new ControlGroup({
             name: new Control(),
             location: new Control()

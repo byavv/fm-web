@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Router, RouteParams} from "@angular/router-deprecated";
+import {Router} from "@angular/router";
 import {
     FORM_DIRECTIVES,
     ControlGroup,

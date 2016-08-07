@@ -1,16 +1,13 @@
-import {Component} from '@angular/core';
-import {Http} from '@angular/http';
-import {Router, RouteConfig, ROUTER_DIRECTIVES} from "@angular/router-deprecated";
-import {LoginComponent} from './authentication/components/login/login';
-import {SignUpComponent} from './authentication/components/signUp/signup';
-import {Identity, Storage, APP_SERVICES_PROVIDERS, AppController} from "./shared/services";
-import {Header} from "./shared/components/header/header";
-import {FORM_PROVIDERS} from '@angular/common';
-import {QuickSearchComponent} from "./quickSearch/components/quickSearchBase"
-import {CarsSearchComponent} from "./regularSearch/components/searchBase"
-import {CarDetailsComponent} from "./carDetails/carDetails";
-import {PersonalBase} from "./account/components/accountBase";
-import {LoaderComponent} from "./shared/components/loader/loader";
+import { Component } from '@angular/core';
+import { Http } from '@angular/http';
+
+import { Router, ROUTER_DIRECTIVES } from "@angular/router";
+import { Identity, Storage, APP_SERVICES_PROVIDERS, AppController } from "./shared/services";
+import { ACTIONS_PROVIDERS } from "./shared/actions";
+import { Header } from "./shared/components/header/header";
+import { FORM_PROVIDERS } from '@angular/common';
+import { AccountBase } from "./account/components/accountBase";
+import { LoaderComponent } from "./shared/components/loader/loader";
 
 // applied to the whole app
 import '../assets/styles/main.scss';
@@ -30,16 +27,9 @@ import '../assets/styles/main.scss';
       </div>
     </div>         
   `,
-  providers: [FORM_PROVIDERS, APP_SERVICES_PROVIDERS]
+  providers: [FORM_PROVIDERS, APP_SERVICES_PROVIDERS, ACTIONS_PROVIDERS]
 })
-@RouteConfig([
-  { path: '/', name: 'Home', component: QuickSearchComponent, useAsDefault: true },
-  { path: '/login', name: 'Login', component: LoginComponent },
-  { path: '/signup', name: 'SignUp', component: SignUpComponent },
-  { path: '/search/:maker/:year/:price/', name: 'SearchList', component: CarsSearchComponent },
-  { path: '/details/:id', name: 'Details', component: CarDetailsComponent },
-  { path: '/settings/...', name: 'Settings', component: PersonalBase },
-])
+
 export class App {
   loading = true;
   constructor(private identity: Identity, private storage: Storage, private appController: AppController) {

@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, Output, EventEmitter} from "@angular/core";
-import {Router, OnActivate} from "@angular/router-deprecated";
+import {Router} from "@angular/router";
 import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
 import {UsersBackEndApi} from "../../../services/usersBackEndApi";
 import {MasterController} from "../../../services/masterController";

@@ -1,5 +1,5 @@
 import {Component, Injector} from '@angular/core';
-import {Router, ROUTER_DIRECTIVES, OnActivate} from "@angular/router-deprecated";
+import {Router, ROUTER_DIRECTIVES} from "@angular/router";
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, ControlGroup, FormBuilder} from '@angular/common';
 import {Identity, AuthApi, Storage} from '../../../shared/services';
 
@@ -9,7 +9,7 @@ import {Identity, AuthApi, Storage} from '../../../shared/services';
     template: require("./signup.html")
 })
 
-export class SignUpComponent implements OnActivate {
+export class SignUpComponent {
     signInForm: ControlGroup;
     error: string;
     constructor(builder: FormBuilder,
@@ -30,12 +30,12 @@ export class SignUpComponent implements OnActivate {
             err => this.onError(err)
         );
     }
-
-    routerOnActivate() {
+// TODO:AUTH
+  /*  routerOnActivate() {
         if (this.identityService.user.isAuthenticated()) {
             this.router.navigate(['/Home']);
         }
-    }
+    }*/
 
     onSuccess(data) {
 
