@@ -15,7 +15,11 @@ import {LastAddedComponent} from './lastAddedPanel/components/lastAdded';
 import {ScrollSpy} from "../directives/scrollSpy";
 import {ResizeSpy} from '../directives/resizeSpy';
 import {StickyPanel} from "../directives/sticky";
-import {SizeSpy} from "../directives/rectSpy"
+import {SizeSpy} from "../directives/rectSpy";
+import { Store } from "@ngrx/store";
+
+import {AppState, getSearchState, getFoundVehicles} from "../../shared/reducers";
+import {SearchActions} from "../../shared/actions/searchAction";
 
 @Component({
     selector: 'carSearch',
@@ -37,10 +41,11 @@ import {SizeSpy} from "../directives/rectSpy"
     styles: [require('./component.scss')]
 })
 export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
-    found$: Subject<Array<any>> = new Subject<Array<any>>();
+   // found$: Subject<Array<any>> = new Subject<Array<any>>();
     totalCount: number;
     loading: boolean;
-
+    search
+    found$: Observable<any>;
     constructor(
         private apiService: Api,
         private router: Router,
@@ -48,8 +53,16 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
         private activatedRoute: ActivatedRoute,
         private filterController: FilterController,
         private totalCounter: TotalCounter,
-        private appController: AppController
-    ) { }
+        private appController: AppController,
+        private store: Store<AppState>,
+        private searchActions: SearchActions
+    ) {
+        this.found$ = store.let(getFoundVehicles());   
+        store.let(getSearchState()).subscribe((value)=>{
+            console.log(value)
+        }) 
+        
+    }
 
     /*  routerCanReuse() {
           return true;
@@ -84,7 +97,8 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
                 if (result) {
                     this.totalCount = +result[1].count;
                     this.totalCounter.next(this.totalCount);
-                    this.found$.next(result[0]);
+                   // this.found$.next(result[0]);
+                    this.store.dispatch(this.searchActions.update(result[0]));
                 }
             }, err => {
                 console.log(err);
@@ -92,7 +106,7 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
     }
     // happens when any filter value changes
     doSearch(value) {
-        if (value) {
+        if (value) {            
             this.filterController.filterState = value;
             const searchPrams = this.filterController.convertToRouteParams();
             this.router.navigate(['/search/', searchPrams.maker], { queryParams: searchPrams });

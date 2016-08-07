@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 
 import { Router, ROUTER_DIRECTIVES } from "@angular/router";
 import { Identity, Storage, APP_SERVICES_PROVIDERS, AppController } from "./shared/services";
+import { ACTIONS_PROVIDERS } from "./shared/actions";
 import { Header } from "./shared/components/header/header";
 import { FORM_PROVIDERS } from '@angular/common';
 import { AccountBase } from "./account/components/accountBase";
@@ -26,7 +27,7 @@ import '../assets/styles/main.scss';
       </div>
     </div>         
   `,
-  providers: [FORM_PROVIDERS, APP_SERVICES_PROVIDERS]
+  providers: [FORM_PROVIDERS, APP_SERVICES_PROVIDERS, ACTIONS_PROVIDERS]
 })
 
 export class App {
