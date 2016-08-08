@@ -5,6 +5,7 @@ import { combineReducers } from '@ngrx/store';
 import { vehicleReducer, VehicleState }  from './vehicleSearch';
 import * as vehicle  from './vehicleSearch';
 import * as query  from './routeQuery';
+import * as filter  from './filterPanel';
 import { filterReducer }  from './filterPanel';
 import { queryReducer, SearchQueryState }  from './routeQuery';
 import { FilterStateModel, FilterModel } from '../models';
@@ -12,13 +13,13 @@ import { FilterStateModel, FilterModel } from '../models';
 export interface AppState {
   vehicle: VehicleState,
   filter: FilterModel,
-  query: SearchQueryState  
+  query: SearchQueryState
 }
 
 export default combineReducers({
   vehicle: vehicleReducer,
   filter: filterReducer,
-  query: queryReducer 
+  query: queryReducer
 });
 
 export function getVehicleState() {
@@ -28,16 +29,20 @@ export function getVehicleState() {
 
 export function getFilterState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.filter);
+    .select(s => s.filter)    
 }
 
 export function getQueryState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.query)
+    .select(s => s.query)   
 }
 
 export function getQuery() {
   return compose(query.getQuery(), getQueryState());
+}
+
+export function getFilter() {
+  return compose(filter.getFilterState(), getFilterState());
 }
 
 export function getConvertedToRouteParamsQuery() {

@@ -11,18 +11,26 @@ export class FilterPanelActions {
     static DEACTIVATE = 'Deactivate filter';
     static CONVERT_FROM_ROUTE = '[FilterPanel] CONVERT FROM ROUTE';
 
-    applyFilters(query: Array<FilterModel>): Action {
+  /*  applyFilters(query: Array<FilterModel>): Action {
         return {
             type: FilterPanelActions.APPLY,
             payload: query
         };
-    }
-    convertFromRouteParams(params: any): Action {
+    }*/
+    updateStateFromRouteParams(params: any): Action {
         return {
             type: FilterPanelActions.CONVERT_FROM_ROUTE,
             payload: params
         };
     }
+
+  /*  searchComplete(results: Vehicle[]): Action {
+        return {
+            type: VehicleActions.SEARCH_COMPLETE_SUCCESS,
+            payload: results
+        };
+    }
+
     addFilter(filter: FilterModel): Action {
         return {
             type: FilterPanelActions.ADD,
@@ -40,5 +48,5 @@ export class FilterPanelActions {
             type: FilterPanelActions.DEACTIVATE,
             payload: filter
         };
-    }
+    }*/
 }

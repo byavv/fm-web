@@ -50,7 +50,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
     filterState$: Observable<any>
-    constructor(//private filterController: FilterController,
+    constructor(
         private store: Store<AppState>,
         private queryActions: QueryActions,
         private counter: TotalCounter,
@@ -60,9 +60,9 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this._counterSubscr = this.counter.subscribe((count: any) => {
             this.count = count;
-        })    
+        })
         this.filterState$ = this.store.let(getFilterState());
-        this._filterSrvSubscr = this.filterState$
+        this._filterSrvSubscr = this.filterState$           
             .subscribe((state) => {
                 if (!this.alreadyLoaded) {
                     this.filters = state;
@@ -78,14 +78,14 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     }
 
     onFilterValueChanged(newValue) {
-      //  if (newValue.immidiate) {
-         //   this.store.dispatch(this.queryActions.applyQueryParams(newValue.filterValue))
-            // this.filterController.filterState = newValue.filterValue;
-          //  this._doSearch();
-          this.changed.emit(newValue.filterValue)
-      //  } else {
-       //     this.pendingFilterState = Object.assign(this.pendingFilterState, newValue.filterValue);
-       // }
+        //  if (newValue.immidiate) {
+        //   this.store.dispatch(this.queryActions.applyQueryParams(newValue.filterValue))
+        // this.filterController.filterState = newValue.filterValue;
+        //  this._doSearch();
+        this.changed.emit(newValue.filterValue)
+        //  } else {
+        //     this.pendingFilterState = Object.assign(this.pendingFilterState, newValue.filterValue);
+        // }
         if (this.opened) {
             //  this.apiService.getCarsCount(Object.assign(this.filterController.filterState, this.pendingFilterState))
             //      .subscribe((result: any) => {
@@ -95,9 +95,9 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     }
 
     //_doSearch() {
-      //  this.changed.next(this.pendingFilterState);
-     //   this.pendingFilterState = {};
-   // }
+    //  this.changed.next(this.pendingFilterState);
+    //   this.pendingFilterState = {};
+    // }
 
     detailedSearch() {
         console.warn("This feature has not been implemented yet");

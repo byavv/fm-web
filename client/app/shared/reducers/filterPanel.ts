@@ -18,7 +18,7 @@ function convertersPipe() {
     return convertersArray;
 }
 
-export function filterReducer(state = initialState, action: Action): Array<FilterModel> {
+export function filterReducer(state/* = initialState*/, action: Action): Array<FilterModel> {
     switch (action.type) {
 
         case FilterPanelActions.APPLY: {
@@ -62,4 +62,10 @@ export function filterReducer(state = initialState, action: Action): Array<Filte
             return state;
         }
     }
+}
+
+export function getFilterState() {
+    return (state$: Observable<Array<FilterModel>>) => state$
+        .select((state) => state)
+        .filter(filter => !!filter)
 }

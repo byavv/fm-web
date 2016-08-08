@@ -15,7 +15,7 @@ export interface SearchQueryState {
 };
 
 const initialState: SearchQueryState = {
-    query: {},
+    query: undefined,
     navigate: false
 };
 
@@ -63,4 +63,5 @@ export function getConvertedToRouteQueryState() {
 export function getQuery() {
     return (state$: Observable<SearchQueryState>) => state$
         .select((state) => state.query)
+        .filter(query => !!query)
 }

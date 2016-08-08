@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Api} from '../../shared/services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subject, Observable} from "rxjs";
+import {Subject, Observable, Subscription} from "rxjs";
 
 import {AppController} from "../../shared/services";
 import {CarFilterPanelComponent} from './filterPanel/panelBase';
@@ -46,16 +46,18 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
     search
     found$: Observable<any>;
     state$: Observable<any>;
+    routSbscr: Subscription;
+    routSbscr2: Subscription;
     constructor(
         private apiService: Api,
         private router: Router,
-        private activatedRoute: ActivatedRoute,
+        private route: ActivatedRoute,
         private filterController: FilterController,
         private totalCounter: TotalCounter,
         private appController: AppController,
         private store: Store<AppState>,
         private vehicleActions: VehicleActions,
-        private queryActions: QueryActions,       
+        private queryActions: QueryActions,
         private filterPanelActions: FilterPanelActions
     ) {
         this.found$ = store.let(getFoundVehicles());
@@ -69,34 +71,51 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
              this.store.dispatch(this.queryActions.convertFromRouteParams(routeQuery));
              this.store.dispatch(this.filterPanelActions.convertFromRouteParams(routeQuery));
          })*/
-
-        this.router.routerState
-            .queryParams
+        this.routSbscr2 = this.route.params
             .delayWhen(() => this.appController.init$)
-            .subscribe(params => {
+            .subscribe((params) => {
                 const routeQuery = Object.assign({}, params);
                 this.store.dispatch(this.queryActions.updateStateFromRouteParams(routeQuery));
-                this.store.dispatch(this.filterPanelActions.convertFromRouteParams(routeQuery));
-            });
+                this.store.dispatch(this.filterPanelActions.updateStateFromRouteParams(routeQuery));
+            })
+
+        /* this.routSbscr = this.router.routerState
+             .queryParams
+             // .concatMapTo(this.appController.init$, (params, defaults)=>{
+             //     return params
+             //  })
+             .delayWhen(() => this.appController.init$)
+             //  .filter(params=>!!params['maker'])
+             .subscribe(params => {
+                 const routeQuery = Object.assign({}, params);
+                 this.store.dispatch(this.queryActions.updateStateFromRouteParams(routeQuery));
+                 this.store.dispatch(this.filterPanelActions.updateStateFromRouteParams(routeQuery));
+             });*/
         // search vehicles as soon as inner query state changes
         this.store.let(getQuery())
             .subscribe(state => {
-                if (!!state) {
-                    this._search(state);
-                }
+                this._search(state);
             });
+
         this.store.let(getConvertedToRouteParamsQuery())
             .filter(state => {
                 return state.navigate
             })
-            .map(state=>state.route)
-
+            .map(state => {
+                return state.route
+            })
             .subscribe((routeParams) => {
                 if (!!routeParams) {
-                    this.router.navigate(['/search/', routeParams.maker], { queryParams: routeParams });
+                    this.router.navigate(['/search/', routeParams.maker, routeParams]/*, { queryParams: routeParams }*/);
                 }
-            });       
+            });
     }
+
+    ngOnDestroy() {
+        //  this.routSbscr.unsubscribe();
+        this.routSbscr2.unsubscribe();
+    }
+
     private _search(filter) {
         this.loading = true;
         Observable.zip(
@@ -118,7 +137,7 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
     // happens when any filter value changes
     doSearch(value) {
         // if (!!value) {
-        this.store.dispatch(this.queryActions.updateStateFromFilterChange(value));      
+        this.store.dispatch(this.queryActions.updateStateFromFilterChange(value));
         //  }
     }
 }
