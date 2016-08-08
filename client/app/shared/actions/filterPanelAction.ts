@@ -5,15 +5,22 @@ import { FilterModel } from '../models';
 @Injectable()
 export class FilterPanelActions {
 
-    static UPDATE = 'Update panel';
+    static APPLY = 'Apply filters';
     static ADD = 'Add filter';
     static ACTIVATE = 'Activate filter';
     static DEACTIVATE = 'Deactivate filter';
+    static CONVERT_FROM_ROUTE = '[FilterPanel] CONVERT FROM ROUTE';
 
-    update(query: Array<FilterModel>): Action {
+    applyFilters(query: Array<FilterModel>): Action {
         return {
-            type: FilterPanelActions.UPDATE,
+            type: FilterPanelActions.APPLY,
             payload: query
+        };
+    }
+    convertFromRouteParams(params: any): Action {
+        return {
+            type: FilterPanelActions.CONVERT_FROM_ROUTE,
+            payload: params
         };
     }
     addFilter(filter: FilterModel): Action {

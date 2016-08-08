@@ -1,4 +1,21 @@
-export class FilterStateModel {
+export interface IFilterStateModel {
+    maker?: string;
+    model?: string;
+    yearUp?: number;
+    yearFrom?: number;
+    priceUp?: number;
+    priceFrom?: number;
+    colors?: Array<any>;
+    milageFrom?: number;
+    milageUp?: number;
+    sort?: string;
+    limit?: number;
+    page?: number;
+    options?: Array<string>;
+    engineTypes?: Array<string>;
+}
+
+export class FilterStateModel implements IFilterStateModel{
     maker: string;
     model: string;
     yearUp: number;

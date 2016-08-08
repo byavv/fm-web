@@ -37,7 +37,7 @@ export class StateFullComponent implements OnInit {
     private _sort;
     sortType: string;
     sortArow: string;
-   // canCollapse: boolean = true;
+    // canCollapse: boolean = true;
     closedByUser: boolean = false;
 
     private requireCollapse: boolean;
@@ -88,7 +88,8 @@ export class StateFullComponent implements OnInit {
             .do(() => { this.loading = true; })
             .subscribe((values: Array<any>) => {
                 this.loading = false;
-                var [searchFilters, searchOptions] = values;
+                const searchFilters = values[0];
+                const searchOptions = values[1];
                 this.activeFilters = searchFilters.filter(filterItem => filterItem.active);
                 if (!this.collapsed || this.sort !== searchOptions.sort || this.page !== +searchOptions.page || this.limit !== +searchOptions.limit) {
                     this.limit = +searchOptions.limit;

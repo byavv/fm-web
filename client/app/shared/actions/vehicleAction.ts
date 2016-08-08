@@ -3,37 +3,28 @@ import { Action } from '@ngrx/store';
 import { Vehicle } from '../models';
 
 @Injectable()
-export class SearchActions {
-
+export class VehicleActions {
   static SEARCH = '[Vehicle] Search';
   static SEARCH_COMPLETE_SUCCESS = '[Vehicle] Search Complete Success';
-  static SEARCH_COMPLETE_ERROR = '[Vehicle] Search Complete Error';
-  static UPDATE = '[Vehicle] FOUND';
+  static SEARCH_COMPLETE_ERROR = '[Vehicle] Search Complete Error'; 
 
   search(query: any): Action {
     return {
-      type: SearchActions.SEARCH,
+      type: VehicleActions.SEARCH,
       payload: query
-    };
-  }
-
-  update(vehicles: Array<any>): Action {
-    return {
-      type: SearchActions.UPDATE,
-      payload: vehicles
     };
   }
 
   searchComplete(results: Vehicle[]): Action {
     return {
-      type: SearchActions.SEARCH_COMPLETE_SUCCESS,
+      type: VehicleActions.SEARCH_COMPLETE_SUCCESS,
       payload: results
     };
   }
 
   searchError(error: any): Action {
     return {
-      type: SearchActions.SEARCH_COMPLETE_ERROR,
+      type: VehicleActions.SEARCH_COMPLETE_ERROR,
       payload: error
     };
   }

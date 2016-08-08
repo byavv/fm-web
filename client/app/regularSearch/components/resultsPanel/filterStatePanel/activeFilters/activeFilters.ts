@@ -5,6 +5,9 @@ import {FilterModel, FilterStateModel} from "../../../../../shared/models";
 import {AppController} from "../../../../../shared/services";
 import {ConverterBase} from "../../../../../shared/lib/converters/ConverterBase";
 import {Subscription} from "rxjs";
+import * as converters from "../../../../../shared/lib/converters";
+import { construct } from "../../../../../shared/lib/helpers";
+
 @Component({
     selector: 'activeFilters',
     template: require("./activeFilters.html"),
@@ -35,13 +38,17 @@ export class ActiveFiltersComponent {
     }
 
     constructor(private appController: AppController, private filterController: FilterController) {
-        this._converters = appController.converters;
+        let convertersArray = [];
+        Object.keys(converters).forEach((key) => {
+            convertersArray.push(construct(converters[key]));
+        });
+        this._converters = convertersArray;
     }
 
     resetFilter(filterId) {
         var converter = this._converters.find((converter) => converter.converterId === filterId);
         var o = {
-            [filterId]: converter.resetValue(),           
+            [filterId]: converter.resetValue(),
         }
         this.filterController.resetFilter$.next(o)
         //this.reset.next(converter.resetValue());

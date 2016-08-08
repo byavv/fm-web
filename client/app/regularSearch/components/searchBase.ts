@@ -18,8 +18,8 @@ import {StickyPanel} from "../directives/sticky";
 import {SizeSpy} from "../directives/rectSpy";
 import { Store } from "@ngrx/store";
 
-import {AppState, getSearchState, getFoundVehicles} from "../../shared/reducers";
-import {SearchActions} from "../../shared/actions/searchAction";
+import {AppState, getVehicleState, getFoundVehicles, getFilterState, getQuery, getQueryState, getConvertedToRouteParamsQuery} from "../../shared/reducers";
+import { QueryActions, FilterPanelActions, VehicleActions} from "../../shared/actions";
 
 @Component({
     selector: 'carSearch',
@@ -41,49 +41,61 @@ import {SearchActions} from "../../shared/actions/searchAction";
     styles: [require('./component.scss')]
 })
 export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
-   // found$: Subject<Array<any>> = new Subject<Array<any>>();
     totalCount: number;
     loading: boolean;
     search
     found$: Observable<any>;
+    state$: Observable<any>;
     constructor(
         private apiService: Api,
         private router: Router,
-        // private params: RouteParams,
         private activatedRoute: ActivatedRoute,
         private filterController: FilterController,
         private totalCounter: TotalCounter,
         private appController: AppController,
         private store: Store<AppState>,
-        private searchActions: SearchActions
+        private vehicleActions: VehicleActions,
+        private queryActions: QueryActions,       
+        private filterPanelActions: FilterPanelActions
     ) {
-        this.found$ = store.let(getFoundVehicles());   
-        store.let(getSearchState()).subscribe((value)=>{
-            console.log(value)
-        }) 
-        
+        this.found$ = store.let(getFoundVehicles());
+        this.state$ = Observable
+            .zip(store.let(getFilterState()), store.let(getQuery()));
     }
 
-    /*  routerCanReuse() {
-          return true;
-      }*/
-    /* routerOnReuse(instruction: ComponentInstruction) {
-         this.appController.init$.subscribe(() => {
-             this._search(this.filterController.updateStateFromRoute(instruction.params));
-         })
-     }*/
     ngOnInit() {
-        // first time 
-        this.router.routerState.queryParams.skip(1).subscribe(params => {
-            this._search(this.filterController.updateStateFromRoute(Object.assign({}, params)));
-            //  this._search(this.filterController.updateStateFromRoute(Object.assign({}, this.activatedRoute.snapshot.params, this.router.routerState.snapshot.queryParams)/*this.params.params*/));
-        })
-        this.activatedRoute.params.subscribe((params) => {
-            console.log(params)
-        })
-        this.appController.init$.subscribe(() => {
-            this._search(this.filterController.updateStateFromRoute(Object.assign(this.activatedRoute.snapshot.params, this.router.routerState.snapshot.queryParams)/*this.params.params*/));
-        })
+        /* this.router.routerState.queryParams.skip(1)..subscribe(params => {
+             const routeQuery = Object.assign({}, params);
+             this.store.dispatch(this.queryActions.convertFromRouteParams(routeQuery));
+             this.store.dispatch(this.filterPanelActions.convertFromRouteParams(routeQuery));
+         })*/
+
+        this.router.routerState
+            .queryParams
+            .delayWhen(() => this.appController.init$)
+            .subscribe(params => {
+                const routeQuery = Object.assign({}, params);
+                this.store.dispatch(this.queryActions.updateStateFromRouteParams(routeQuery));
+                this.store.dispatch(this.filterPanelActions.convertFromRouteParams(routeQuery));
+            });
+        // search vehicles as soon as inner query state changes
+        this.store.let(getQuery())
+            .subscribe(state => {
+                if (!!state) {
+                    this._search(state);
+                }
+            });
+        this.store.let(getConvertedToRouteParamsQuery())
+            .filter(state => {
+                return state.navigate
+            })
+            .map(state=>state.route)
+
+            .subscribe((routeParams) => {
+                if (!!routeParams) {
+                    this.router.navigate(['/search/', routeParams.maker], { queryParams: routeParams });
+                }
+            });       
     }
     private _search(filter) {
         this.loading = true;
@@ -97,19 +109,16 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
                 if (result) {
                     this.totalCount = +result[1].count;
                     this.totalCounter.next(this.totalCount);
-                   // this.found$.next(result[0]);
-                    this.store.dispatch(this.searchActions.update(result[0]));
+                    this.store.dispatch(this.vehicleActions.searchComplete(result[0]));
                 }
             }, err => {
-                console.log(err);
+                this.store.dispatch(this.vehicleActions.searchError(err));
             })
     }
     // happens when any filter value changes
     doSearch(value) {
-        if (value) {            
-            this.filterController.filterState = value;
-            const searchPrams = this.filterController.convertToRouteParams();
-            this.router.navigate(['/search/', searchPrams.maker], { queryParams: searchPrams });
-        }
+        // if (!!value) {
+        this.store.dispatch(this.queryActions.updateStateFromFilterChange(value));      
+        //  }
     }
 }
