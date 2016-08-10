@@ -5,17 +5,32 @@ import { FilterModel } from '../models';
 @Injectable()
 export class FilterPanelActions {
 
-    static UPDATE = 'Update panel';
+    static APPLY = 'Apply filters';
     static ADD = 'Add filter';
     static ACTIVATE = 'Activate filter';
     static DEACTIVATE = 'Deactivate filter';
+    static CONVERT_FROM_ROUTE = '[FilterPanel] CONVERT FROM ROUTE';
 
-    update(query: Array<FilterModel>): Action {
+  /*  applyFilters(query: Array<FilterModel>): Action {
         return {
-            type: FilterPanelActions.UPDATE,
+            type: FilterPanelActions.APPLY,
             payload: query
         };
+    }*/
+    updateStateFromRouteParams(params: any): Action {
+        return {
+            type: FilterPanelActions.CONVERT_FROM_ROUTE,
+            payload: params
+        };
     }
+
+  /*  searchComplete(results: Vehicle[]): Action {
+        return {
+            type: VehicleActions.SEARCH_COMPLETE_SUCCESS,
+            payload: results
+        };
+    }
+
     addFilter(filter: FilterModel): Action {
         return {
             type: FilterPanelActions.ADD,
@@ -33,5 +48,5 @@ export class FilterPanelActions {
             type: FilterPanelActions.DEACTIVATE,
             payload: filter
         };
-    }
+    }*/
 }

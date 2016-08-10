@@ -1,8 +1,7 @@
-import {FilterModel, FilterStateModel} from "../../models";
+import { FilterModel, FilterStateModel, IFilterStateModel } from "../../models";
 
-export function convertFromRoute(converters, routeParams): any {
+export function convertFromRoute(converters, routeParams): FilterStateModel {
     let filterState: FilterStateModel = new FilterStateModel();
-    let filters = new Array<FilterModel>();
     converters
         .forEach((converter) => {
             var converterParams = [];
@@ -11,16 +10,31 @@ export function convertFromRoute(converters, routeParams): any {
             });
             let filter = converter.convert(converterParams);
             Object.assign(filterState, filter.value);
-            filters.push(Object.assign({ id: converter.converterId }, filter));
+        
         });
     Object.assign(filterState,
         { page: +routeParams["page"] || 1 },
         { sort: routeParams["sort"] || "price-" },
         { limit: +routeParams["limit"] || 20 });
-    return [filterState, filters]
+    return filterState
 }
 
-export function convertToRoute(converters, filterState: FilterStateModel): any {
+export function buildFilterListFromRoute(converters, routeParams): Array<FilterModel> {
+    let filters = new Array<FilterModel>();
+    converters
+        .forEach((converter) => {
+            var converterParams = [];
+            converter.params.forEach((paramName) => {
+                converterParams.push(routeParams[paramName]);
+            });
+            let filter = converter.convert(converterParams);
+
+            filters.push(Object.assign({ id: converter.converterId }, filter));
+        });
+    return filters
+}
+
+export function convertToRoute(converters, filterState: IFilterStateModel): any {
     var route = {};
     converters
         .forEach((converter) => {

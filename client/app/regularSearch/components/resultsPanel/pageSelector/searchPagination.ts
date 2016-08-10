@@ -3,7 +3,9 @@ import {FilterController} from '../../../services/filterController';
 //import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 import {PaginationControlsCmp} from './_tempPaginationControl'
 import {Subscription} from "rxjs";
+import { Store } from "@ngrx/store";
 
+import {AppState, getQuery} from "../../../../shared/reducers";
 @Component({
     selector: 'searchPage',
     template: `    
@@ -36,11 +38,10 @@ export class PaginationComponent implements OnInit, OnDestroy {
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
 
-    constructor(private filterController: FilterController) { }
+    constructor(private store: Store<AppState>) { }
 
     ngOnInit() {
-        this._subscription = this.filterController
-            .updateFilterState$
+        this._subscription = this.store.let(getQuery())
             .subscribe((state) => {
                 this.currentPage = state.page;
                 this.limit = state.limit;

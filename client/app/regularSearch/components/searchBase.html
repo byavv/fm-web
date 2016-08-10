@@ -11,7 +11,7 @@
         <div scroll-spy #s='sSpy' [boundary]='sizeSpy.height + 55' class='search-panel'>           
             <div class='header' size #sizeSpy='size'>
                 <state-full
-                    [state]='filterController.state$'
+                    [state]='state$'
                     [totalCount]='totalCount'                     
                     (searchClick)='filterPanel.openPanel()'
                     (changed)="doSearch($event)">
@@ -23,7 +23,7 @@
                     [active]="(s.collapse$ | async) && (panelSizeSpy.height > bs4Spy.height)" 
                     bindWidthTo="central-column">
                 <state-summary
-                    [state]='filterController.state$'
+                    [state]='state$'
                     [totalCount]='totalCount'                     
                     (searchClick)='filterPanel.openPanel()'
                     (changed)="doSearch($event)">

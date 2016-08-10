@@ -86,7 +86,7 @@ export class FilterState implements OnInit {
             .subscribe((values: Array<any>) => {
                 this.loading = false;
                 var [searchFilters, searchOptions] = values;
-                this.activeFilters = searchFilters.filter(filterItem => filterItem.active);
+                this.activeFilters = searchFilters.filters.filter(filterItem => filterItem.active);
                 if (!this.collapsed || this.sort !== searchOptions.sort || this.page !== +searchOptions.page || this.limit !== +searchOptions.limit) {
                     this.limit = +searchOptions.limit;
                     this.sort = searchOptions.sort;

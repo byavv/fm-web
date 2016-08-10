@@ -4,11 +4,21 @@ import { Action } from '@ngrx/store';
 @Injectable()
 export class QueryActions {
 
-  static UPDATE = 'Update query';
-  update(query: string): Action {
+  static CONVERT_FROM_ROUTE = '[QUERY] CONVERT FROM VALUE';
+  static UPDATE_VALUE = '[QUERY] UPDATE NEW VALUE';
+ 
+  // update value and navigate
+  updateStateFromFilterChange(value: any): Action {
     return {
-      type: QueryActions.UPDATE,
-      payload: query
+      type: QueryActions.UPDATE_VALUE,
+      payload: value
     };
-  } 
+  }
+
+  updateStateFromRouteParams(params: any): Action {
+    return {
+      type: QueryActions.CONVERT_FROM_ROUTE,
+      payload: params,      
+    };
+  }
 }

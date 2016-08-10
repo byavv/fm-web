@@ -1,0 +1,97 @@
+import { Observable } from 'rxjs';
+import { Action } from '@ngrx/store';
+import { Vehicle } from '../models';
+import { FilterPanelActions } from '../actions/filterPanelAction';
+import { FilterModel } from "../../shared/models/";
+import * as converters from "../lib/converters";
+import { construct } from "../lib/helpers";
+import { ConverterBase } from "../lib/converters/ConverterBase";
+import {buildFilterListFromRoute} from "../../shared/lib/";
+
+export interface FilterState {
+    filter: Array<FilterModel>,
+    loaded: boolean,
+   // makers: Array<any>,
+  //  engineTypes: Array<any>,
+  //  colors: Array<any>
+};
+
+const initialState: FilterState = {
+    filter: [],
+    loaded: false,
+  //  makers: [],
+    
+};
+
+function convertersPipe() {
+    let convertersArray = [];
+    Object.keys(converters).forEach((key) => {
+        convertersArray.push(construct(converters[key]));
+    });
+    return convertersArray;
+}
+
+export function filterReducer(state = initialState, action: Action): FilterState {
+    switch (action.type) {
+
+        case FilterPanelActions.APPLY: {
+            return {
+                filter: [...action.payload],
+                loaded: true
+            }
+        }
+
+        case FilterPanelActions.ADD: {
+            return {
+                filter: [...state.filter, action.payload],
+                loaded: true
+            }
+        }
+
+        case FilterPanelActions.ACTIVATE: {
+            var index = state.filter.indexOf(action.payload);
+            let filter = state[index];
+            filter.active = true;
+            return {
+                filter: [
+                    ...state.filter.slice(0, index),
+                    filter,
+                    ...state.filter.slice(index + 1)
+                ], loaded: true
+            }
+        }
+
+        case FilterPanelActions.CONVERT_FROM_ROUTE: {
+            const routeParams = action.payload;
+            const converted = buildFilterListFromRoute(convertersPipe(), routeParams);
+            //  return Object.assign({}, state, converted);
+            return {
+                filter: [...converted],
+                loaded: true
+            }
+        }
+
+        case FilterPanelActions.DEACTIVATE: {
+            var index = state.filter.indexOf(action.payload);
+            let filter = state[index];
+            filter.active = false;
+            return {
+                filter: [
+                    ...state.filter.slice(0, index),
+                    filter,
+                    ...state.filter.slice(index + 1)
+                ], loaded: true
+            }
+        }
+
+        default: {
+            return state;
+        }
+    }
+}
+
+export function getFilterState() {
+    return (state$: Observable<FilterState>) => state$
+        .filter(state => state.loaded)
+        .select((state) => state.filter);
+}

@@ -5,6 +5,7 @@ import {Api} from '../../shared/services/backEndApi';
 import {Observable, Subscription, Subject} from 'rxjs';
 import {AppController} from '../../shared/services/';
 import {convertToRoute} from '../../shared/lib/';
+import * as converters from "../../shared/lib/converters";
 import {FilterStateModel} from '../../shared/models';
 
 @Component({
@@ -120,7 +121,7 @@ export class QuickSearchComponent implements OnDestroy {
         let model = new FilterStateModel();
         let searchRequest = Object.assign(model, query, { maker: query.maker.name })
 
-        let routeParams = convertToRoute(this.appController.converters, searchRequest);
+        let routeParams = convertToRoute(converters, searchRequest);
         const queryParams = {
             'year': routeParams.year, price: routeParams.price
         };

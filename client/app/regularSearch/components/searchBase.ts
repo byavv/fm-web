@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Api} from '../../shared/services';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Subject, Observable} from "rxjs";
+import {Subject, Observable, Subscription} from "rxjs";
 
 import {AppController} from "../../shared/services";
 import {CarFilterPanelComponent} from './filterPanel/panelBase';
@@ -18,8 +18,8 @@ import {StickyPanel} from "../directives/sticky";
 import {SizeSpy} from "../directives/rectSpy";
 import { Store } from "@ngrx/store";
 
-import {AppState, getSearchState, getFoundVehicles} from "../../shared/reducers";
-import {SearchActions} from "../../shared/actions/searchAction";
+import {AppState, getVehicleState, getFoundVehicles, getFilter, getQuery, getQueryState, getConvertedToRouteParamsQuery} from "../../shared/reducers";
+import { QueryActions, FilterPanelActions, VehicleActions} from "../../shared/actions";
 
 @Component({
     selector: 'carSearch',
@@ -40,51 +40,61 @@ import {SearchActions} from "../../shared/actions/searchAction";
     providers: [SEARCH_SERVICES_PROVIDERS],
     styles: [require('./component.scss')]
 })
-export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
-   // found$: Subject<Array<any>> = new Subject<Array<any>>();
+export class CarsSearchComponent implements OnInit {
     totalCount: number;
     loading: boolean;
     search
     found$: Observable<any>;
+    state$: Observable<any>
+    routSbscr: Subscription;
     constructor(
         private apiService: Api,
         private router: Router,
-        // private params: RouteParams,
-        private activatedRoute: ActivatedRoute,
+        private route: ActivatedRoute,
         private filterController: FilterController,
         private totalCounter: TotalCounter,
         private appController: AppController,
         private store: Store<AppState>,
-        private searchActions: SearchActions
+        private vehicleActions: VehicleActions,
+        private queryActions: QueryActions,
+        private filterPanelActions: FilterPanelActions
     ) {
-        this.found$ = store.let(getFoundVehicles());   
-        store.let(getSearchState()).subscribe((value)=>{
-            console.log(value)
-        }) 
-        
+        this.found$ = store.let(getFoundVehicles());
+        this.state$ = Observable
+            .zip(store.let(getFilter()), store.let(getQuery()));
     }
 
-    /*  routerCanReuse() {
-          return true;
-      }*/
-    /* routerOnReuse(instruction: ComponentInstruction) {
-         this.appController.init$.subscribe(() => {
-             this._search(this.filterController.updateStateFromRoute(instruction.params));
-         })
-     }*/
     ngOnInit() {
-        // first time 
-        this.router.routerState.queryParams.skip(1).subscribe(params => {
-            this._search(this.filterController.updateStateFromRoute(Object.assign({}, params)));
-            //  this._search(this.filterController.updateStateFromRoute(Object.assign({}, this.activatedRoute.snapshot.params, this.router.routerState.snapshot.queryParams)/*this.params.params*/));
-        })
-        this.activatedRoute.params.subscribe((params) => {
-            console.log(params)
-        })
-        this.appController.init$.subscribe(() => {
-            this._search(this.filterController.updateStateFromRoute(Object.assign(this.activatedRoute.snapshot.params, this.router.routerState.snapshot.queryParams)/*this.params.params*/));
-        })
+        this.routSbscr = this.route.params
+            .delayWhen(() => this.appController.init$)
+            .subscribe((params) => {
+                this.store.dispatch(this.queryActions.updateStateFromRouteParams(params));
+                this.store.dispatch(this.filterPanelActions.updateStateFromRouteParams(params));
+            });
+
+        this.store.let(getQuery())
+            .subscribe(state => {
+                this._search(state);
+            });
+
+        this.store.let(getConvertedToRouteParamsQuery())
+            .filter(state => {
+                return state.navigate
+            })
+            .map(state => {
+                return state.route
+            })
+            .subscribe((routeParams) => {
+                if (!!routeParams) {
+                    this.router.navigate(['/search/', routeParams.maker, routeParams]/*, { queryParams: routeParams }*/);
+                }
+            });
     }
+
+    ngOnDestroy() {
+        this.routSbscr.unsubscribe();
+    }
+
     private _search(filter) {
         this.loading = true;
         Observable.zip(
@@ -97,19 +107,16 @@ export class CarsSearchComponent implements /*OnReuse,*/ OnInit {
                 if (result) {
                     this.totalCount = +result[1].count;
                     this.totalCounter.next(this.totalCount);
-                   // this.found$.next(result[0]);
-                    this.store.dispatch(this.searchActions.update(result[0]));
+                    this.store.dispatch(this.vehicleActions.searchComplete(result[0]));
                 }
             }, err => {
-                console.log(err);
+                this.store.dispatch(this.vehicleActions.searchError(err));
             })
     }
     // happens when any filter value changes
     doSearch(value) {
-        if (value) {            
-            this.filterController.filterState = value;
-            const searchPrams = this.filterController.convertToRouteParams();
-            this.router.navigate(['/search/', searchPrams.maker], { queryParams: searchPrams });
-        }
+        // if (!!value) {
+        this.store.dispatch(this.queryActions.updateStateFromFilterChange(value));
+        //  }
     }
 }

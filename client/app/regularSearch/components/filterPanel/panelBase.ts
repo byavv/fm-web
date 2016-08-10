@@ -6,8 +6,10 @@ import {TotalCounter} from '../../services/totalCounter';
 import {Api} from "../../../shared/services";
 import {FilterModel, FilterStateModel} from "../../../shared/models";
 import {LoaderComponent} from "../../../shared/components/loader/loader";
-import {Subscription} from "rxjs";
-
+import {Subscription, Observable} from "rxjs";
+import { Store } from "@ngrx/store";
+import { AppState, getFilter } from "../../../shared/reducers";
+import { QueryActions } from "../../../shared/actions";
 @Component({
     selector: 'carFilterPanel',
     template: require("./panelBase.html"),
@@ -47,8 +49,10 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
 
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
-
-    constructor(private filterController: FilterController,
+    filterState$: Observable<any>
+    constructor(
+        private store: Store<AppState>,
+        private queryActions: QueryActions,
         private counter: TotalCounter,
         private apiService: Api,
         @ViewQuery("wrapper") private wrappers: QueryList<FilterWrapperComponent>) { }
@@ -57,14 +61,14 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
         this._counterSubscr = this.counter.subscribe((count: any) => {
             this.count = count;
         })
-        this._filterSrvSubscr = this.filterController
-            .updateFilterPanel$
-            .subscribe((filters) => {
+        this.filterState$ = this.store.let(getFilter());
+        this._filterSrvSubscr = this.filterState$           
+            .subscribe((state) => {
                 if (!this.alreadyLoaded) {
-                    this.filters = filters;
+                    this.filters = state;
                     this.alreadyLoaded = true;
                 }
-            });
+            })
     }
     ngOnDestroy() {
         if (this._filterSrvSubscr)
@@ -74,24 +78,26 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     }
 
     onFilterValueChanged(newValue) {
-        if (newValue.immidiate) {
-            this.filterController.filterState = newValue.filterValue;
-            this._doSerch();
-        } else {
-            this.pendingFilterState = Object.assign(this.pendingFilterState, newValue.filterValue);
-        }
+        //  if (newValue.immidiate) {
+        //   this.store.dispatch(this.queryActions.applyQueryParams(newValue.filterValue))
+        // this.filterController.filterState = newValue.filterValue;
+        //  this._doSearch();
+        this.changed.emit(newValue.filterValue)
+        //  } else {
+        //     this.pendingFilterState = Object.assign(this.pendingFilterState, newValue.filterValue);
+        // }
         if (this.opened) {
-            this.apiService.getCarsCount(Object.assign(this.filterController.filterState, this.pendingFilterState))
-                .subscribe((result: any) => {
-                    this.counter.next(+result.count);
-                })
+            //  this.apiService.getCarsCount(Object.assign(this.filterController.filterState, this.pendingFilterState))
+            //      .subscribe((result: any) => {
+            //           this.counter.next(+result.count);
+            //       })
         }
     }
 
-    _doSerch() {
-        this.changed.next(this.pendingFilterState);
-        this.pendingFilterState = {};
-    }
+    //_doSearch() {
+    //  this.changed.next(this.pendingFilterState);
+    //   this.pendingFilterState = {};
+    // }
 
     detailedSearch() {
         console.warn("This feature has not been implemented yet");

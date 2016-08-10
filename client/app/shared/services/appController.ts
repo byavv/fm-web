@@ -1,9 +1,9 @@
 import {Injectable, NgZone} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {ExtHttp} from './extHttp';
-import * as converters from "../lib/converters";
-import {construct} from "../lib/helpers";
-import {ConverterBase} from "../lib/converters/ConverterBase";
+//import * as converters from "../lib/converters";
+//import {construct} from "../lib/helpers";
+//import {ConverterBase} from "../lib/converters/ConverterBase";
 import {Api} from "./backEndApi";
 import {ReplaySubject, Observable} from "rxjs";
 
@@ -13,7 +13,7 @@ export class AppController {
     config: any = {
         apiBase: "https://localhost:3001" //todo get from data
     };
-    converters: Array<ConverterBase> = [];
+    //converters: Array<ConverterBase> = [];
     makers: Array<any> = [];
     engineTypes: Array<any> = [];
     // todo: car colors     
@@ -28,9 +28,9 @@ export class AppController {
     }
 
     _loadAppDefaults(doneCallback: (defaults: any) => void) {
-        Object.keys(converters).forEach((key) => {
-            this.converters.push(construct(converters[key]));
-        });
+       // Object.keys(converters).forEach((key) => {
+      //      this.converters.push(construct(converters[key]));
+      //  });
         Observable.zip(
             this._backEnd.getMakers(),
             this._backEnd.getEngineTypes(),

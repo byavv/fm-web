@@ -51,8 +51,7 @@ describe('App controller tests', () => {
     })));
     it('should init app converters, makers and enginetypes', async(inject([AppController], (appController: AppController) => {
         appController.start();
-        appController.init$.subscribe((value) => {
-            expect(appController.converters).toBeDefined();
+        appController.init$.subscribe((value) => {            
             expect(appController.makers.length).toBe(1);
             expect(appController.makers[0].name).toBe('fake');
             expect(appController.engineTypes.length).toBe(1);

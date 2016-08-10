@@ -1,13 +1,16 @@
 import { FilterPanelActions } from "./filterPanelAction";
 import { QueryActions } from "./queryAction";
-import { SearchActions } from "./searchAction";
+import { VehicleActions } from "./vehicleAction";
+import { CatalogActions } from "./catalogAction";
 
 export * from "./filterPanelAction";
 export * from "./queryAction";
-export * from "./searchAction";
+export * from "./vehicleAction";
+export * from "./catalogAction";
 
 export var ACTIONS_PROVIDERS: Array<any> = [
     FilterPanelActions,
     QueryActions,
-    SearchActions
+    VehicleActions,
+    CatalogActions
 ];

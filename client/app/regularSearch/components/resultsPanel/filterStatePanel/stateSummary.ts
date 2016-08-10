@@ -80,7 +80,8 @@ export class StateSummaryPanel implements OnInit {
             .do(() => { this.loading = true; })
             .subscribe((values: Array<any>) => {
                 this.loading = false;
-                var [searchFilters, searchOptions] = values;
+                const searchFilters = values[0];
+                const searchOptions = values[1];
                 if (!this.collapsed || this.sort !== searchOptions.sort || this.page !== +searchOptions.page || this.limit !== +searchOptions.limit) {
                     this.limit = +searchOptions.limit;
                     this.sort = searchOptions.sort;
