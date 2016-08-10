@@ -8,7 +8,7 @@ import {FilterModel, FilterStateModel} from "../../../shared/models";
 import {LoaderComponent} from "../../../shared/components/loader/loader";
 import {Subscription, Observable} from "rxjs";
 import { Store } from "@ngrx/store";
-import {AppState, getFilterState} from "../../../shared/reducers";
+import { AppState, getFilter } from "../../../shared/reducers";
 import { QueryActions } from "../../../shared/actions";
 @Component({
     selector: 'carFilterPanel',
@@ -61,7 +61,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
         this._counterSubscr = this.counter.subscribe((count: any) => {
             this.count = count;
         })
-        this.filterState$ = this.store.let(getFilterState());
+        this.filterState$ = this.store.let(getFilter());
         this._filterSrvSubscr = this.filterState$           
             .subscribe((state) => {
                 if (!this.alreadyLoaded) {
