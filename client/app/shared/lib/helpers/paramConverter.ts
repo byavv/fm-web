@@ -1,8 +1,7 @@
-import {FilterModel, FilterStateModel, IFilterStateModel} from "../../models";
+import { FilterModel, FilterStateModel, IFilterStateModel } from "../../models";
 
 export function convertFromRoute(converters, routeParams): FilterStateModel {
     let filterState: FilterStateModel = new FilterStateModel();
-  //  let filters = new Array<FilterModel>();
     converters
         .forEach((converter) => {
             var converterParams = [];
@@ -11,13 +10,13 @@ export function convertFromRoute(converters, routeParams): FilterStateModel {
             });
             let filter = converter.convert(converterParams);
             Object.assign(filterState, filter.value);
-          //  filters.push(Object.assign({ id: converter.converterId }, filter));
+        
         });
     Object.assign(filterState,
         { page: +routeParams["page"] || 1 },
         { sort: routeParams["sort"] || "price-" },
         { limit: +routeParams["limit"] || 20 });
-    return filterState//, filters]
+    return filterState
 }
 
 export function buildFilterListFromRoute(converters, routeParams): Array<FilterModel> {

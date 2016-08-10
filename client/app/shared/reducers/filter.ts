@@ -8,7 +8,20 @@ import { construct } from "../lib/helpers";
 import { ConverterBase } from "../lib/converters/ConverterBase";
 import {buildFilterListFromRoute} from "../../shared/lib/";
 
-const initialState: Array<FilterModel> = [];
+export interface FilterState {
+    filter: Array<FilterModel>,
+    loaded: boolean,
+   // makers: Array<any>,
+  //  engineTypes: Array<any>,
+  //  colors: Array<any>
+};
+
+const initialState: FilterState = {
+    filter: [],
+    loaded: false,
+  //  makers: [],
+    
+};
 
 function convertersPipe() {
     let convertersArray = [];
@@ -18,44 +31,57 @@ function convertersPipe() {
     return convertersArray;
 }
 
-export function filterReducer(state/* = initialState*/, action: Action): Array<FilterModel> {
+export function filterReducer(state = initialState, action: Action): FilterState {
     switch (action.type) {
 
         case FilterPanelActions.APPLY: {
-            return [...action.payload]
+            return {
+                filter: [...action.payload],
+                loaded: true
+            }
         }
 
         case FilterPanelActions.ADD: {
-            return [...state, action.payload]
+            return {
+                filter: [...state.filter, action.payload],
+                loaded: true
+            }
         }
 
         case FilterPanelActions.ACTIVATE: {
-            var index = state.indexOf(action.payload);
+            var index = state.filter.indexOf(action.payload);
             let filter = state[index];
             filter.active = true;
-            return [
-                ...state.slice(0, index),
-                filter,
-                ...state.slice(index + 1)
-            ]
+            return {
+                filter: [
+                    ...state.filter.slice(0, index),
+                    filter,
+                    ...state.filter.slice(index + 1)
+                ], loaded: true
+            }
         }
 
         case FilterPanelActions.CONVERT_FROM_ROUTE: {
             const routeParams = action.payload;
             const converted = buildFilterListFromRoute(convertersPipe(), routeParams);
             //  return Object.assign({}, state, converted);
-            return [...converted]
+            return {
+                filter: [...converted],
+                loaded: true
+            }
         }
 
         case FilterPanelActions.DEACTIVATE: {
-            var index = state.indexOf(action.payload);
+            var index = state.filter.indexOf(action.payload);
             let filter = state[index];
             filter.active = false;
-            return [
-                ...state.slice(0, index),
-                filter,
-                ...state.slice(index + 1)
-            ]
+            return {
+                filter: [
+                    ...state.filter.slice(0, index),
+                    filter,
+                    ...state.filter.slice(index + 1)
+                ], loaded: true
+            }
         }
 
         default: {
@@ -65,7 +91,7 @@ export function filterReducer(state/* = initialState*/, action: Action): Array<F
 }
 
 export function getFilterState() {
-    return (state$: Observable<Array<FilterModel>>) => state$
-        .select((state) => state)
-        .filter(filter => !!filter)
+    return (state$: Observable<FilterState>) => state$
+        .filter(state => state.loaded)
+        .select((state) => state.filter);
 }

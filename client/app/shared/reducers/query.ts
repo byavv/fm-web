@@ -11,12 +11,14 @@ import { ConverterBase } from "../lib/converters/ConverterBase";
 
 export interface SearchQueryState {
     query: IFilterStateModel,
-    navigate: boolean
+    navigate: boolean,
+    loaded: boolean
 };
 
 const initialState: SearchQueryState = {
-    query: undefined,
-    navigate: false
+    query: new FilterStateModel(),
+    navigate: false,
+    loaded: false
 };
 
 function convertersPipe() {
@@ -34,7 +36,8 @@ export function queryReducer(state = initialState, action: Action): SearchQueryS
             const converted = convertFromRoute(convertersPipe(), query);
             return Object.assign({}, state, {
                 query: converted,
-                navigate: false
+                navigate: false,
+                loaded: true
             });
         }
         case QueryActions.UPDATE_VALUE: {
@@ -57,11 +60,11 @@ export function getConvertedToRouteQueryState() {
                 route: convertToRoute(convertersPipe(), s.query),
                 navigate: s.navigate
             }
-        })
+        });
 }
 
 export function getQuery() {
     return (state$: Observable<SearchQueryState>) => state$
-        .select((state) => state.query)
-        .filter(query => !!query)
+        .filter(query => query.loaded)
+        .select((state) => state.query);
 }

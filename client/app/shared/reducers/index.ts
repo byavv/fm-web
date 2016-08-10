@@ -2,12 +2,12 @@ import { Observable } from 'rxjs/Observable';
 import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
 
-import { vehicleReducer, VehicleState }  from './vehicleSearch';
-import * as vehicle  from './vehicleSearch';
-import * as query  from './routeQuery';
-import * as filter  from './filterPanel';
-import { filterReducer }  from './filterPanel';
-import { queryReducer, SearchQueryState }  from './routeQuery';
+import { vehicleReducer, VehicleState }  from './vehicle';
+import * as vehicle  from './vehicle';
+import * as query  from './query';
+import * as filter  from './filter';
+import { filterReducer }  from './filter';
+import { queryReducer, SearchQueryState }  from './query';
 import { FilterStateModel, FilterModel } from '../models';
 
 export interface AppState {
