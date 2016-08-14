@@ -1,10 +1,4 @@
-import {
-    FORM_DIRECTIVES,
-    ControlGroup,
-    NgControl,
-    Validators,
-    NgFormModel
-} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder, FormGroupDirective} from '@angular/forms';
 import {Component, Directive, Host} from '@angular/core';
 
 import {RegExpWrapper, print, isPresent} from '@angular/compiler/src/facade/lang';
@@ -24,10 +18,10 @@ export class ShowError {
     controlPath: string;
     errorTypes: string[];
 
-    constructor( @Host() formDir: NgFormModel) { this.formDir = formDir; }
+    constructor( @Host() formDir: FormGroupDirective) { this.formDir = formDir; }
 
     get errorMessage(): string {
-        var form: ControlGroup = this.formDir.form;
+        var form: FormGroup = this.formDir.form;
         var control = form.find(this.controlPath);
         if (isPresent(control)) {
             for (var i = 0; i < this.errorTypes.length; ++i) {

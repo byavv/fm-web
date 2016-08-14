@@ -1,12 +1,9 @@
-import { Component, Self, EventEmitter, Output, ElementRef, Optional, Attribute } from '@angular/core';
-import { NgControl, NgModel, ControlValueAccessor } from '@angular/common';
+import { Component, Self, forwardRef, EventEmitter, Output, Optional, Attribute } from '@angular/core';
+import { NgControl, NgModel, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { allColors } from "./carColors";
 import { isString } from '@angular/compiler/src/facade/lang';
 @Component({
-    selector: `
-        colorPicker[ngControl],
-        colorPicker[ngFormControl],
-        colorPicker[ngModel]`,
+    selector: `colorPicker`,
     template: require("./colorPicker.html"),
     styles: [`
         .color-picker{           
@@ -24,7 +21,14 @@ import { isString } from '@angular/compiler/src/facade/lang';
             background-repeat: no-repeat;
             background-position: center;
         }
-    `]
+    `],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ColorPickerControl),
+            multi: true
+        }
+    ]
 })
 
 export class ColorPickerControl implements ControlValueAccessor {
@@ -44,15 +48,7 @@ export class ColorPickerControl implements ControlValueAccessor {
         return this._colors;
     }
 
-    @Output()
-    onChange: EventEmitter<any> = new EventEmitter()
-
-    constructor(
-        @Optional() @Self() private ngModel: NgModel,
-        @Optional() @Self() private ngControl: NgControl,
-        @Optional() @Attribute('single') private single) {
-        if (ngModel) ngModel.valueAccessor = this;
-        if (ngControl) ngControl.valueAccessor = this;
+    constructor( @Optional() @Attribute('single') private single) {
         this._colors = allColors().map((color) => {
             return {
                 active: false,
@@ -60,7 +56,6 @@ export class ColorPickerControl implements ControlValueAccessor {
             }
         })
     }
-
     selectColor(index) {
         if (this.single != null) {
             this.colors.forEach(color => {
@@ -76,18 +71,21 @@ export class ColorPickerControl implements ControlValueAccessor {
             newValue = newValue[0] || '';
         }
         this.onChange.next(newValue);
-        if (this.ngModel) this.ngModel.viewToModelUpdate(newValue);
-        if (this.ngControl) this.ngControl.viewToModelUpdate(newValue);
     }
-
 
     onTouched = () => {
     };
+    @Output()
+    onChange: EventEmitter<any> = new EventEmitter();
+
     writeValue(value) {
-        this.colors = value;
+        if (value !== undefined) {
+            this.colors = value;
+        }
     }
     registerOnChange(fn): void {
         this.onChange.subscribe(fn);
+
     }
     registerOnTouched(fn): void {
         this.onTouched = fn;

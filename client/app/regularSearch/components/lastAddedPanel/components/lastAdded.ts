@@ -55,7 +55,7 @@ export class LastAddedComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.trackerApi.getLastAdded().subscribe(cars => {
             this.lastAdded = cars;
-        })
+        }, console.error)
     }
     ngOnDestroy() {
         if (this._subscription)

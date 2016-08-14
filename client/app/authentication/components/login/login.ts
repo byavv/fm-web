@@ -1,6 +1,6 @@
 import {Component, Injector} from '@angular/core';
 import {Router, ROUTER_DIRECTIVES} from "@angular/router";
-import {CORE_DIRECTIVES, FORM_DIRECTIVES, ControlGroup, FormBuilder} from '@angular/common';
+import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {Identity, AuthApi, Storage} from '../../../shared/services';
 
 @Component({
@@ -10,7 +10,7 @@ import {Identity, AuthApi, Storage} from '../../../shared/services';
 })
 
 export class LoginComponent  {
-    signInForm: ControlGroup;
+    signInForm: FormGroup;
     error: string;
     constructor(builder: FormBuilder,
         private router: Router,

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output, AfterViewInit, OnInit, ViewEncapsulation} from '@angular/core';
-import { Control, ControlGroup} from '@angular/common';
 import {ConverterProvider, convertToView, FilterComponent, MilageConverter} from "../../../../shared/lib/";
 import {PatternInput, DebounceInput} from "../../../../shared/directives";
 import {FilterController} from '../../../services/filterController';
+import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 
 @Component({
     selector: 'milage-filter',
@@ -12,7 +12,7 @@ import {FilterController} from '../../../services/filterController';
             <div><strong>Milage</strong></div> 
         </div> 
         <div class="col-md-12 col-sm-12">  
-            <form [ngFormModel]="form" >    
+            <form [formGroup]="form" >    
                  <div class="row">                                 
                      <div class="col-md-6 col-sm-12 padding-shrink-right" >
                          <input-wrapper 
@@ -22,7 +22,7 @@ import {FilterController} from '../../../services/filterController';
                             id='milageFrom' 
                             placeholder='From' 
                             only="[0-9]"                             
-                            ngControl="milageFrom" 
+                            formControlName="milageFrom" 
                             [(ngModel)]="filterValue.milageFrom">
                          </input-wrapper>
                      </div>                  
@@ -34,7 +34,7 @@ import {FilterController} from '../../../services/filterController';
                              id='milageUp' 
                              placeholder='Up' 
                              only="[0-9]"                             
-                             ngControl="milageUp" 
+                             formControlName="milageUp" 
                              [(ngModel)]="filterValue.milageUp">
                          </input-wrapper>
                      </div>                 
@@ -43,7 +43,7 @@ import {FilterController} from '../../../services/filterController';
         </div>                 
     </div> 
   `,
-    directives: [PatternInput, DebounceInput]
+    directives: [REACTIVE_FORM_DIRECTIVES, PatternInput, DebounceInput]
 })
 @ConverterProvider({
     bindWith: MilageConverter
@@ -56,14 +56,14 @@ export class MilageFilterComponent extends FilterComponent {
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
     notEmit: boolean = false;
-    milageFrom: Control;
-    milageUp: Control;
-    form: ControlGroup;
+    milageFrom: FormControl;
+    milageUp: FormControl;
+    form: FormGroup;
     constructor(filterController: FilterController) {
         super(filterController)
-        this.milageFrom = new Control();
-        this.milageUp = new Control();
-        this.form = new ControlGroup({
+        this.milageFrom = new FormControl();
+        this.milageUp = new FormControl();
+        this.form = new FormGroup({
             milageFrom: this.milageFrom,
             milageUp: this.milageUp
         });

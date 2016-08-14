@@ -1,8 +1,9 @@
 import {Component, OnInit, Output, Input, EventEmitter, OnDestroy, Host, Optional} from '@angular/core';
 import {Router} from "@angular/router";
-import {FORM_DIRECTIVES, ControlGroup, Validators, FormBuilder} from '@angular/common';
+
 import {ShowError} from '../../../directives/showError';
 
+import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {RegExpWrapper, print, isPresent, isFunction} from '@angular/compiler/src/facade/lang';
 
 import {UsersBackEndApi} from '../../../services/usersBackEndApi';
@@ -15,13 +16,13 @@ import {UiPane} from '../../../directives/uiTabs';
 @Component({
     selector: 'carInfo',
     template: require("./templates/stepInfo.html"),
-    directives: [FORM_DIRECTIVES, ShowError, ColorPickerControl],
+    directives: [REACTIVE_FORM_DIRECTIVES, ShowError, ColorPickerControl],
     styles: [require('./styles/stepInfo.css')]
 })
 export class StepInfoComponent implements OnInit {
     @Output()
     next: EventEmitter<any> = new EventEmitter();
-    form: ControlGroup;
+    form: FormGroup;
     makers = [];
     models = [];
     engineTypes = [];
@@ -96,7 +97,7 @@ export class StepInfoComponent implements OnInit {
             });
     }
 
-    onSubmit(form: ControlGroup) {
+    onSubmit(form: FormGroup) {
         this.submitted = true;
         if (form.valid) {
             this.next.next('img');

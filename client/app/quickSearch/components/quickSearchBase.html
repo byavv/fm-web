@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6 col-sm-12">            
-        <form [ngFormModel]="form">                             
+        <form [formGroup]="form">                             
             <div class="row">
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
@@ -8,13 +8,13 @@
                         <select class="form-control" 
                         [disabled]='loading'
                         [ngModel]="carFormModel.maker"      
-                        #makerControl='ngForm'
-                        ngControl="maker"                                
+                        #makerControl
+                        formControlName="maker"                                
                         name="maker" id="maker">
                             <option value="">Any</option>
                             <option *ngFor="let maker of carMakers" [ngValue]="maker">{{maker.name}}</option>
                         </select>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="form-group">
@@ -22,7 +22,7 @@
                         <select class="form-control" 
                             [disabled]='loading || !makerControl.value'  
                             [ngModel]="carFormModel.model"               
-                            ngControl="model"
+                            formControlName="model"
                             name="model" id="model">
                             <option value="">Any</option>
                             <option *ngFor="let model of carModels" [ngValue]="model.name">{{model.name}}</option>
@@ -37,7 +37,7 @@
                         <select class="form-control" name="yearFrom" 
                         [disabled]='loading'
                         [ngModel]="carFormModel.year"
-                        ngControl="yearFrom"
+                        formControlName="yearFrom"
                         id="yearFrom">
                             <option value="">Any</option>
                             <option *ngFor="let yearFrom of yearFroms" [value]="yearFrom">{{yearFrom}}</option>
@@ -49,7 +49,7 @@
                         <label for="priceUp">Price up to</label>
                         <input type="number" class="form-control" name="priceUp" id="priceUp" 
                         [disabled]='loading'
-                        ngControl="priceUp"/>
+                        formControlName="priceUp"/>
                     </div>
                 </div>
             </div> 

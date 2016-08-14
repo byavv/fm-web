@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, Input, ViewChild, ViewQuery, ElementRef, Optional, QueryList, Self, HostListener } from '@angular/core';
-import { NgModel, NgControl, FORM_DIRECTIVES, ControlValueAccessor } from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, ControlValueAccessor, NgModel, NgControl, FormGroupDirective, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import { ReplaySubject, Observable } from 'rxjs/Rx';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 import { PatternInput } from './patternInput'
@@ -13,7 +13,7 @@ import { PatternInput } from './patternInput'
                        [attr.pattern] = "only"
                        [id] = "id"                               
                        [placeholder] = "placeholder"/> `,
-    directives: [FORM_DIRECTIVES, PatternInput]
+    directives: [REACTIVE_FORM_DIRECTIVES, PatternInput]
 })
 export class DebounceInput implements ControlValueAccessor {
     private _value;
