@@ -12,44 +12,17 @@ import {FilterController} from '../../../services/filterController';
         </div>
         <div class="col-md-12 col-sm-12">                      
             <form [formGroup]="form" >    
-                <div class="row">
-                     <!--
-                     <div class="col-md-6 col-sm-12 padding-shrink-right">
-                        <select class="form-control" 
-                            name="yearFrom" 
-                            id="yearFrom"                            
-                            formControlName="yearFrom" 
-                            [(ngModel)]="filterValue.yearFrom"
-                            #yearFrom="ngModel">
-                                <option value="">Any</option>
-                                <option *ngFor="let year of yearsFrom" 
-                                [class.hidden]="year > yearUp.control.value && !!yearUp.control.value"
-                                [value]="year">{{year}}</option>            
-                         </select> 
-                     </div>                  
-                     <div class="col-md-6 col-sm-12 padding-shrink-left">
-                         <select class="form-control" 
-                             name="yearUp" 
-                             id="yearUp"                             
-                             formControlName='yearUp'
-                             [(ngModel)]="filterValue.yearUp"
-                             #yearUp="ngModel">
-                             <option value="">Any</option>
-                             <option *ngFor="let year of yearsUp" 
-                                 [class.hidden]="year < yearFrom.control.value && !!yearFrom.control.value"
-                                 [value]="year">{{year}}</option>                       
-                         </select> 
-                     </div> 
-                     --> 
+                <div class="row">                     
                       <div class="col-md-6 col-sm-12 padding-shrink-right">
                         <select class="form-control" 
                             name="yearFrom" 
                             id="yearFrom"                            
                             formControlName="yearFrom" 
                             [(ngModel)]="filterValue.yearFrom"
-                            >
+                            #yearFrom>
                                 <option value="">Any</option>
                                 <option *ngFor="let year of yearsFrom"
+                                [class.hidden]="year > yearUp.value && !!yearUp.value"
                                 [value]="year">{{year}}</option>            
                          </select> 
                      </div>                  
@@ -59,19 +32,26 @@ import {FilterController} from '../../../services/filterController';
                              id="yearUp"                             
                              formControlName='yearUp'
                              [(ngModel)]="filterValue.yearUp"
-                             >
+                             #yearUp>
                              <option value="">Any</option>
                              <option *ngFor="let year of yearsUp"
+                                 [class.hidden]="year < yearFrom.value && !!yearFrom.value"
                                  [value]="year">{{year}}</option>                       
                          </select> 
                      </div>                  
-                 </div>
-                              
+                 </div>                              
             </form>
         </div>                 
     </div> 
   `,
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    directives: [REACTIVE_FORM_DIRECTIVES],
+    styles:[
+        `
+            .hidden {
+                display: none; 
+            }
+        `
+    ]
 })
 @ConverterProvider({
     bindWith: YearConverter
