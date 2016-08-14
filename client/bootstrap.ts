@@ -6,6 +6,7 @@ import { Http } from '@angular/http';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { provideRouter, ROUTER_DIRECTIVES } from '@angular/router';
 import { HTTP_PROVIDERS } from '@angular/http';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 // Angular2-universal
 import { prebootComplete } from 'angular2-universal';
 // i18n
@@ -32,6 +33,8 @@ const PROVIDERS = [
     }),
     provide(PLATFORM_DIRECTIVES, { useValue: InertLink, multi: true }),
     provide(PLATFORM_DIRECTIVES, { useValue: [ROUTER_DIRECTIVES], multi: true }),
+    disableDeprecatedForms(),
+    provideForms()
 ];
 
 enableProdMode();

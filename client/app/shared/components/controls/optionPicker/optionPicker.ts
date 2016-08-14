@@ -4,17 +4,26 @@ interface ICarOption {
     active?: boolean;
 }
 
-import { Component, Self, EventEmitter, Output, ViewChild, Input, Optional } from '@angular/core';
-import { NgControl, NgModel, ControlValueAccessor } from '@angular/common';
+import { Component, Self, Input, forwardRef, EventEmitter, Output, Optional, Attribute } from '@angular/core';
+import { NgControl, NgModel, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+import { isString } from '@angular/compiler/src/facade/lang';
 
 @Component({
-    selector: 'optionPicker[ngModel]',
+    selector: 'optionPicker',
     template: require('./template.html'),
-    styles: [require("./component.css")]
+    styles: [require("./component.css")],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => OptionsPickerControl),
+            multi: true
+        }
+    ]
 })
 
 export class OptionsPickerControl implements ControlValueAccessor {
-    private _selectedOptions = {};
+    private _selectedOptions = [];
     private _options = [];
     @Input()
     options: Array<ICarOption>;
@@ -34,36 +43,25 @@ export class OptionsPickerControl implements ControlValueAccessor {
         })
     }
 
-    @Output()
-    selected: EventEmitter<any> = new EventEmitter();
-
-    constructor( @Optional() @Self() private ngModel: NgModel,
-        @Optional() @Self() private ngControl: NgControl) {
-        if (ngModel) ngModel.valueAccessor = this;
-        if (ngControl) ngControl.valueAccessor = this;
-    }
-
     onCheck(index) {
         this.options[index].active = !this.options[index].active;
         let activeOptions = this._options.filter((option) => option.active);
         let newValue = activeOptions.map((option) => option.name);
-        this.selected.next(newValue);
-        if (this.ngModel) this.ngModel.viewToModelUpdate(newValue);
-        if (this.ngControl) this.ngControl.viewToModelUpdate(newValue);
+        this.onChange.next(newValue);     
     }
 
     /**
      * ControlValueAccessor
      */
-    onChange = (_: any) => {
-    };
+    @Output()
+    onChange: EventEmitter<any> = new EventEmitter();
     onTouched = () => {
     };
     writeValue(value) {
         this.selectedOptions = value;
     }
     registerOnChange(fn): void {
-        this.onChange = fn;
+        this.onChange.subscribe(fn);
     }
     registerOnTouched(fn): void {
         this.onTouched = fn;

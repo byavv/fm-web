@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, Output, OnInit, ViewEncapsulation} from '@angular/core';
-import {FORM_DIRECTIVES, ControlGroup, FormBuilder} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl} from '@angular/forms';
 import {ConverterProvider, convertToView, FilterComponent, OptionsConverter} from '../../../../shared/lib/';
 import {OptionsPickerControl} from "../../../../shared/components/controls/optionPicker/optionPicker";
-import {AppController} from '../../../../shared/services/';
 import {FilterController} from '../../../services/filterController';
 
 @Component({
@@ -15,17 +14,19 @@ import {FilterController} from '../../../services/filterController';
               <a href="" class="pull-right open-link" (click)="opened = !opened">change</a>
          </div>
          <div *ngIf='opened'>
-              <div class="col-md-12  col-sm-12 box-content">              
-                  <optionPicker
-                      [options]="options"                
-                      [(ngModel)]="filterValue.options"                 
-                      (selected)="onOptionSelected($event)">
-                  </optionPicker>
-              </div> 
+             <div [formGroup]='form'>
+                <div class="col-md-12  col-sm-12 box-content">              
+                    <optionPicker
+                        [options]="defaults"                
+                        [ngModel]="filterValue.options"
+                        formControlName="options">
+                    </optionPicker>
+                </div> 
+             </div>
          </div>
     </div>
   `,
-    directives: [FORM_DIRECTIVES, OptionsPickerControl],
+    directives: [REACTIVE_FORM_DIRECTIVES, OptionsPickerControl],
     styles: [`
         :host >>> .control-container > div {      
             flex: 1 0 100%!important;            
@@ -42,28 +43,42 @@ export class OptionsFilterComponent extends FilterComponent {
     active: boolean;
     @Input()
     filterValue: any;
-    constructor(private appController: AppController, filterController: FilterController) {
-        super(filterController)
-    }
-    options = [];
-    ngOnInit() {
-        this.appController.init$.subscribe((value) => {
-            this.options = [
-                { name: 'op1', description: 'super-option' },
-                { name: 'op2', description: 'super-option2' },
-                { name: 'op2', description: 'super-option3' },
-                { name: 'op2', description: 'super-option4' },
-                { name: 'op2', description: 'super-option5' },
-                { name: 'op2', description: 'super-option6' },
-                { name: 'op2', description: 'super-option7' },
-                { name: 'op2', description: 'super-option8' },
-                { name: 'op2', description: 'super-option9' },
-                { name: 'op2', description: 'super-option10' }
-            ]
-        })
-    }
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
+
+    form: FormGroup;
+    options: FormControl = new FormControl([]);
+    defaults: Array<any> = [
+        { name: 'op1', description: 'super-option' },
+        { name: 'op2', description: 'super-option2' },
+        { name: 'op2', description: 'super-option3' },
+        { name: 'op2', description: 'super-option4' },
+        { name: 'op2', description: 'super-option5' },
+        { name: 'op2', description: 'super-option6' },
+        { name: 'op2', description: 'super-option7' },
+        { name: 'op2', description: 'super-option8' },
+        { name: 'op2', description: 'super-option9' },
+        { name: 'op2', description: 'super-option10' }
+    ];
+    
+    constructor(filterController: FilterController) {
+        super(filterController);
+        this.form = new FormGroup({
+            options: this.options
+        })
+    }
+
+    ngOnInit() {
+        this.form.valueChanges
+            .map(value => {
+                return {
+                    filterValue: value,
+                    immidiate: true
+                }
+            })
+            .subscribe(this.changed)
+    }
+
     onOptionSelected(value) {
         this.changed.next({ filterValue: this.filterValue, immidiate: true });
     }
@@ -75,5 +90,4 @@ export class OptionsFilterComponent extends FilterComponent {
         this.filterValue = value;
         this.changed.next({ filterValue: this.filterValue, immidiate: true });
     }
-
 }

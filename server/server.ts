@@ -22,6 +22,7 @@ import {
 } from 'angular2-universal';
 // Angular 2
 import { enableProdMode, provide } from '@angular/core';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
 
 import {
     TranslateService,
@@ -30,6 +31,10 @@ import {
 } from "ng2-translate/ng2-translate";
 import { provideRouter } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+
+// Redux
+import { provideStore } from '@ngrx/store';
+import reducer from '../client/app/shared/reducers';
 
 // Application
 import { routes } from '../client/app/routes';
@@ -72,7 +77,11 @@ function ngApp(req, res) {
             provide(TranslateLoader, {
                 useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),
                 deps: [Http]
-            })
+            }),
+            provideStore(reducer),
+            disableDeprecatedForms(),
+            provideForms(),
+
         ],
         preboot: {
             appRoot: 'app',          // selector for Angular root element

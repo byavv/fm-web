@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output, Input, AfterViewInit} from '@angular/core';
-import {CORE_DIRECTIVES, Control, FORM_DIRECTIVES, ControlGroup} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {ConverterProvider, convertToView, FilterComponent, YearConverter} from "../../../../shared/lib/";
 import {FilterController} from '../../../services/filterController';
 
@@ -11,15 +11,16 @@ import {FilterController} from '../../../services/filterController';
             <div><strong>First registration (date)</strong></div>  
         </div>
         <div class="col-md-12 col-sm-12">                      
-            <form [ngFormModel]="form" >    
+            <form [formGroup]="form" >    
                 <div class="row">
+                     <!--
                      <div class="col-md-6 col-sm-12 padding-shrink-right">
                         <select class="form-control" 
                             name="yearFrom" 
-                            id="yearFrom"
-                            #yearFrom="ngForm"  
-                            ngControl="yearFrom" 
-                            [(ngModel)]="filterValue.yearFrom">
+                            id="yearFrom"                            
+                            formControlName="yearFrom" 
+                            [(ngModel)]="filterValue.yearFrom"
+                            #yearFrom="ngModel">
                                 <option value="">Any</option>
                                 <option *ngFor="let year of yearsFrom" 
                                 [class.hidden]="year > yearUp.control.value && !!yearUp.control.value"
@@ -29,22 +30,48 @@ import {FilterController} from '../../../services/filterController';
                      <div class="col-md-6 col-sm-12 padding-shrink-left">
                          <select class="form-control" 
                              name="yearUp" 
-                             id="yearUp"
-                             #yearUp="ngForm" 
-                             ngControl='yearUp'
-                             [(ngModel)]="filterValue.yearUp">
+                             id="yearUp"                             
+                             formControlName='yearUp'
+                             [(ngModel)]="filterValue.yearUp"
+                             #yearUp="ngModel">
                              <option value="">Any</option>
                              <option *ngFor="let year of yearsUp" 
                                  [class.hidden]="year < yearFrom.control.value && !!yearFrom.control.value"
                                  [value]="year">{{year}}</option>                       
                          </select> 
-                     </div>                 
-                 </div>               
+                     </div> 
+                     --> 
+                      <div class="col-md-6 col-sm-12 padding-shrink-right">
+                        <select class="form-control" 
+                            name="yearFrom" 
+                            id="yearFrom"                            
+                            formControlName="yearFrom" 
+                            [(ngModel)]="filterValue.yearFrom"
+                            >
+                                <option value="">Any</option>
+                                <option *ngFor="let year of yearsFrom"
+                                [value]="year">{{year}}</option>            
+                         </select> 
+                     </div>                  
+                     <div class="col-md-6 col-sm-12 padding-shrink-left">
+                         <select class="form-control" 
+                             name="yearUp" 
+                             id="yearUp"                             
+                             formControlName='yearUp'
+                             [(ngModel)]="filterValue.yearUp"
+                             >
+                             <option value="">Any</option>
+                             <option *ngFor="let year of yearsUp"
+                                 [value]="year">{{year}}</option>                       
+                         </select> 
+                     </div>                  
+                 </div>
+                              
             </form>
         </div>                 
     </div> 
   `,
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
+    directives: [REACTIVE_FORM_DIRECTIVES]
 })
 @ConverterProvider({
     bindWith: YearConverter
@@ -56,16 +83,16 @@ export class YearFilterComponent extends FilterComponent {
     filterValue: any;
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
-    yearFrom: Control;
-    yearUp: Control;
-    form: ControlGroup;
+    yearFrom: FormControl;
+    yearUp: FormControl;
+    form: FormGroup;
     yearsUp: Array<number> = [];
     yearsFrom: Array<number> = [];
     constructor(filterController: FilterController) {
         super(filterController)
-        this.yearFrom = new Control("");
-        this.yearUp = new Control("");
-        this.form = new ControlGroup({
+        this.yearFrom = new FormControl("");
+        this.yearUp = new FormControl("");
+        this.form = new FormGroup({
             yearFrom: this.yearFrom,
             yearUp: this.yearUp
         });

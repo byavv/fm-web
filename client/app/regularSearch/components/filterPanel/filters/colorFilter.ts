@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FORM_DIRECTIVES, ControlGroup} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl} from '@angular/forms';
 import {ConverterProvider, convertToView, FilterComponent, ColorConverter} from '../../../../shared/lib/';
 import {FilterController} from '../../../services/filterController';
 import {ColorPickerControl} from "../../../../shared/components/controls/colorPicker/colorPicker";
@@ -13,17 +13,19 @@ import {ColorPickerControl} from "../../../../shared/components/controls/colorPi
                <span>{{viewValue}}</span>
                <a href="" class="pull-right open-link" (click)="opened = !opened">change</a>
             </div>          
-            <div *ngIf='opened' class="col-md-12 col-sm-12">             
-                <colorPicker
-                    [(ngModel)]="filterValue.colors"
-                    (onChange)="onColorSelected($event)">
-                </colorPicker>    
+            <div *ngIf='opened' class="col-md-12 col-sm-12"> 
+                <div [formGroup]='form'>            
+                    <colorPicker
+                        [ngModel]="filterValue.colors"
+                        formControlName="colors">
+                    </colorPicker>    
+                </div>
             </div>                
       </div>
   `,
-    directives: [FORM_DIRECTIVES, ColorPickerControl]
+    directives: [REACTIVE_FORM_DIRECTIVES, ColorPickerControl]
 })
-
+// (onChange)="onColorSelected($event)" 
 @ConverterProvider({
     bindWith: ColorConverter
 })
@@ -34,12 +36,29 @@ export class ColorFilterComponent extends FilterComponent {
     filterValue: any = {};
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
+    form: FormGroup;
+    colors: FormControl = new FormControl([])
     constructor(filterController: FilterController) {
-        super(filterController)
+        super(filterController);
+        this.form = new FormGroup({
+            colors: this.colors
+        })
     }
-    onColorSelected(value) {
-        this.changed.next({ filterValue: this.filterValue, immidiate: true });
+    ngOnInit() {
+        this.form.valueChanges
+            .map(value => {
+                return {
+                    filterValue: value,
+                    immidiate: true
+                }
+            })
+            .subscribe((value)=>{
+                 this.changed.next(value);
+            });        
     }
+    //onColorSelected(value) {
+    //     this.changed.next({ filterValue: this.filterValue, immidiate: true });
+    // }
     @convertToView
     get viewValue() {
         return this.filterValue;

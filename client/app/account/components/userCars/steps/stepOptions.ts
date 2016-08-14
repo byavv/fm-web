@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, Input, EventEmitter, OnDestroy, Host, Optional} from '@angular/core';
 import {Router} from "@angular/router";
-import {FORM_DIRECTIVES, ControlGroup, Validators, FormBuilder} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {ShowError} from '../../../directives/showError';
 
 import {RegExpWrapper, print, isPresent, isFunction} from '@angular/compiler/src/facade/lang';
@@ -14,14 +14,14 @@ import {Car} from '../../../../shared/models';
 @Component({
     selector: 'carOptions',
     template: require("./templates/stepOptions.html"),
-    directives: [FORM_DIRECTIVES, ShowError],
+    directives: [REACTIVE_FORM_DIRECTIVES, ShowError],
     styles: [require('./styles/stepInfo.css')]
 })
 export class StepOptionsComponent implements OnInit {
 
     @Output()
     next: EventEmitter<any> = new EventEmitter();
-    form: ControlGroup;
+    form: FormGroup;
     options: Array<any> = [];
     car: any = {};
     loading: boolean = false;

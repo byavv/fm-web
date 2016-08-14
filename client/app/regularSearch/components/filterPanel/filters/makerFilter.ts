@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
-import {FORM_DIRECTIVES, Control} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup} from '@angular/forms';
 import {Api} from '../../../../shared/services/';
 import {Observable, Subscription} from 'rxjs';
 import {ConverterProvider, convertToView, FilterComponent, MakerConverter}  from '../../../../shared/lib/';
@@ -10,7 +10,7 @@ import {FilterController} from '../../../services/filterController';
 @Component({
     selector: 'makerWrapper',
     template: require("./makerFilter.html"),
-    directives: [FORM_DIRECTIVES]
+    directives: [REACTIVE_FORM_DIRECTIVES]
 })
 
 @ConverterProvider({
@@ -19,6 +19,7 @@ import {FilterController} from '../../../services/filterController';
 export class MakerFilterComponent extends FilterComponent {
     @Input()
     active: boolean;
+    form: FormGroup;
     maker;
     model;
     _filterValue: any = {}
@@ -36,8 +37,8 @@ export class MakerFilterComponent extends FilterComponent {
     carMakers: any[];
     models: any[];
     alreadyLoaded: boolean = false;
-    makerControl: Control = new Control();
-    modelControl: Control = new Control();
+    makerControl: FormControl = new FormControl();
+    modelControl: FormControl = new FormControl();
     loading: boolean = false;
     opened: boolean = false;
     valueView: string;
@@ -46,7 +47,11 @@ export class MakerFilterComponent extends FilterComponent {
 
     constructor(private apiService: Api, private appController: AppController,
         filterController: FilterController) {
-        super(filterController);
+        super(filterController);    
+        this.form = new FormGroup({
+            maker: this.makerControl,
+            model: this.modelControl
+        })    
     }
 
     ngAfterViewInit() {

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, AfterViewInit, OnInit} from '@angular/core';
-import {Control, ControlGroup} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import {ConverterProvider, convertToView, FilterComponent, IFilterComponent, PriceConverter}  from "../../../../shared/lib/";
 import {PatternInput, DebounceInput} from "../../../../shared/directives";
 import {FilterController} from '../../../services/filterController';
@@ -12,7 +12,7 @@ import {FilterController} from '../../../services/filterController';
              <div><strong>Price</strong></div> 
         </div>  
         <div class="col-md-12 col-sm-12">  
-            <form [ngFormModel]="form" >    
+            <form [formGroup]="form" >    
                  <div class="row">                                 
                      <div class="col-md-6 col-sm-12 padding-shrink-right">
                          <input-wrapper 
@@ -21,7 +21,7 @@ import {FilterController} from '../../../services/filterController';
                              pattern="[0-9]"                              
                              placeholder='From' 
                              only="[0-9]"                             
-                             ngControl="priceFrom" 
+                             formControlName="priceFrom" 
                              [(ngModel)]="filterValue.priceFrom">
                          </input-wrapper>
                      </div>                  
@@ -32,7 +32,7 @@ import {FilterController} from '../../../services/filterController';
                              pattern="[0-9]"                              
                              placeholder='Up' 
                              only="[0-9]"                             
-                             ngControl="priceUp" 
+                             formControlName="priceUp" 
                              [(ngModel)]="filterValue.priceUp">
                          </input-wrapper>
                      </div>                 
@@ -41,7 +41,7 @@ import {FilterController} from '../../../services/filterController';
         </div>                 
     </div>  
   `,
-    directives: [PatternInput, DebounceInput]
+    directives: [REACTIVE_FORM_DIRECTIVES, PatternInput, DebounceInput]
 })
 @ConverterProvider({
     bindWith: PriceConverter
@@ -53,22 +53,22 @@ export class PriceFilterComponent extends FilterComponent implements IFilterComp
     filterValue: any = {};
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
-    priceFrom: Control = new Control();
-    priceUp: Control = new Control();
-    form: ControlGroup;
+    priceFrom: FormControl = new FormControl();
+    priceUp: FormControl = new FormControl();
+    form: FormGroup;
     pricesUp: Array<number> = [];
     pricesFrom: Array<number> = [];
 
     constructor(filterController: FilterController) {
         super(filterController)
-        this.form = new ControlGroup({
+        this.form = new FormGroup({
             priceFrom: this.priceFrom,
             priceUp: this.priceUp
         });
     }
     ngAfterViewInit() {
         this.form.valueChanges
-            .distinctUntilChanged()           
+            .distinctUntilChanged()
             .subscribe(value => {
                 this.changed.next({ filterValue: value, immidiate: true });
             })
