@@ -3,8 +3,7 @@ var gulp = require('gulp'),
     webpack = require('webpack'),
     path = require('path'),
     ts = require('gulp-typescript'),
-    runSequence = require('run-sequence'),
-    chalk = require('chalk'),
+    runSequence = require('run-sequence'),    
     nodemon = require('gulp-nodemon'),
     rx = require("rxjs");
 
