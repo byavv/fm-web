@@ -1,10 +1,9 @@
 [![CircleCI][circle-image]][circle-url]
-[![codecov][codecov-image]][codecov-url]
 
 ## Web client [funny-market](https://github.com/byavv/funny-market) project
 ## 
-- NG2 @angular/angular
-- Server rendering @angular2-universal
+- Angular2
+- Server rendering via angular2-universal
 
 ## Basic Usage
 ```bash
@@ -32,7 +31,5 @@ $ gulp test
 
 ```
 
-[circle-image]: https://circleci.com/gh/byavv/fm-200loc.svg?style=shield
-[circle-url]: https://circleci.com/gh/byavv/fm-200loc
-[codecov-url]: https://codecov.io/gh/byavv/fm-200loc
-[codecov-image]: https://codecov.io/gh/byavv/fm-200loc/branch/master/graph/badge.svg
+[circle-image]: https://circleci.com/gh/byavv/fm-web.svg?style=shield
+[circle-url]: https://circleci.com/gh/byavv/fm-web
