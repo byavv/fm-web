@@ -1,11 +1,23 @@
-FROM node
-MAINTAINER V.V. Aksenchyk <aksenchyk.v@gmail.com>
-ADD . /app
-WORKDIR /app
-RUN \            
-    npm install -g typings gulp --depth 0 && \
-    npm install --depth 0 && \
-    typings install   
-RUN gulp build:production
+FROM node:6.3
 
-CMD ["npm","start"]
+# File Author / Maintainer
+MAINTAINER Aksenchyk V. <aksenchyk.v@gmail.com>
+
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+# Install pm2
+RUN npm install -g gulp typings
+
+# Copy app source
+COPY . /usr/src/app
+
+# Install dependencies and build client
+RUN \ 
+    npm install \ 
+    && typings install \
+    && npm run build
+
+
+CMD [ "npm", "start" ]
