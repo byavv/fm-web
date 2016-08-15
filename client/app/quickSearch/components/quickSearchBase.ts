@@ -75,14 +75,20 @@ export class QuickSearchComponent implements OnDestroy {
             .subscribe((val: any) => {
                 this.carModels = val.models;
                 this.count$.next(val.count);
-            }, console.error);
+            }, (err)=>{
+
+                console.error('!!!!!!!!!!!!!!!!!!!', err)
+            });
 
         this.form
             .find("model")
             .valueChanges
             .do(() => { this.loading = true; })
             .switchMap((value) => this._operateCount({ model: value }))
-            .subscribe(this.count$, console.error);
+            .subscribe(this.count$,(err)=>{
+
+                console.error('+++++++++++++++++', err)
+            });
 
         this.form
             .find("priceUp")
@@ -105,9 +111,8 @@ export class QuickSearchComponent implements OnDestroy {
             this.appControllerSubscr.unsubscribe();
     }
 
-    _operateCount(value = {}): Observable<number> {
-        var query = Object.assign({}, this.form.value, value);
-        var searchRequest = Object.assign({}, query);
+    _operateCount(value = {}): Observable<number> {     
+        var searchRequest = Object.assign({}, this.form.value, value);
         if (!!searchRequest.maker)
             searchRequest.maker = searchRequest.maker.name;
         return this.apiService.getCarsCount(searchRequest)

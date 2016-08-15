@@ -8,7 +8,7 @@
                         <select class="form-control" 
                         [disabled]='loading'
                         [ngModel]="carFormModel.maker"      
-                        #makerControl
+                        #maker
                         formControlName="maker"                                
                         name="maker" id="maker">
                             <option value="">Any</option>
@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label for="maker">Model</label>
                         <select class="form-control" 
-                            [disabled]='loading || !makerControl.value'  
+                            [disabled]='loading || !maker.value'  
                             [ngModel]="carFormModel.model"               
                             formControlName="model"
                             name="model" id="model">
