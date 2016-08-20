@@ -6,8 +6,6 @@ const http_port = process.env.HTTP_PORT || 3000
     , etcd_host = process.env.ETCD_HOST || 'localhost'
     , proxy_url = process.env.PROXY_URL || 'http://localhost:3001';
 
-const registry = require('etcd-registry')(`${etcd_host}:4001`);
-
 import 'angular2-universal/polyfills';
 import { Http } from '@angular/http';
 import { Footer } from './components/footer';
@@ -101,7 +99,8 @@ app.get('/*', ngApp);
 
 // Binds our express app the the specified port (i.e. starts it up) and logs when it is running
 app.listen(http_port, () => {
-    console.log(`WEB server is listening on port: ${http_port} `)
+    console.log(`WEB server is listening on port: ${http_port} `);
+    const registry = require('etcd-registry')(`${etcd_host}:4001`);
     registry.join('web', { port: http_port });
     setTimeout(() => {
         registry.lookup('web', (err, service) => {
