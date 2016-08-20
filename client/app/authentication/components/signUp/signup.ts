@@ -1,11 +1,11 @@
-import {Component, Injector} from '@angular/core';
-import {Router, ROUTER_DIRECTIVES} from "@angular/router";
-import { FormGroup, FormBuilder} from '@angular/forms';
-import {Identity, AuthApi, Storage} from '../../../shared/services';
+import { Component, Injector } from '@angular/core';
+import { Router, ROUTER_DIRECTIVES } from "@angular/router";
+import { FormGroup, Validators, FormBuilder, REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
+import { Identity, AuthApi, Storage } from '../../../shared/services';
 
 @Component({
     selector: 'signup',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, REACTIVE_FORM_DIRECTIVES],
     template: require("./signup.html")
 })
 

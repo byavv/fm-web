@@ -1,8 +1,8 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router, ROUTER_DIRECTIVES} from "@angular/router";
-import {UsersBackEndApi} from "../services/usersBackEndApi"
-import {AuthApi} from "../../shared/services/authBackEndApi"
-import {Subscription} from "rxjs";
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ROUTER_DIRECTIVES } from "@angular/router";
+import { UsersBackEndApi } from "../services/usersBackEndApi";
+import { AuthApi } from "../../shared/services/authBackEndApi";
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'settings',
@@ -11,9 +11,9 @@ import {Subscription} from "rxjs";
             <div class="col-md-2 col-sm-12 padding-shrink-right">   
                 <div class="card">                      
                     <ul class="list-group list-group-flush">    
-                        <a class="list-group-item" [routerLink]="['MyCars']">My Cars</a>
-                        <a class="list-group-item" [routerLink]="['Profile']">Profile</a>
-                        <a class="list-group-item" [routerLink]="['Account']">Account</a>
+                        <a class="list-group-item" [routerLink]="['cars/list']">My Cars</a>
+                        <a class="list-group-item" [routerLink]="['profile']">Profile</a>
+                        <a class="list-group-item" [routerLink]="['account']">Account</a>
                     </ul>
                 </div>                     
             </div>
@@ -22,12 +22,10 @@ import {Subscription} from "rxjs";
                 </router-outlet>               
             </div>
         </div>
-   `,
-    
+   `,    
     directives: [ROUTER_DIRECTIVES],
     providers: [UsersBackEndApi],
-    styles: [`      
-                      
+    styles: [`                            
         :host >>> .info-panel{
             padding: 7px 15px;    
             color: white;
