@@ -17,7 +17,7 @@ export const ACCOUNT_ROUTER_PROVIDERS: RouterConfig = [
                 path: 'cars',
                 component: UserCarsComponent,
                 children: [
-                    { path: 'master/:id', component: MasterBaseComponent },
+                    { path: 'master', component: MasterBaseComponent },
                     { path: 'list', component: UserCarsListComponent }
                 ]
             }

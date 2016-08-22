@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header" style="position: relative; display: flex;">
         <span style='flex:1 0 auto'>Added cars</span>
-        <div [routerLink]="['MasterBase']" class="btn-group options">
+        <div [routerLink]="['/personal/cars/master']" class="btn-group options">
             <a href='' class="btn options-button" style='padding: 1px 6px'>
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </a>
@@ -19,7 +19,7 @@
                             </div>
                             <img [src]="(car.images[0]?.url)" alt="image">
                             <div class='command-buttons'>
-                                <a [routerLink]="['MasterBase', {id: car.id}]" class='btn btn-primary btn-sm'>Edit</a>
+                                <a [routerLink]="['/personal/cars/master', {id: car.id}]" class='btn btn-primary btn-sm'>Edit</a>
                                 <a href="" (click)="deleteCar(car)" class='btn btn-danger btn-sm' style="float:right">Delete</a>
                             </div>
                         </div>

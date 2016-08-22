@@ -11,9 +11,9 @@ import { Subscription } from "rxjs";
             <div class="col-md-2 col-sm-12 padding-shrink-right">   
                 <div class="card">                      
                     <ul class="list-group list-group-flush">    
-                        <a class="list-group-item" [routerLink]="['cars/list']">My Cars</a>
-                        <a class="list-group-item" [routerLink]="['profile']">Profile</a>
-                        <a class="list-group-item" [routerLink]="['account']">Account</a>
+                        <a class="list-group-item" [routerLink]="['cars/list']" routerLinkActive="active">My Cars</a>
+                        <a class="list-group-item" [routerLink]="['profile']" routerLinkActive="active">Profile</a>
+                        <a class="list-group-item" [routerLink]="['account']" routerLinkActive="active">Account</a>
                     </ul>
                 </div>                     
             </div>
@@ -36,9 +36,7 @@ import { Subscription } from "rxjs";
         :host >>> .info-panel.info{
             background-color: #6ECEE4;
         }        
-        .router-link-active{
-            background-color: #F5F5F5;
-        }        
+      
     `]
 })
 /*@RouteConfig([

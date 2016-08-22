@@ -17,7 +17,7 @@ export class CarDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.apiService
-            .getCar(/*this.params.get('id')*/this.activeRoute.snapshot.params['from'])
+            .getCar(/*this.params.get('id')*/this.activeRoute.snapshot.params['id'])
             .subscribe((car: any) => {
                 this.car = car;
             })

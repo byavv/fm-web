@@ -18,7 +18,7 @@ export class ExtHttp {
             'Content-Type': 'application/json'
         });
         if (!!identityData && identityData.token) {
-            headers.append('Authorization', `${identityData.token}`)
+            headers.append('authorization', `${identityData.token}`)
         }
         return headers;
     }
