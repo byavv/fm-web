@@ -1,17 +1,17 @@
 <div class="row">
     <div class="col-md-12 col-lg-9 col-sm-12">
         <div class="my-card">
-            <form [formGroup]="form" #carForm="ngForm" class="form-horizontal">
+            <form [formGroup]="form" class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label for="maker">Made by</label>
-                        <select class="form-control" name="maker" id="maker" formControlName="maker" [(ngModel)]='maker' [attr.disabled]='loading'>
+                        <select class="form-control" name="maker" id="maker" formControlName="maker" [(ngModel)]='maker' [disabled]='loading'>
                         <option *ngFor="let maker of makers" [ngValue]="maker">{{maker.name}}</option>
                     </select>
                         <show-error *ngIf="submitted" control="maker" [errors]="['required']"></show-error>
                     </div>
                     <div class="col-sm-6"><label for="maker">Model</label>
-                        <select class="form-control" name="model" id="model" formControlName="model" [(ngModel)]='model' [attr.disabled]="loading || !maker">
+                        <select class="form-control" name="model" id="model" formControlName="model" [(ngModel)]='model' [disabled]="loading || !maker">
                         <option *ngFor="let model of models" [ngValue]="model">{{model.name}}</option>
                     </select>
                         <show-error *ngIf="submitted" control="model" [errors]="['required']"></show-error>
@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="col-md-12 col-lg-3 col-sm-12">
-        <button type="button" (click)="onSubmit(carForm)" class="btn btn-primary next-button">
+        <button type="button" (click)="onSubmit(form)" class="btn btn-primary next-button">
            <i class="fa fa-arrow-right" aria-hidden="true"></i>
                 Next add images
         </button>

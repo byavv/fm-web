@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Control, ControlGroup} from '@angular/common';
+import {FormControl, FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UsersBackEndApi} from "../../services/usersBackEndApi"
 import {Api, Identity} from "../../../shared/services";
@@ -7,18 +7,18 @@ import {Api, Identity} from "../../../shared/services";
 @Component({
     selector: 'settings',
     template: require('./personal.html'),
-    directives: []
+    directives: [REACTIVE_FORM_DIRECTIVES]
 })
 
 export class ProfileComponent implements OnInit {
-    personalForm: ControlGroup;
+    personalForm: FormGroup;
     model: any = {};
     error;
     info;
     constructor(private usersBackEnd: UsersBackEndApi, private identity: Identity) {
-        this.personalForm = new ControlGroup({
-            name: new Control(),
-            location: new Control()
+        this.personalForm = new FormGroup({
+            name: new FormControl(),
+            location: new FormControl()
         })
     }
 

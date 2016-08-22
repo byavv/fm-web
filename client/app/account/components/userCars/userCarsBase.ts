@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES } from "@angular/router";
-
+import { UsersBackEndApi } from "../../services/usersBackEndApi";
 @Component({
     selector: 'usercars',
     template: `
@@ -12,7 +12,8 @@ import { ROUTER_DIRECTIVES } from "@angular/router";
         </div>
     `,
 
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES],
+    providers: [UsersBackEndApi],
 })
 
 export class UserCarsComponent { }

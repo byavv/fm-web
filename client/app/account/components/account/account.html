@@ -25,6 +25,8 @@
                 </div>
             </div>
         </div>
+
+
         <div class="card">
             <div class="card-header" style="background-color: #0275D8;color: #eee;">
                 <span style='flex:1 0 auto'>Change password</span>
@@ -34,21 +36,21 @@
                 <div class='row'>
                     <div class='col-md-12 col-lg-9'>
                         <form [formGroup]="passwordForm">
-                            <div class="form-group" [ngClass]="{ 'has-error' : !oldpassword.valid && passwordSubmitted}">
+                            <div class="form-group" [ngClass]="{ 'has-error' : !passwordForm.controls['oldPassword'].valid && passwordSubmitted}">
                                 <label for="oldPassword">Old Password</label>
-                                <input type="password" class="form-control" id="oldPassword" #oldpassword='ngForm' placeholder="oldPassword" formControlName="oldPassword"
+                                <input type="password" class="form-control" id="oldPassword"  placeholder="oldPassword" formControlName="oldPassword"
                                     [(ngModel)]='model.oldPassword'>
                                 <show-error *ngIf="passwordSubmitted" control="oldPassword" [errors]="['required']"></show-error>
                             </div>
-                            <div class="form-group" [ngClass]="{ 'has-error' :!newpassword.valid && passwordSubmitted}">
+                            <div class="form-group" [ngClass]="{ 'has-error' :!passwordForm.controls['newPassword'].valid && passwordSubmitted}">
                                 <label for="newPassword">New Password</label>
-                                <input type="password" class="form-control" #newpassword='ngForm' id="newPassword" placeholder="password" formControlName="newPassword"
+                                <input type="password" class="form-control"  id="newPassword" placeholder="password" formControlName="newPassword"
                                     [(ngModel)]='model.newPassword'>
                                 <show-error *ngIf="passwordSubmitted" control="newPassword" [errors]="['minlength', 'pattern', 'required']"></show-error>
                             </div>
-                            <div class="form-group" [ngClass]="{ 'has-error' :!confirm.valid && passwordSubmitted}">
+                            <div class="form-group" [ngClass]="{ 'has-error' :!passwordForm.controls['confirm'].valid && passwordSubmitted}">
                                 <label for="confirm">Confirm new password</label>
-                                <input type="password" class="form-control" #confirm='ngForm' id="confirm" placeholder="confirm" formControlName="confirm" [(ngModel)]='model.confirm'>
+                                <input type="password" class="form-control" id="confirm" placeholder="confirm" formControlName="confirm" [(ngModel)]='model.confirm'>
                                 <show-error *ngIf="passwordSubmitted" control="confirm" [errors]="['confirm']"></show-error>
                             </div>
                             <button (click)="onSubmitPassword()" class="btn btn-primary submit-form-button">Change</button>

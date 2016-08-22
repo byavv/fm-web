@@ -4,16 +4,23 @@ import { AccountComponent } from './account/account';
 import { MasterBaseComponent } from './userCars/masterBase';
 import { UserCarsListComponent } from './userCars/carList';
 import { UserCarsComponent } from './userCars/userCarsBase';
+import { AccountBase } from './accountBase';
 
 export const ACCOUNT_ROUTER_PROVIDERS: RouterConfig = [
-    { path: 'profile', component: ProfileComponent },
-    { path: 'account', component: AccountComponent },
     {
-        path: 'cars',
-        component: UserCarsComponent,
+        path: 'personal',
+        component: AccountBase,
         children: [
-            { path: 'master/:id', component: MasterBaseComponent },
-            { path: 'list', component: UserCarsListComponent }
+            { path: 'profile', component: ProfileComponent },
+            { path: 'account', component: AccountComponent },
+            {
+                path: 'cars',
+                component: UserCarsComponent,
+                children: [
+                    { path: 'master', component: MasterBaseComponent },
+                    { path: 'list', component: UserCarsListComponent }
+                ]
+            }
         ]
     }
 ];

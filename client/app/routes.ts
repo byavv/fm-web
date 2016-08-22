@@ -11,8 +11,9 @@ export const routes: RouterConfig = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'search/:maker', component: CarsSearchComponent },
+  { path: 'details/:id', component: CarDetailsComponent },
   ...ACCOUNT_ROUTER_PROVIDERS,
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '/' }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

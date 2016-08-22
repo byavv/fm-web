@@ -10,13 +10,13 @@ export class UsersBackEndApi {
 
     public getUserCars(): Observable<any> {
         return this._http           
-            .post("/profiles/cars/getusercars", null)
+            .post("/private/cars/getusercars", null)
             .map(res => res.json());
     }
 
     public postNewCar(data: any) {
         return this._http           
-            .post("/profiles/cars/new", JSON.stringify(data))
+            .post("/private/cars/new", JSON.stringify(data))
             .map(res => res.json());
     }
     public deleteImage(id: string, key: string) {
@@ -28,7 +28,7 @@ export class UsersBackEndApi {
 
     public deleteCar(id: string) {
         return this._http           
-            .delete(`/profiles/cars/${id}`)
+            .delete(`/private/cars/${id}`)
             .map(res => res.json());
     }
     public deleteUserWithProfile() {
@@ -68,9 +68,9 @@ export class UsersBackEndApi {
     public createOrUpdate(data: any, id?: string) {       
           return (id
             ? this._http
-                .post(`/profiles/cars/update/${id}`, JSON.stringify(data))
+                .post(`/private/cars/update/${id}`, JSON.stringify(data))
             : this._http
-                .post(`/profiles/cars/new`, JSON.stringify(data)))
+                .post(`/private/cars/new`, JSON.stringify(data)))
             .map(res => res.json());      
     }
 

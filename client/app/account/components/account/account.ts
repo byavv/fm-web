@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
+import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UsersBackEndApi} from "../../services/usersBackEndApi"
 import {Api, Identity} from "../../../shared/services";
@@ -8,7 +8,7 @@ import {ShowError} from '../../directives/showError';
 @Component({
     selector: 'account',
     template: require('./account.html'),
-    directives: [ShowError],
+    directives: [ShowError, REACTIVE_FORM_DIRECTIVES],
     styles: [`       
         .panel-heading.red{
             color: #fff;
@@ -27,8 +27,8 @@ import {ShowError} from '../../directives/showError';
 })
 
 export class AccountComponent implements OnInit {
-    accountForm: ControlGroup;
-    passwordForm: ControlGroup;
+    accountForm: FormGroup;
+    passwordForm: FormGroup;
     model: any = {};
     user: any = {};
     passwordSubmitted = false;
@@ -68,11 +68,11 @@ export class AccountComponent implements OnInit {
         this._usersBackEnd.deleteUserWithProfile().subscribe((result) => {
             this._identity.update();
             console.log(result);
-            this.router.navigate(['/Home']);
+            this.router.navigate(['/']);
         }, (err) => {
             this._identity.update();
             console.error(err);
-            this.router.navigate(['/Home']);
+            this.router.navigate(['/']);
         })
     }
 

@@ -9,15 +9,15 @@
                 <form [formGroup]="signInForm" no-validate (submit)="onSubmit(signInForm.value)">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" #username="ngForm" placeholder="name" formControlName="username">
+                        <input type="text" class="form-control" id="username" #username placeholder="name" formControlName="username">
                     </div>
                      <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" id="username" #email="ngForm" placeholder="name" formControlName="email">
+                        <input type="text" class="form-control" id="email" #email placeholder="name" formControlName="email">
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" #password="ngForm" placeholder="password" formControlName="password">
+                        <input type="password" class="form-control" id="password" #password placeholder="password" formControlName="password">
                     </div>                   
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary submit-form-button">Submit</button>

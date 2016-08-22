@@ -57,24 +57,10 @@ export class StepInfoComponent implements OnInit {
             this.form.markAsTouched();
         });
 
-        this.form
-            .find("maker")
-            .valueChanges
-            .filter(value => value)
-            .do(() => { this.loading = true })
-            .switchMap(value => !!value.id ? this.api.getMakerModels(value.id) : Observable.of([]))
-            .subscribe((models: Array<any>) => {
-                this.loading = false;
-                this.models = models;
-                if (this.modelToUpdate) {
-                    this.model = models.find((model) => model.id == this.modelToUpdate);
-                    this.modelToUpdate = null;
-                }
-            });
 
         this.appController
             .init$
-            .do(() => { this.loading = true })           
+            .do(() => { this.loading = true })
             .subscribe((defaults) => {
                 this.makers = defaults.makers || [];
                 this.engineTypes = defaults.engineTypes || [];
@@ -94,6 +80,22 @@ export class StepInfoComponent implements OnInit {
             .subscribe(value => {
                 this.master.info = value;
                 this.master.validation['info'] = this.form.valid;
+            });
+    }
+    ngAfterViewInit() {
+        this.form
+            .find("maker")
+            .valueChanges
+            .filter(value => value)
+            .do(() => { this.loading = true })
+            .switchMap(value => !!value.id ? this.api.getMakerModels(value.id) : Observable.of([]))
+            .subscribe((models: Array<any>) => {
+                this.loading = false;
+                this.models = models;
+                if (this.modelToUpdate) {
+                    this.model = models.find((model) => model.id == this.modelToUpdate);
+                    this.modelToUpdate = null;
+                }
             });
     }
 
