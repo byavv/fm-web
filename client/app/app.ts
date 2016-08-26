@@ -5,11 +5,14 @@ import { Router, ROUTER_DIRECTIVES } from "@angular/router";
 import { Identity, Storage, APP_SERVICES_PROVIDERS, AppController } from "./shared/services";
 import { ACTIONS_PROVIDERS } from "./shared/actions";
 import { Header } from "./shared/components/header/header";
-import { FORM_PROVIDERS } from '@angular/common';
 import { AccountBase } from "./account/components/accountBase";
 import { LoaderComponent } from "./shared/components/loader/loader";
 
-// applied to the whole app
+import { AppState, getCatalogReady } from "./shared/reducers";
+import { CatalogActions } from "./shared/actions";
+import { Store } from '@ngrx/store';
+import { Observable } from "rxjs/Observable";
+
 import '../assets/styles/main.scss';
 
 @Component({
@@ -17,7 +20,7 @@ import '../assets/styles/main.scss';
   directives: [ROUTER_DIRECTIVES, Header, LoaderComponent],
   template: `
     <div class="page-wrap">
-      <loader [active]='loading' [async]='appController.init$'></loader>      
+      <loader [active]='loading' [async]='init$' (completed)='loading=false'></loader>      
        <app-header></app-header>
        <div [hidden]='loading' class='container-fluid'>
           <div class='content-area'>
@@ -27,16 +30,21 @@ import '../assets/styles/main.scss';
       </div>
     </div>         
   `,
-  providers: [FORM_PROVIDERS, APP_SERVICES_PROVIDERS, ACTIONS_PROVIDERS]
+  providers: []
 })
-
 export class App {
   loading = true;
-  constructor(private identity: Identity, private storage: Storage, private appController: AppController) {
-    this.appController.init$.subscribe(() => {
-      this.loading = false;
-    })
-    this.appController.start();
+  init$: Observable<any>;
+  constructor(
+    private identity: Identity,
+    private storage: Storage,
+    private store: Store<AppState>,
+    private catalogActions: CatalogActions,
+    appController: AppController) {
+    this.init$ = this.store
+      .let(getCatalogReady())
+
+    appController.start();
     identity.update(JSON.parse(storage.getItem("authorizationData")));
   }
 }

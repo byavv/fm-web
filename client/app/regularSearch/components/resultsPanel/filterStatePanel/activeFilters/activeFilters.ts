@@ -1,10 +1,8 @@
-import {Component, OnInit, OnDestroy, Output, Input, EventEmitter, ChangeDetectionStrategy} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {FilterController} from '../../../../services';
-import {FilterModel, FilterStateModel} from "../../../../../shared/models";
-import {AppController} from "../../../../../shared/services";
-import {ConverterBase} from "../../../../../shared/lib/converters/ConverterBase";
-import {Subscription} from "rxjs";
+import { Component, OnInit, OnDestroy, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { FilterController } from '../../../../services';
+import { FilterModel, FilterStateModel } from "../../../../../shared/models";
+import { ConverterBase } from "../../../../../shared/lib/converters/ConverterBase";
+import { Subscription } from "rxjs";
 import * as converters from "../../../../../shared/lib/converters";
 import { construct } from "../../../../../shared/lib/helpers";
 
@@ -37,7 +35,7 @@ export class ActiveFiltersComponent {
         return this._appliedFilters;
     }
 
-    constructor(private appController: AppController, private filterController: FilterController) {
+    constructor(private filterController: FilterController) {
         let convertersArray = [];
         Object.keys(converters).forEach((key) => {
             convertersArray.push(construct(converters[key]));

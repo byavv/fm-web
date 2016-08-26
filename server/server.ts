@@ -35,7 +35,10 @@ import { provideStore } from '@ngrx/store';
 import reducer from '../client/app/shared/reducers';
 
 // Application
-import { routes } from '../client/app/routes';
+import { APP_ROUTER_PROVIDERS } from '../client/app/routes';
+import { APP_SERVICES_PROVIDERS } from '../client/app/shared/services';
+import { ACTIONS_PROVIDERS } from '../client/app/shared/actions';
+
 // Root app Component
 import { App } from '../client/app/app';
 
@@ -69,7 +72,11 @@ function ngApp(req, res) {
         ],
         providers: [
             NODE_HTTP_PROVIDERS,
-            provideRouter(routes),
+
+            ...APP_ROUTER_PROVIDERS,
+            ...APP_SERVICES_PROVIDERS,
+            ...ACTIONS_PROVIDERS,
+
             NODE_LOCATION_PROVIDERS,
             provide(REQUEST_URL, { useValue: url }),
             provide(TranslateLoader, {

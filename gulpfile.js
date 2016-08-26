@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     webpack = require('webpack'),
     path = require('path'),
     ts = require('gulp-typescript'),
-    runSequence = require('run-sequence'),    
+    runSequence = require('run-sequence'),
     nodemon = require('gulp-nodemon'),
     rx = require("rxjs");
 
@@ -73,7 +73,7 @@ function startClientTests(single, done) {
         } else {
             $.util.log($.util.colors.white.bgGreen.bold('INFO:'), 'Karma completed');
         }
-        done();
+        process.exit(res)
     });
     server.start();
 }

@@ -1,11 +1,13 @@
-import {Component, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup} from '@angular/forms';
-import {Api} from '../../../../shared/services/';
-import {Observable, Subscription} from 'rxjs';
-import {ConverterProvider, convertToView, FilterComponent, MakerConverter}  from '../../../../shared/lib/';
-import {AppController} from '../../../../shared/services/';
-import {isString, isBlank} from '@angular/compiler/src/facade/lang';
-import {FilterController} from '../../../services/filterController';
+import { Component, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
+import { REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup} from '@angular/forms';
+import { Api} from '../../../../shared/services/';
+import { Observable, Subscription} from 'rxjs';
+import { ConverterProvider, convertToView, FilterComponent, MakerConverter}  from '../../../../shared/lib/';
+import { isString, isBlank } from '@angular/compiler/src/facade/lang';
+import { FilterController } from '../../../services/filterController';
+import { AppState, getMakers } from "../../../../shared/reducers";
+import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../shared/actions";
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'makerWrapper',
@@ -45,21 +47,24 @@ export class MakerFilterComponent extends FilterComponent {
     oldValue: any;
     subscription: Subscription;
 
-    constructor(private apiService: Api, private appController: AppController,
-        filterController: FilterController) {
-        super(filterController);    
+    constructor(private apiService: Api,
+        filterController: FilterController,
+        private store: Store<AppState>,
+        private catalogActions: CatalogActions
+    ) {
+        super(filterController);
         this.form = new FormGroup({
             maker: this.makerControl,
             model: this.modelControl
-        })    
+        })
     }
 
     ngAfterViewInit() {
-        this.appController.init$.subscribe(value => {
-            this.carMakers = value.makers;
+        this.store.let(getMakers()).subscribe((makers) => {
+            this.carMakers = makers;
             this._resetView();
-        })  
-        
+        });
+
         this.makerControl
             .valueChanges
             .distinctUntilChanged()

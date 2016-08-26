@@ -7,8 +7,12 @@
                 <i class="glyphicon glyphicon-circle-arrow-right"></i>
             </span>
             </div>
-            <div class="panel-body">
-                <filterWrapper #wrapper *ngFor="let filter of filters" [filter]="filter" (changed)="onFilterValueChanged($event)">
+            <div class="panel-body">                
+                <filterWrapper 
+                    #wrapper 
+                    *ngFor="let filter of filters" 
+                    [filter]="filter" 
+                    (changed)="changed.emit($event.filterValue)">
                 </filterWrapper>
             </div>
         </div>

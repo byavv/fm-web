@@ -1,24 +1,23 @@
-import {Component, OnInit} from '@angular/core';
-import {Api} from '../../shared/services';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subject, Observable, Subscription} from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { Api } from '../../shared/services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, Observable, Subscription } from "rxjs";
 
-import {AppController} from "../../shared/services";
-import {CarFilterPanelComponent} from './filterPanel/panelBase';
-import {LoaderComponent} from "../../shared/components/loader/loader";
-import {SEARCH_SERVICES_PROVIDERS, FilterController, TotalCounter} from '../services/';
-import {CarsListComponent} from './resultsPanel/carList/carList';
-import {PaginationComponent} from './resultsPanel/pageSelector/searchPagination';
-import {StateFullComponent} from './resultsPanel/filterStatePanel/stateFull';
-import {StateSummaryPanel} from './resultsPanel/filterStatePanel/stateSummary';
-import {LastAddedComponent} from './lastAddedPanel/components/lastAdded';
-import {ScrollSpy} from "../directives/scrollSpy";
-import {ResizeSpy} from '../directives/resizeSpy';
-import {StickyPanel} from "../directives/sticky";
-import {SizeSpy} from "../directives/rectSpy";
+import { CarFilterPanelComponent } from './filterPanel/panelBase';
+import { LoaderComponent } from "../../shared/components/loader/loader";
+import { SEARCH_SERVICES_PROVIDERS, FilterController, TotalCounter } from '../services/';
+import { CarsListComponent } from './resultsPanel/carList/carList';
+import { PaginationComponent } from './resultsPanel/pageSelector/searchPagination';
+import { StateFullComponent } from './resultsPanel/filterStatePanel/stateFull';
+import { StateSummaryPanel } from './resultsPanel/filterStatePanel/stateSummary';
+import { LastAddedComponent } from './lastAddedPanel/components/lastAdded';
+import { ScrollSpy } from "../directives/scrollSpy";
+import { ResizeSpy } from '../directives/resizeSpy';
+import { StickyPanel } from "../directives/sticky";
+import { SizeSpy } from "../directives/rectSpy";
 import { Store } from "@ngrx/store";
 
-import {AppState, getVehicleState, getFoundVehicles, getFilter, getQuery, getQueryState, getConvertedToRouteParamsQuery} from "../../shared/reducers";
+import { AppState, getVehicleState, getFoundVehicles, getFilter, getQuery, getCatalogReady, getConvertedToRouteParamsQuery } from "../../shared/reducers";
 import { QueryActions, FilterPanelActions, VehicleActions} from "../../shared/actions";
 
 @Component({
@@ -53,7 +52,6 @@ export class CarsSearchComponent implements OnInit {
         private route: ActivatedRoute,
         private filterController: FilterController,
         private totalCounter: TotalCounter,
-        private appController: AppController,
         private store: Store<AppState>,
         private vehicleActions: VehicleActions,
         private queryActions: QueryActions,
@@ -66,7 +64,6 @@ export class CarsSearchComponent implements OnInit {
 
     ngOnInit() {
         this.routSbscr = this.route.params
-            .delayWhen(() => this.appController.init$)
             .subscribe((params) => {
                 this.store.dispatch(this.queryActions.updateStateFromRouteParams(params));
                 this.store.dispatch(this.filterPanelActions.updateStateFromRouteParams(params));
@@ -113,10 +110,8 @@ export class CarsSearchComponent implements OnInit {
                 this.store.dispatch(this.vehicleActions.searchError(err));
             })
     }
-    // happens when any filter value changes
+
     doSearch(value) {
-        // if (!!value) {
         this.store.dispatch(this.queryActions.updateStateFromFilterChange(value));
-        //  }
     }
 }

@@ -1,9 +1,12 @@
-import {Component, EventEmitter, Input, Output, OnInit} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl} from '@angular/forms';
-import {ConverterProvider, convertToView, FilterComponent, EngineTypeConverter} from '../../../../shared/lib/';
-import {OptionsPickerControl} from "../../../../shared/components/controls/optionPicker/optionPicker";
-import {AppController} from '../../../../shared/services/';
-import {FilterController} from '../../../services/filterController';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl } from '@angular/forms';
+import { ConverterProvider, convertToView, FilterComponent, EngineTypeConverter } from '../../../../shared/lib/';
+import { OptionsPickerControl } from "../../../../shared/components/controls/optionPicker/optionPicker";
+import { FilterController } from '../../../services/filterController';
+
+import { AppState, getEngineTypes } from "../../../../shared/reducers";
+import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../shared/actions";
+import { Store } from '@ngrx/store'
 
 @Component({
     selector: 'engine-filter',
@@ -44,7 +47,11 @@ export class EngineTypeFilterComponent extends FilterComponent {
     form: FormGroup;
     engineTypes: FormControl = new FormControl([]);
     defaults: Array<any> = [];
-    constructor(filterController: FilterController, private appController: AppController) {
+    constructor(
+        filterController: FilterController,
+        private store: Store<AppState>,
+        private catalogActions: CatalogActions
+    ) {
         super(filterController);
         this.form = new FormGroup({
             engineTypes: this.engineTypes
@@ -52,9 +59,9 @@ export class EngineTypeFilterComponent extends FilterComponent {
     }
 
     ngOnInit() {
-        // it' not completed part
-        // todo: remove appCOntroller, go reduce it!
-        this.defaults = this.appController.engineTypes;
+        this.store.let(getEngineTypes()).subscribe((engineTypes) => {
+            this.defaults = engineTypes;
+        });
         this.form.valueChanges
             .map(value => {
                 return {

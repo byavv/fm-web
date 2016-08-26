@@ -10,17 +10,13 @@ import {buildFilterListFromRoute} from "../../shared/lib/";
 
 export interface FilterState {
     filter: Array<FilterModel>,
-    loaded: boolean,
-   // makers: Array<any>,
-  //  engineTypes: Array<any>,
-  //  colors: Array<any>
+    loaded: boolean
 };
 
 const initialState: FilterState = {
     filter: [],
-    loaded: false,
-  //  makers: [],
-    
+    loaded: false
+
 };
 
 function convertersPipe() {
@@ -83,7 +79,6 @@ export function filterReducer(state = initialState, action: Action): FilterState
                 ], loaded: true
             }
         }
-
         default: {
             return state;
         }

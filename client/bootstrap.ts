@@ -21,11 +21,19 @@ import reducer from './app/shared/reducers';
 // Application
 import { App } from './app/app';
 import { InertLink } from "./app/shared/directives";
-import { routes } from './app/routes';
+
+import { APP_ROUTER_PROVIDERS } from './app/routes';
+import { APP_SERVICES_PROVIDERS } from "./app/shared/services";
+import { ACTIONS_PROVIDERS } from "./app/shared/actions";
 
 const PROVIDERS = [
+
     ...HTTP_PROVIDERS,
-    provideRouter(routes),
+
+    ...APP_ROUTER_PROVIDERS,
+    ...APP_SERVICES_PROVIDERS,
+    ...ACTIONS_PROVIDERS,
+
     provideStore(reducer),
     provide(TranslateLoader, {
         useFactory: (http: Http) => new TranslateStaticLoader(http, 'i18n', '.json'),

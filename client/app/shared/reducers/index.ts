@@ -6,20 +6,24 @@ import { vehicleReducer, VehicleState }  from './vehicle';
 import * as vehicle  from './vehicle';
 import * as query  from './query';
 import * as filter  from './filter';
+import * as catalog  from './catalog';
 import { filterReducer }  from './filter';
 import { queryReducer, SearchQueryState }  from './query';
-import { FilterStateModel, FilterModel } from '../models';
+import { catalogReducer, CatalogState }  from './catalog';
+import { FilterStateModel, FilterModel, Catalog } from '../models';
 
 export interface AppState {
   vehicle: VehicleState,
   filter: FilterModel,
-  query: SearchQueryState
+  query: SearchQueryState,
+  catalog: CatalogState
 }
 
 export default combineReducers({
   vehicle: vehicleReducer,
   filter: filterReducer,
-  query: queryReducer
+  query: queryReducer,
+  catalog: catalogReducer
 });
 
 export function getVehicleState() {
@@ -29,12 +33,29 @@ export function getVehicleState() {
 
 export function getFilterState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.filter)    
+    .select(s => s.filter)
+}
+
+export function getCatalogState() {
+  return (state$: Observable<AppState>) => state$
+    .select(s => s.catalog)
 }
 
 export function getQueryState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.query)   
+    .select(s => s.query)
+}
+
+export function getMakers() {
+  return compose(catalog.getCurrentMakers(), getCatalogState());
+}
+
+export function getEngineTypes() {
+  return compose(catalog.getCurrentEngineTypes(), getCatalogState());
+}
+
+export function getCatalogReady() {
+  return compose(catalog.catalogInit(), getCatalogState());
 }
 
 export function getQuery() {
@@ -48,7 +69,6 @@ export function getFilter() {
 export function getConvertedToRouteParamsQuery() {
   return compose(query.getConvertedToRouteQueryState(), getQueryState());
 }
-
 
 export function getFoundVehicles() {
   return compose(vehicle.getFoundVehicles(), getVehicleState());

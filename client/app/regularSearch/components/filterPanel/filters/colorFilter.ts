@@ -25,7 +25,6 @@ import {ColorPickerControl} from "../../../../shared/components/controls/colorPi
   `,
     directives: [REACTIVE_FORM_DIRECTIVES, ColorPickerControl]
 })
-// (onChange)="onColorSelected($event)" 
 @ConverterProvider({
     bindWith: ColorConverter
 })
@@ -36,14 +35,17 @@ export class ColorFilterComponent extends FilterComponent {
     filterValue: any = {};
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
+    
     form: FormGroup;
-    colors: FormControl = new FormControl([])
+    colors: FormControl = new FormControl([]);
+
     constructor(filterController: FilterController) {
         super(filterController);
         this.form = new FormGroup({
             colors: this.colors
         })
     }
+
     ngOnInit() {
         this.form.valueChanges
             .map(value => {
@@ -52,17 +54,16 @@ export class ColorFilterComponent extends FilterComponent {
                     immidiate: true
                 }
             })
-            .subscribe((value)=>{
-                 this.changed.next(value);
-            });        
+            .subscribe((value) => {
+                this.changed.next(value);
+            });
     }
-    //onColorSelected(value) {
-    //     this.changed.next({ filterValue: this.filterValue, immidiate: true });
-    // }
+
     @convertToView
     get viewValue() {
         return this.filterValue;
     }
+
     setValue(value) {
         this.filterValue = value;
         this.changed.next({ filterValue: this.filterValue, immidiate: true });

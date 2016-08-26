@@ -1,8 +1,7 @@
-import {Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit} from '@angular/core';
-import {CarItemComponent} from './carListItem/carListItem'
-import {Observable, Subscription} from "rxjs";
-import {LoaderComponent} from "../../../../shared/components/loader/loader";
-import {AppController} from "../../../../shared/services";
+import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit } from '@angular/core';
+import { CarItemComponent } from './carListItem/carListItem'
+import { Observable, Subscription } from "rxjs";
+import { LoaderComponent } from "../../../../shared/components/loader/loader";
 
 @Component({
     selector: 'carsList',
@@ -16,7 +15,7 @@ import {AppController} from "../../../../shared/services";
             </ul>             
             <div *ngIf='!found'>
                 <hr/>
-                <h3 style='text-align: center;padding-top: 70px;'>Nothing was found</h3>
+                <h3 style='text-align: center; padding-top: 70px;'>Nothing was found</h3>
             </div>
        </div>     
      </div>
@@ -36,12 +35,12 @@ import {AppController} from "../../../../shared/services";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CarsListComponent implements OnInit, OnDestroy {
-    @Input()//loading
+    @Input()
     cars: Observable<Array<any>>;
     private _subscription: Subscription;
     init: boolean;
     found: boolean = true;
-    constructor(private cd: ChangeDetectorRef, private appController: AppController) { }
+    constructor(private cd: ChangeDetectorRef) { }
     ngOnInit() {
         this._subscription =
             this.cars.subscribe((cars: Array<any>) => {

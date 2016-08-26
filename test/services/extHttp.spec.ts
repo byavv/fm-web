@@ -125,8 +125,8 @@ describe('Extended http tests', () => {
         var connection: MockConnection;
         var backend = _injector.get(MockBackend);
         backend.connections.subscribe(c => {
-            connection = c;
-            expect(connection.request.headers.get("Authorization")).toEqual('supersecret')
+            connection = c;           
+            expect(connection.request.headers.get("authorization")).toEqual('supersecret')
         });
         extHttp.post('/someapi', JSON.stringify({ some: 'request' }))
             .subscribe(res => {
