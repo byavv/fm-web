@@ -1,12 +1,12 @@
-import {Component, OnInit, EventEmitter, Output, ViewQuery, ComponentRef, OnDestroy, QueryList, ChangeDetectorRef} from '@angular/core';
-import {FilterController} from '../../services/filterController';
-import {FilterWrapperComponent} from './filterWrapper'
+import { Component, OnInit, EventEmitter, Output, ViewQuery, OnDestroy, QueryList } from '@angular/core';
+import { FilterController } from '../../services/filterController';
+import { FilterWrapperComponent } from './filterWrapper'
 import * as filters from './filters';
-import {TotalCounter} from '../../services/totalCounter';
-import {Api} from "../../../shared/services";
-import {FilterModel, FilterStateModel} from "../../../shared/models";
-import {LoaderComponent} from "../../../shared/components/loader/loader";
-import {Subscription, Observable} from "rxjs";
+import { TotalCounter } from '../../services/totalCounter';
+import { Api} from "../../../shared/services";
+import { FilterModel, FilterStateModel } from "../../../shared/models";
+import { LoaderComponent } from "../../../shared/components/loader/loader";
+import { Subscription, Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState, getFilter } from "../../../shared/reducers";
 import { QueryActions } from "../../../shared/actions";
@@ -15,7 +15,7 @@ import { QueryActions } from "../../../shared/actions";
     template: require("./panelBase.html"),
     directives: [FilterWrapperComponent, LoaderComponent],
     styles: [`
-        .sch-button{
+        .sch-button {
             width: 100%;
             color: #fff;
             outline: none;
@@ -24,18 +24,18 @@ import { QueryActions } from "../../../shared/actions";
             -webkit-box-shadow: 0 1px .5px 0 rgba(0,0,0,.25);
             box-shadow: 0 1px .5px 0 rgba(0,0,0,.25);
         }
-        .link{
+        .link {
             color: #337ab7;
             text-decoration: underline;
             cursor: pointer;
             font-size:16px;
         }
-       :host >>> .form-control{
-           margin:3px 0;
-       }    
-       .opened{
-           display: block!important;
-       } 
+        :host >>> .form-control {
+            margin:3px 0;
+        }    
+        .opened {
+            display: block!important;
+        } 
     `]
 })
 export class CarFilterPanelComponent implements OnInit, OnDestroy {
@@ -62,7 +62,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
             this.count = count;
         })
         this.filterState$ = this.store.let(getFilter());
-        this._filterSrvSubscr = this.filterState$           
+        this._filterSrvSubscr = this.filterState$
             .subscribe((state) => {
                 if (!this.alreadyLoaded) {
                     this.filters = state;
@@ -76,29 +76,6 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
         if (this._counterSubscr)
             this._counterSubscr.unsubscribe();
     }
-
-    onFilterValueChanged(newValue) {
-        //  if (newValue.immidiate) {
-        //   this.store.dispatch(this.queryActions.applyQueryParams(newValue.filterValue))
-        // this.filterController.filterState = newValue.filterValue;
-        //  this._doSearch();
-        this.changed.emit(newValue.filterValue)
-        //  } else {
-        //     this.pendingFilterState = Object.assign(this.pendingFilterState, newValue.filterValue);
-        // }
-        if (this.opened) {
-            //  this.apiService.getCarsCount(Object.assign(this.filterController.filterState, this.pendingFilterState))
-            //      .subscribe((result: any) => {
-            //           this.counter.next(+result.count);
-            //       })
-        }
-    }
-
-    //_doSearch() {
-    //  this.changed.next(this.pendingFilterState);
-    //   this.pendingFilterState = {};
-    // }
-
     detailedSearch() {
         console.warn("This feature has not been implemented yet");
     }

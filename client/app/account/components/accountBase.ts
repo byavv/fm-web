@@ -22,7 +22,7 @@ import { Subscription } from "rxjs";
                 </router-outlet>               
             </div>
         </div>
-   `,    
+   `,
     directives: [ROUTER_DIRECTIVES],
     providers: [UsersBackEndApi],
     styles: [`                            
@@ -39,18 +39,14 @@ import { Subscription } from "rxjs";
       
     `]
 })
-/*@RouteConfig([
-    { path: '/profile', name: 'Profile', component: ProfileComponent },
-    { path: '/account', name: 'Account', component: AccountComponent },
-    { path: '/cars/...', name: 'MyCars', component: UserCarsComponent, useAsDefault: true }
-])*/
+
 export class AccountBase implements OnInit, OnDestroy {
     private _subscr: Subscription;
 
     constructor(private authBackEnd: AuthApi) { }
-    ngOnInit() { 
-        this._subscr = this.authBackEnd.authorize().subscribe(() => { });
-    }  
+    ngOnInit() {
+        this._subscr = this.authBackEnd.authorize().subscribe(() => { }, console.error);
+    }
 
     ngOnDestroy() {
         if (this._subscr)

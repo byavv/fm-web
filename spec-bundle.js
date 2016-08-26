@@ -19,6 +19,9 @@ require('zone.js/dist/sync-test');
 // RxJS
 require('rxjs/Rx');
 
+require('@ngrx/core');
+require('@ngrx/store');
+
 var testing = require('@angular/core/testing');
 var browser = require('@angular/platform-browser-dynamic/testing');
 

@@ -6,6 +6,10 @@ import {ShowError} from '../../../directives/showError';
 import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {RegExpWrapper, print, isPresent, isFunction} from '@angular/compiler/src/facade/lang';
 
+import { AppState, getCatalogState, getCatalogReady } from "../../../../shared/reducers";
+import { CatalogActions } from "../../../../shared/actions";
+import { Store } from '@ngrx/store';
+
 import {UsersBackEndApi} from '../../../services/usersBackEndApi';
 import {Api, AppController} from '../../../../shared/services';
 import {ColorPickerControl} from '../../../../shared/components/controls/colorPicker/colorPicker';
@@ -13,6 +17,7 @@ import {MasterController} from '../../../services/masterController';
 import {Observable} from 'rxjs';
 import {Car} from '../../../../shared/models';
 import {UiPane} from '../../../directives/uiTabs';
+
 @Component({
     selector: 'carInfo',
     template: require("./templates/stepInfo.html"),
@@ -37,15 +42,16 @@ export class StepInfoComponent implements OnInit {
         private master: MasterController,
         fb: FormBuilder,
         private api: Api,
-        private appController: AppController) {
+        private store: Store<AppState>,
+        private catalogActions: CatalogActions) {
         this.form = fb.group({
-            "maker": ['', Validators.required],
-            "model": ['', Validators.required],
-            "milage": [0, Validators.required],
-            "year": [0, Validators.required],
-            "color": ["", Validators.required],
-            "price": [0, Validators.compose([Validators.required])],
-            "description": [""]
+            maker: ['', Validators.required],
+            model: ['', Validators.required],
+            milage: [0, Validators.required],
+            year: [0, Validators.required],
+            color: ["", Validators.required],
+            price: [0, Validators.compose([Validators.required])],
+            description: [""]
         });
     }
 
@@ -56,12 +62,10 @@ export class StepInfoComponent implements OnInit {
             this.submitted = true;
             this.form.markAsTouched();
         });
-
-
-        this.appController
-            .init$
+        this.store
+            .let(getCatalogReady())
             .do(() => { this.loading = true })
-            .subscribe((defaults) => {
+            .subscribe((defaults) => {              
                 this.makers = defaults.makers || [];
                 this.engineTypes = defaults.engineTypes || [];
                 this.master.init$.subscribe((car: Car) => {
@@ -72,7 +76,7 @@ export class StepInfoComponent implements OnInit {
                         this.maker = this.makers.find((maker) => maker.id == this.car.makerId);
                     }
                 })
-            });
+            }, console.error);
 
         this.form
             .valueChanges

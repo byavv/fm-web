@@ -3,7 +3,7 @@ import {Router, ActivatedRoute, ROUTER_DIRECTIVES} from "@angular/router";
 import {STEP_COMPONENTS} from "./steps";
 import {MasterController} from "../../services/masterController";
 import {UsersBackEndApi} from "../../services/usersBackEndApi";
-import {Api, Identity} from "../../../shared/services";
+import {Api} from "../../../shared/services";
 import {Car} from "../../../shared/models";
 import {UiTabs, UiPane} from '../../directives/uiTabs';
 import {LoaderComponent} from "../../../shared/components/loader/loader";
@@ -63,13 +63,13 @@ export class MasterBaseComponent {
     loading: boolean = true;
     constructor(
         private router: Router,
-         private activeRoute: ActivatedRoute,
-     //   private params: RouteParams,
+        private activeRoute: ActivatedRoute,
         private master: MasterController,
         private userBackEnd: UsersBackEndApi,
-        private api: Api,
-        private identity: Identity) {
-        // new or update
+        private api: Api) {
+    }
+
+    ngOnInit() {
         this.id = this.activeRoute.snapshot.params['id']//this.params.get("id");
         if (this.id) {
             this.api.getCar(this.id).subscribe((car: Car) => {
@@ -79,13 +79,15 @@ export class MasterBaseComponent {
             this.master.init$.next(new Car());
         }
     }
+
     ngAfterViewInit() {
         this.tab.goTo("info");
     }
+
     onDone() {
         this.master
             .validate$
-            .do(() => { this.loading = true; })           
+            .do(() => { this.loading = true; })
             .flatMap(() => this.userBackEnd.createOrUpdate(this.master.info, this.id))
             .flatMap((result) => {
                 let form = new FormData();
@@ -106,5 +108,5 @@ export class MasterBaseComponent {
                 if (isString(err))
                     this.tab.goTo(err);
             });
-    }  
+    }
 }

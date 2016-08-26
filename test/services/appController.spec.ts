@@ -2,7 +2,7 @@ import {
     beforeEachProviders,
     inject,
     async,
-    it,    
+    it,
     beforeEach, fakeAsync
 } from '@angular/core/testing';
 
@@ -13,6 +13,10 @@ import { provide, Injector } from '@angular/core';
 import { Observable, ReplaySubject } from "rxjs";
 import { User } from '../../client/app/shared/models/user';
 import { UnauthorizedAccessError, ServerError } from '../helpers/errors';
+
+import { Store, provideStore } from '@ngrx/store';
+import reducer from '../../client/app/shared/reducers';
+import { ACTIONS_PROVIDERS } from "../../client/app/shared/actions";
 
 var _injector: Injector;
 import {Identity, ExtHttp, ResponseHandler, AppController, Api, APP_SERVICES_PROVIDERS} from "../../client/app/shared/services";
@@ -31,7 +35,9 @@ describe('App controller tests', () => {
                 return new Http(backend, defaultOptions);
             },
             deps: [MockBackend, BaseRequestOptions]
-        })
+        }),
+        provideStore(reducer),
+        ACTIONS_PROVIDERS
     ]);
     beforeEach(inject([Injector], (injector) => {
         _injector = injector;
@@ -51,7 +57,7 @@ describe('App controller tests', () => {
     })));
     it('should init app converters, makers and enginetypes', async(inject([AppController], (appController: AppController) => {
         appController.start();
-        appController.init$.subscribe((value) => {            
+        appController.init$.subscribe((value) => {
             expect(appController.makers.length).toBe(1);
             expect(appController.makers[0].name).toBe('fake');
             expect(appController.engineTypes.length).toBe(1);

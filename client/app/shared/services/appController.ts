@@ -1,36 +1,34 @@
 import {Injectable, NgZone} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {ExtHttp} from './extHttp';
-//import * as converters from "../lib/converters";
-//import {construct} from "../lib/helpers";
-//import {ConverterBase} from "../lib/converters/ConverterBase";
+import { Store } from "@ngrx/store";
 import {Api} from "./backEndApi";
 import {ReplaySubject, Observable} from "rxjs";
-
+import {AppState, getEngineTypes} from "../../shared/reducers";
+import {CatalogActions} from "../../shared/actions";
 @Injectable()
 export class AppController {
     init$: ReplaySubject<any> = new ReplaySubject<any>();
     config: any = {
         apiBase: "https://localhost:3001" //todo get from data
     };
-    //converters: Array<ConverterBase> = [];
     makers: Array<any> = [];
     engineTypes: Array<any> = [];
     // todo: car colors     
-    constructor(private _backEnd: Api, private _ngZone: NgZone) { }
+    constructor(private _backEnd: Api, private store: Store<AppState>, private _ngZone: NgZone, private catalogActions: CatalogActions) { }
     start() {
         this._ngZone.runOutsideAngular(() => {
             this._loadAppDefaults((defaults) => {
-                this._ngZone.run(() => { this.init$.next(defaults); });
+                this._ngZone.run(() => {
+                    this.store.dispatch(this.catalogActions.setAppLookups(defaults));
+                    this.init$.next(defaults);
+                });
                 console.log("APPLICATION STARTED");
             })
         });
     }
 
     _loadAppDefaults(doneCallback: (defaults: any) => void) {
-       // Object.keys(converters).forEach((key) => {
-      //      this.converters.push(construct(converters[key]));
-      //  });
         Observable.zip(
             this._backEnd.getMakers(),
             this._backEnd.getEngineTypes(),

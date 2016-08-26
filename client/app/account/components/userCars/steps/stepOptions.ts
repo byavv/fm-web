@@ -4,9 +4,7 @@ import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilde
 import {ShowError} from '../../../directives/showError';
 
 import {RegExpWrapper, print, isPresent, isFunction} from '@angular/compiler/src/facade/lang';
-
 import {UsersBackEndApi} from '../../../services/usersBackEndApi';
-import {Api, AppController} from '../../../../shared/services';
 import {MasterController} from '../../../services/masterController';
 import {Observable} from 'rxjs';
 import {Car} from '../../../../shared/models';
@@ -28,8 +26,7 @@ export class StepOptionsComponent implements OnInit {
     submitted: boolean = false;
     constructor(
         private master: MasterController,
-        fb: FormBuilder,
-        private api: Api) {
+        fb: FormBuilder) {
         this.form = fb.group({
 
         });
