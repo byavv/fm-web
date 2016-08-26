@@ -4,10 +4,11 @@
 
 Error.stackTraceLimit = Infinity;
 
-require('es6-shim');
-require('reflect-metadata');
+require('core-js/es6');
+require('core-js/es7/reflect');
+
 // Typescript emit helpers polyfill
-//require('ts-helpers');
+require('ts-helpers');
 
 require('zone.js/dist/zone');
 require('zone.js/dist/long-stack-trace-zone');
@@ -19,6 +20,7 @@ require('zone.js/dist/sync-test');
 // RxJS
 require('rxjs/Rx');
 
+// @ngrx
 require('@ngrx/core');
 require('@ngrx/store');
 
@@ -30,13 +32,6 @@ testing.setBaseTestProviders(
   browser.TEST_BROWSER_DYNAMIC_APPLICATION_PROVIDERS
 );
 
-Object.assign(global, testing);
-
-
 var testContext = require.context('./test', true, /\.spec\.ts/);
-var appContext = require.context('./client', true, /\.spec\.ts/);
 
-
-appContext.keys().forEach(appContext);
-testContext.keys().forEach(testContext);
-
+testContext.keys().map(testContext);
