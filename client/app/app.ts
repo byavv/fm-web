@@ -30,10 +30,7 @@ import '../assets/styles/main.scss';
       </div>
     </div>         
   `,
-  providers: [
-    APP_SERVICES_PROVIDERS,
-    ACTIONS_PROVIDERS
-  ]
+  providers: []
 })
 export class App {
   loading = true;

@@ -5,6 +5,7 @@ import { QuickSearchComponent } from "./quickSearch/components/quickSearchBase"
 import { CarsSearchComponent } from "./regularSearch/components/searchBase"
 import { CarDetailsComponent } from "./carDetails/carDetails";
 import { ACCOUNT_ROUTER_PROVIDERS } from "./account/components/routes";
+import { GUARDS } from "./shared/guards";
 
 export const routes: RouterConfig = [
   { path: '', component: QuickSearchComponent },
@@ -17,5 +18,6 @@ export const routes: RouterConfig = [
 ];
 
 export const APP_ROUTER_PROVIDERS = [
-  provideRouter(routes)
+  provideRouter(routes),
+  ...GUARDS
 ];
