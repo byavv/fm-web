@@ -1,7 +1,10 @@
-import {Component, EventEmitter, Output, Input, AfterViewInit} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {ConverterProvider, convertToView, FilterComponent, YearConverter} from "../../../../shared/lib/";
-import {FilterController} from '../../../services/filterController';
+import { Component, EventEmitter, Output, Input, AfterViewInit } from '@angular/core';
+import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+    ConverterProvider, convertToView,
+    FilterComponent, YearConverter
+} from "../../../../../lib/";
+import { FilterController } from '../../../../services';
 
 @Component({
     selector: 'yearWrapper',
@@ -43,9 +46,8 @@ import {FilterController} from '../../../services/filterController';
             </form>
         </div>                 
     </div> 
-  `,
-    directives: [REACTIVE_FORM_DIRECTIVES],
-    styles:[
+  `,    
+    styles: [
         `
             .hidden {
                 display: none; 

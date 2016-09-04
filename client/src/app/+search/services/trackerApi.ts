@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Observable, ReplaySubject, Observer, BehaviorSubject} from 'rxjs';
-import {ExtHttp} from '../../../../shared/services/extHttp';
+import { Injectable } from '@angular/core';
+import { Observable, ReplaySubject, Observer, BehaviorSubject } from 'rxjs';
+import { ExtHttp } from '../../shared/services';
 
 @Injectable()
 export class TrackerApi {

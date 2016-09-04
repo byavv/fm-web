@@ -3,10 +3,10 @@ import {Router} from "@angular/router";
 
 import {ShowError} from '../../../directives/showError';
 
-import {REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {RegExpWrapper, print, isPresent, isFunction} from '@angular/compiler/src/facade/lang';
+import { FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { print, isPresent, isFunction} from '@angular/compiler/src/facade/lang';
 
-import { AppState, getCatalogState, getCatalogReady } from "../../../../shared/reducers";
+import { AppState, getCatalogState, getCatalogReady } from "../../../../lib/reducers";
 import { CatalogActions } from "../../../../shared/actions";
 import { Store } from '@ngrx/store';
 
@@ -15,13 +15,12 @@ import {Api, AppController} from '../../../../shared/services';
 import {ColorPickerControl} from '../../../../shared/components/controls/colorPicker/colorPicker';
 import {MasterController} from '../../../services/masterController';
 import {Observable} from 'rxjs';
-import {Car} from '../../../../shared/models';
+import {Car} from '../../../../lib/models';
 import {UiPane} from '../../../directives/uiTabs';
 
 @Component({
     selector: 'carInfo',
-    template: require("./templates/stepInfo.html"),
-    directives: [REACTIVE_FORM_DIRECTIVES, ShowError, ColorPickerControl],
+    template: require("./templates/stepInfo.html"),  
     styles: [require('./styles/stepInfo.css')]
 })
 export class StepInfoComponent implements OnInit {
@@ -88,7 +87,7 @@ export class StepInfoComponent implements OnInit {
     }
     ngAfterViewInit() {
         this.form
-            .find("maker")
+            .controls["maker"]
             .valueChanges
             .filter(value => value)
             .do(() => { this.loading = true })

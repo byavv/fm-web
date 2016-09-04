@@ -1,15 +1,18 @@
-import { Component, OnInit, OnDestroy, Output, Input, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { FilterController } from '../../../../services';
-import { FilterModel, FilterStateModel } from "../../../../../shared/models";
-import { ConverterBase } from "../../../../../shared/lib/converters/ConverterBase";
+import {
+    Component, OnInit, OnDestroy,
+    Output, Input, EventEmitter,
+    ChangeDetectionStrategy
+} from '@angular/core';
+import { FilterController } from '../../../../../services';
+import { FilterModel, FilterStateModel } from "../../../../../../lib/models";
+import { ConverterBase } from "../../../../../../lib/converters/ConverterBase";
 import { Subscription } from "rxjs";
-import * as converters from "../../../../../shared/lib/converters";
-import { construct } from "../../../../../shared/lib/helpers";
+import * as converters from "../../../../../../lib/converters";
+import { construct } from "../../../../../../lib/helpers";
 
 @Component({
     selector: 'activeFilters',
     template: require("./activeFilters.html"),
-    directives: [],
     styles: [require('./component.css')],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -4,14 +4,16 @@ export * from "./footer/footer";
 export * from "./header/header";
 export * from "./loader/loader";
 
-import { ImageLoader } from "./imageLoader";
-import { InertLink } from "./inertLink";
-import { PatternInput } from "./patternInput";
-import { DebounceInput } from "./filterInput";
+import { ColorPickerControl } from "./controls/colorPicker/colorPicker";
+import { OptionsPickerControl } from "./controls/optionPicker/optionPicker";
+import { Footer } from "./footer/footer";
+import { Header } from "./header/header";
+import { LoaderComponent } from "./loader/loader";
 
-export const SHARED_DIRECTIVES = [
-    ImageLoader,
-    InertLink,
-    PatternInput,
-    DebounceInput
+export const SHARED_COMPONENTS = [
+    ColorPickerControl,
+    OptionsPickerControl,
+    Footer,
+    Header,
+    LoaderComponent
 ]

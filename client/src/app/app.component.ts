@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Router } from "@angular/router";
-import { Identity, Storage, APP_SERVICES_PROVIDERS, AppController } from "./shared/services";
+import { Identity, Storage, AppController } from "./shared/services";
 import { ACTIONS_PROVIDERS } from "./shared/actions";
 import { Header } from "./shared/components/header/header";
-import { AccountBase } from "./account/components/accountBase";
+
 import { LoaderComponent } from "./shared/components/loader/loader";
 
-import { AppState, getCatalogReady } from "./shared/reducers";
+import { AppState, getCatalogReady } from "./lib/reducers";
 import { CatalogActions } from "./shared/actions";
 import { Store } from '@ngrx/store';
 import { Observable } from "rxjs/Observable";
 
-import '../assets/styles/main.scss';
+import '../../assets/styles/main.scss';
 
 @Component({
   selector: 'app',  

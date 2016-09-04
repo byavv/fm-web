@@ -1,18 +1,19 @@
-import {ConverterBase} from "./ConverterBase";
-import {Converter} from "../decorators";
-import {FilterModel} from "../../models/filter"
+import { ConverterBase } from "./ConverterBase";
+import { Converter } from "../decorators";
+import { FilterModel } from "../models/filter";
+
 @Converter({
-    converterId: "typeng",
-    roteParams: ["engineTypes"]
+    converterId: "options",
+    roteParams: ["options"]
 })
-export class EngineTypeConverter extends ConverterBase {
+export class OptionsConverter extends ConverterBase {
 
     public convert(value): any {
         value = value[0];
 
         if (!value) {
             return {
-                value: { engineTypes: [] },
+                value: { options: [] },
                 active: false
             }
         } else {
@@ -20,7 +21,7 @@ export class EngineTypeConverter extends ConverterBase {
 
             return {
                 value: {
-                    engineTypes: params
+                    options: params
                 },
                 active: true
             };
@@ -28,25 +29,25 @@ export class EngineTypeConverter extends ConverterBase {
     }
     public convertToRoute(value): any {
         if (value) {
-            value = value.engineTypes|| [];
+            value = value.options || [];
             return (value.length > 0)
-                ? { engineTypes: value.join() }
+                ? { options: value.join() }
                 : null;
         } else {
             return null;
         }
     }
     public convertToView(value) {
-        var filterValue = value.engineTypes;
+        var filterValue = value.options;
         if (Array.isArray(filterValue) && filterValue.length > 0) {
-            return `${filterValue.length} engine types`;
+            return `${filterValue.length} options`;
         } else {
-            return "all types"
+            return "not care"
         }
     }
     public resetValue() {
         return {
-            engineTypes: []
+            options: []
         };
     }
 }

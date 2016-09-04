@@ -5,7 +5,8 @@
 const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+let extractSASS = new ExtractTextPlugin('assets/styles/[name].scss');
 /**
  * Webpack Plugins
  */
@@ -97,7 +98,12 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
-
+    /**
+     * Plugin: ExtractTextPlugin
+     * Description: Extracts required entry into separate file. Used to avoid 'inline' css in javascript code.
+     * See: https://github.com/webpack/extract-text-webpack-plugin
+     */
+     extractSASS,
     /**
      * Plugin: DefinePlugin
      * Description: Define free variables.
@@ -124,7 +130,7 @@ module.exports = webpackMerge(commonConfig, {
        *
        * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
        */
-      new NamedModulesPlugin(),
+    new NamedModulesPlugin(),
 
   ],
 

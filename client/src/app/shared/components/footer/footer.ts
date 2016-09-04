@@ -1,13 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-footer',
-    template: require('./footer.html'),
-    directives: [ROUTER_DIRECTIVES]
+    template: require('./footer.html')
 })
 export class Footer implements OnInit {
     constructor() { }
-    ngOnInit() {}
+    ngOnInit() { }
 }

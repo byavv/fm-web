@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Api} from '../shared/services';
-import {ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
-import {CAROUSEL_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { Api } from '../../../shared/services';
+import { ActivatedRoute } from '@angular/router';
+
+
 @Component({
     selector: 'carDetails',
     template: require("./carDetails.html"),
-    styles: [require('./component.scss')],
-    directives: [ROUTER_DIRECTIVES, CAROUSEL_DIRECTIVES]
+    styles: [require('./component.scss')]
 })
 export class CarDetailsComponent implements OnInit {
     car: any = {
@@ -17,7 +17,7 @@ export class CarDetailsComponent implements OnInit {
 
     ngOnInit() {
         this.apiService
-            .getCar(/*this.params.get('id')*/this.activeRoute.snapshot.params['id'])
+            .getCar(this.activeRoute.snapshot.params['id'])
             .subscribe((car: any) => {
                 this.car = car;
             })

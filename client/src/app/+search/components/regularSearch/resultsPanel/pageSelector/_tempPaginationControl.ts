@@ -31,8 +31,7 @@ export interface IPage {
             </ul>        
         </nav>
     </div>
-    `,
-    directives: [],
+    `,    
     styles: [`
         .pagination{
             margin: 0;

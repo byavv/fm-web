@@ -1,18 +1,18 @@
-import { Component, OnInit, Output, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, Query, EventEmitter, Input, ElementRef, ViewChild, OnChanges, AfterViewInit, Renderer, AfterViewChecked} from '@angular/core';
-import {SearchOptionsComponent} from './searchOptions/searchOptions';
-import {ActiveFiltersComponent} from './activeFilters/activeFilters';
-import {FilterController} from '../../../services';
-import {Subscription, Subject, Observable} from 'rxjs';
-import {FilterModel, FilterStateModel} from "../../../../shared/models";
-import {isString} from '@angular/compiler/src/facade/lang';
+import {
+    Component, OnInit, Output, TemplateRef,
+    ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter,
+    Input, ElementRef, ViewChild, OnChanges, AfterViewInit, Renderer
+} from '@angular/core';
+import { SearchOptionsComponent } from './searchOptions/searchOptions';
+import { ActiveFiltersComponent } from './activeFilters/activeFilters';
+import { FilterController } from '../../../../services';
+import { Subscription, Subject, Observable } from 'rxjs';
+import { FilterModel, FilterStateModel } from "../../../../../lib/models";
+import { isString } from '@angular/compiler/src/facade/lang';
 
 @Component({
     selector: 'state-summary',
     template: require('./stateSummary.html'),
-    directives: [
-        SearchOptionsComponent,
-        ActiveFiltersComponent      
-    ],
     styles: [`       
         .summary-panel-container{           
             cursor: pointer;

@@ -1,43 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Api } from '../../shared/services';
+import { Api } from '../../../shared/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Observable, Subscription } from "rxjs";
 
-// import { CarFilterPanelComponent } from './filterPanel/panelBase';
-// import { LoaderComponent } from "../../shared/components/loader/loader";
-// import { SEARCH_SERVICES_PROVIDERS, FilterController, TotalCounter } from '../services/';
-// import { CarsListComponent } from './resultsPanel/carList/carList';
-// import { PaginationComponent } from './resultsPanel/pageSelector/searchPagination';
-// import { StateFullComponent } from './resultsPanel/filterStatePanel/stateFull';
-// import { StateSummaryPanel } from './resultsPanel/filterStatePanel/stateSummary';
-// import { LastAddedComponent } from './lastAddedPanel/components/lastAdded';
-// import { ScrollSpy } from "../directives/scrollSpy";
-// import { ResizeSpy } from '../directives/resizeSpy';
-// import { StickyPanel } from "../directives/sticky";
-// import { SizeSpy } from "../directives/rectSpy";
-
+import { TotalCounter } from '../../services';
 import { Store } from "@ngrx/store";
 
-import { AppState, getVehicleState, getFoundVehicles, getFilter, getQuery, getCatalogReady, getConvertedToRouteParamsQuery } from "../../shared/reducers";
-import { QueryActions, FilterPanelActions, VehicleActions} from "../../shared/actions";
+import {
+    AppState, getVehicleState, getFoundVehicles, getFilter,
+    getQuery, getCatalogReady, getConvertedToRouteParamsQuery
+} from "../../../lib/reducers";
+import { QueryActions, FilterPanelActions, VehicleActions } from "../../../shared/actions";
 
 @Component({
     selector: 'carSearch',
-    template: require('./searchBase.html'),
-  /*  directives: [
-        CarsListComponent,
-        CarFilterPanelComponent,
-        StateFullComponent,
-        PaginationComponent,
-        LoaderComponent,
-        ScrollSpy,
-        LastAddedComponent,
-        StickyPanel,
-        ResizeSpy,
-        SizeSpy,
-        StateSummaryPanel
-    ],*/
-   // providers: [SEARCH_SERVICES_PROVIDERS],
+    template: require('./searchBase.html'),   
     styles: [require('./component.scss')]
 })
 export class CarsSearchComponent implements OnInit {
@@ -51,7 +28,7 @@ export class CarsSearchComponent implements OnInit {
         private apiService: Api,
         private router: Router,
         private route: ActivatedRoute,
-        private filterController: FilterController,
+
         private totalCounter: TotalCounter,
         private store: Store<AppState>,
         private vehicleActions: VehicleActions,

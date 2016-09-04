@@ -1,21 +1,52 @@
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './+authentication/components/login/login';
 import { AuthenticationBase } from './+authentication/components/authBase';
-import { QuickSearchComponent } from "./quickSearch/components/quickSearchBase"
+import { QuickSearchComponent } from "./_home/landingForm/quickSearchBase"
+import { Err404 } from "./_err404"
 
-import { CarDetailsComponent } from "./carDetails/carDetails";
-import { ACCOUNT_ROUTER_PROVIDERS } from "./account/components/routes";
-import { GUARDS } from "./shared/guards";
 
 export const routes: Routes = [
-  { path: '', component: QuickSearchComponent }, 
+  { path: '', component: QuickSearchComponent },
   { path: 'auth', loadChildren: () => System.import('./+authentication') },
-  { path: 'details/:id', component: CarDetailsComponent },
   { path: 'personal', loadChildren: () => System.import('./+account') },
-  { path: 'search/:maker', loadChildren: () => System.import('./+regularSearch') },
-  { path: '**', redirectTo: '/' }
+  { path: 'search', loadChildren: () => System.import('./+search') },
+  { path: '**', component: Err404 }
 ];
 
-export const ROUTES_PROVIDERS: any[] = [
-  ...GUARDS
+import { Injectable } from "@angular/core";
+import { AuthApi, Identity, Storage } from "./shared/services";
+import { Observable, Observer } from "rxjs";
+
+import {
+  CanActivate,
+  Router,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot
+} from "@angular/router";
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+  constructor(private permService: AuthApi, private router: Router, private identity: Identity, private storage: Storage) { }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return Observable.create((observer: Observer<boolean>) => {
+      this.permService
+        .authorize()
+        .toPromise()
+        .then(result => {
+          observer.next(true);
+          observer.complete();
+        })
+        .catch((err) => {
+          observer.next(false);
+          observer.complete();
+          this.identity.update(null);
+          this.storage.removeItem("authorizationData");
+          this.router.navigate(["/login", { from: state.url }]);
+        })
+    });
+  }
+}
+
+export const GUARDS: any[] = [
+  AuthGuard
 ];

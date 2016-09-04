@@ -4,7 +4,7 @@ import {STEP_COMPONENTS} from "./steps";
 import {MasterController} from "../../services/masterController";
 import {UsersBackEndApi} from "../../services/usersBackEndApi";
 import {Api} from "../../../shared/services";
-import {Car} from "../../../shared/models";
+import {Car} from "../../../lib/models";
 import {UiTabs, UiPane} from '../../directives/uiTabs';
 import {LoaderComponent} from "../../../shared/components/loader/loader";
 import {isString} from "@angular/compiler/src/facade/lang";
@@ -32,14 +32,7 @@ import {Observable} from "rxjs";
             </ui-tabs>
         </div>
     </div>
-    `,
-    directives: [
-        ROUTER_DIRECTIVES,
-        ...STEP_COMPONENTS,
-        UiTabs,
-        UiPane,
-        LoaderComponent
-    ],
+    `,  
     styles: [require('./steps/styles/master.css'),
         `
     :host >>> .loader-container {

@@ -20,6 +20,10 @@ import '@angularclass/hmr';
 // RxJS
 import 'rxjs';
 
+// Redux
+import '@ngrx/core'
+import '@ngrx/store'
+
 if ('production' === ENV) {
   // Production
 

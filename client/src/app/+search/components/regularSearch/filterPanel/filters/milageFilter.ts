@@ -1,8 +1,11 @@
-import {Component, EventEmitter, Input, Output, AfterViewInit, OnInit, ViewEncapsulation} from '@angular/core';
-import {ConverterProvider, convertToView, FilterComponent, MilageConverter} from "../../../../shared/lib/";
-import {PatternInput, DebounceInput} from "../../../../shared/directives";
-import {FilterController} from '../../../services/filterController';
-import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, FormControl} from '@angular/forms';
+import { Component, EventEmitter, Input, Output, AfterViewInit, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    ConverterProvider, convertToView,
+    FilterComponent, MilageConverter
+} from "../../../../../lib/";
+import { PatternInput, DebounceInput } from "../../../../../shared/directives";
+import { FilterController } from '../../../../services';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     selector: 'milage-filter',
@@ -42,8 +45,7 @@ import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, FormControl} from '@an
             </form>
         </div>                 
     </div> 
-  `,
-    directives: [REACTIVE_FORM_DIRECTIVES, PatternInput, DebounceInput]
+  `
 })
 @ConverterProvider({
     bindWith: MilageConverter
@@ -71,7 +73,7 @@ export class MilageFilterComponent extends FilterComponent {
     }
     ngAfterViewInit() {
         this.form.valueChanges
-            .distinctUntilChanged()           
+            .distinctUntilChanged()
             .subscribe(value => {
                 this.changed.next({ filterValue: value, immidiate: true });
             })

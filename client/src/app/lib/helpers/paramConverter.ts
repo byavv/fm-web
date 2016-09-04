@@ -1,4 +1,4 @@
-import { FilterModel, FilterStateModel, IFilterStateModel } from "../../models";
+import { FilterModel, FilterStateModel, IFilterStateModel } from "../models";
 
 export function convertFromRoute(converters, routeParams): FilterStateModel {
     let filterState: FilterStateModel = new FilterStateModel();

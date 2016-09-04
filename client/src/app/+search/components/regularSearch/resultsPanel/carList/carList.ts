@@ -1,7 +1,6 @@
 import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit } from '@angular/core';
 import { CarItemComponent } from './carListItem/carListItem'
 import { Observable, Subscription } from "rxjs";
-import { LoaderComponent } from "../../../../shared/components/loader/loader";
 
 @Component({
     selector: 'carsList',
@@ -19,8 +18,7 @@ import { LoaderComponent } from "../../../../shared/components/loader/loader";
             </div>
        </div>     
      </div>
-    `,
-    directives: [CarItemComponent, LoaderComponent],
+    `,   
     styles: [`
         .cars-list{
             list-style: none;

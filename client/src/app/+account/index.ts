@@ -11,6 +11,7 @@ import { UserCarsBaseComponent } from './components/userCars/userCarsBase';
 import { AccountBase } from './components/accountBase';
 import { AuthGuard } from '../shared/guards';
 
+import { SharedModule } from '../shared';
 
 import { ACCOUNT_SERVICES_PROVIDERS } from "./services";
 import { ACCOUNT_DIRECTIVES } from "./directives";
@@ -50,7 +51,7 @@ export const routes: Routes = [
     ...ACCOUNT_DIRECTIVES
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     FormsModule,
     RouterModule.forChild(routes),
   ],

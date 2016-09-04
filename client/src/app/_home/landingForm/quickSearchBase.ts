@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
 import { Api } from '../../shared/services/backEndApi';
 import { Observable, Subscription, Subject } from 'rxjs';
-import { convertToRoute, construct } from '../../shared/lib/';
-import * as converters from "../../shared/lib/converters";
-import { FilterStateModel } from '../../shared/models';
+import { convertToRoute, construct } from '../../lib/';
+import * as converters from "../../lib/converters";
+import { FilterStateModel } from '../../lib/models';
 
-import { AppState, getMakers, getCatalogReady } from "../../shared/reducers";
+import { AppState, getMakers, getCatalogReady } from "../../lib/reducers";
 import { CatalogActions } from "../../shared/actions";
 import { Store } from '@ngrx/store';
 

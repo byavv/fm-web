@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { Vehicle } from '../models';
+import { Vehicle } from '../../lib/models';
 
 @Injectable()
 export class VehicleActions {

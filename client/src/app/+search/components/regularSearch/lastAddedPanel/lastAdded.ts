@@ -1,7 +1,7 @@
-import {Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
-import {TrackerApi} from '../services';
-import {LoaderComponent} from "../../../../shared/components/loader/loader";
+import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from "rxjs";
+import { TrackerApi } from '../../../services';
+import { LoaderComponent } from "../../../../shared/components/loader/loader";
 
 @Component({
     selector: 'lastAdded',

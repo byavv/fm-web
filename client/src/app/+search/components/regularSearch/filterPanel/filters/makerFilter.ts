@@ -1,18 +1,20 @@
-import { Component, EventEmitter, Input, Output, AfterViewInit} from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormControl, FormGroup} from '@angular/forms';
-import { Api} from '../../../../shared/services/';
-import { Observable, Subscription} from 'rxjs';
-import { ConverterProvider, convertToView, FilterComponent, MakerConverter}  from '../../../../shared/lib/';
+import { Component, EventEmitter, Input, Output, AfterViewInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Api } from '../../../../../shared/services/';
+import { Observable, Subscription } from 'rxjs';
+import {
+    ConverterProvider, convertToView,
+    FilterComponent, MakerConverter
+} from '../../../../../lib/';
 import { isString, isBlank } from '@angular/compiler/src/facade/lang';
-import { FilterController } from '../../../services/filterController';
-import { AppState, getMakers } from "../../../../shared/reducers";
-import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../shared/actions";
+import { FilterController } from '../../../../services';
+import { AppState, getMakers } from "../../../../../lib/reducers";
+import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../../shared/actions";
 import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'makerWrapper',
-    template: require("./makerFilter.html"),
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    template: require("./makerFilter.html")
 })
 
 @ConverterProvider({

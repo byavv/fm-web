@@ -3,9 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { SignInComponent } from './components/signIn/signin';
+import { SignInComponent } from './components/signIn/signIn';
 import { SignUpComponent } from './components/signUp/signup';
 import { AuthenticationBase } from './components/authBase';
+import { SharedModule } from '../shared';
 
 export const routes: Routes = [
   {
@@ -26,7 +27,7 @@ export const routes: Routes = [
     AuthenticationBase
   ],
   imports: [
-    CommonModule,
+    SharedModule,
     FormsModule,
     RouterModule.forChild(routes),
   ]

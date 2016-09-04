@@ -1,11 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {ROUTER_DIRECTIVES, Router} from '@angular/router';
-import {Identity, AuthApi, Storage} from '../../services';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Identity, AuthApi, Storage } from '../../services';
 
 @Component({
     selector: 'app-header',
-    template: require('./header.html'),
-    directives: [ROUTER_DIRECTIVES]
+    template: require('./header.html')
 })
 export class Header implements OnInit {
     isAuthenticated: boolean = false;

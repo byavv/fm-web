@@ -2,7 +2,7 @@ import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
 import { Catalog } from '../models';
-import { CatalogActions } from '../actions/catalogAction';
+import { CatalogActions } from '../../shared/actions/catalogAction';
 
 export interface CatalogState {
     catalogId: string,

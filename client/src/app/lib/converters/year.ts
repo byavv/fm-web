@@ -1,5 +1,5 @@
-import {ConverterBase} from "./ConverterBase";
-import {Converter} from "../decorators";
+import { ConverterBase } from "./ConverterBase";
+import { Converter } from "../decorators";
 
 @Converter({
     converterId: "year",
@@ -52,7 +52,7 @@ export class YearConverter extends ConverterBase {
         if (up) {
             return `year: up ${up}`;
         }
-        else{
+        else {
             return "year: any"
         }
     }

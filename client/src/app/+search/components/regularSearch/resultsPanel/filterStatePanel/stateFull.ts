@@ -1,23 +1,20 @@
-import { Component, OnInit, Output, TemplateRef, ChangeDetectionStrategy, ChangeDetectorRef, Query, EventEmitter, Input, ElementRef, ViewChild, OnChanges, AfterViewInit, Renderer, AfterViewChecked} from '@angular/core';
-import {SearchOptionsComponent} from './searchOptions/searchOptions';
-import {ActiveFiltersComponent} from './activeFilters/activeFilters';
-//import {AnimationBuilder} from 'angular2/animate';
-import {FilterController} from '../../../services';
-import {Subscription, Subject, Observable} from 'rxjs';
-import {FilterModel, FilterStateModel} from "../../../../shared/models";
+import {
+    Component, OnInit, Output, TemplateRef,
+    ChangeDetectionStrategy, ChangeDetectorRef, EventEmitter,
+    Input, ElementRef, ViewChild, OnChanges, AfterViewInit,
+    Renderer, AfterViewChecked
+} from '@angular/core';
+import { SearchOptionsComponent } from './searchOptions/searchOptions';
+import { ActiveFiltersComponent } from './activeFilters/activeFilters';
+import { FilterController } from '../../../../services';
+import { Subscription, Subject, Observable } from 'rxjs';
+import { FilterModel, FilterStateModel } from "../../../../../lib/models";
 
-
-import {isString} from '@angular/compiler/src/facade/lang';
-import { CollapseDirective } from 'ng2-bootstrap/ng2-bootstrap';
+import { isString } from '@angular/compiler/src/facade/lang';
 
 @Component({
     selector: 'state-full',
     template: require('./stateFull.html'),
-    directives: [
-        SearchOptionsComponent,
-        ActiveFiltersComponent,
-        CollapseDirective,
-    ],
     styles: [`       
         .fs-panel-container{           
             cursor: pointer;

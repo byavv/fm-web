@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, REACTIVE_FORM_DIRECTIVES} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UsersBackEndApi} from "../../services/usersBackEndApi"
-import {Api, Identity} from "../../../shared/services";
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UsersBackEndApi } from "../../services/usersBackEndApi"
+import { Api, Identity } from "../../../shared/services";
 
 @Component({
     selector: 'settings',
-    template: require('./personal.html'),
-    directives: [REACTIVE_FORM_DIRECTIVES]
+    template: require('./personal.html')
 })
 
 export class ProfileComponent implements OnInit {

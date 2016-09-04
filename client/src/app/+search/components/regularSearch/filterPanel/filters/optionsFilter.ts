@@ -1,8 +1,14 @@
-import {Component, EventEmitter, Input, Output, OnInit, ViewEncapsulation} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl} from '@angular/forms';
-import {ConverterProvider, convertToView, FilterComponent, OptionsConverter} from '../../../../shared/lib/';
-import {OptionsPickerControl} from "../../../../shared/components/controls/optionPicker/optionPicker";
-import {FilterController} from '../../../services/filterController';
+import {
+    Component, EventEmitter, Input,
+    Output, OnInit, ViewEncapsulation
+} from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import {
+    ConverterProvider,
+    convertToView, FilterComponent, OptionsConverter
+} from '../../../../../lib/';
+import { OptionsPickerControl } from "../../../../../shared/components/";
+import { FilterController } from '../../../../services';
 
 @Component({
     selector: 'option-filter',
@@ -26,7 +32,6 @@ import {FilterController} from '../../../services/filterController';
          </div>
     </div>
   `,
-    directives: [REACTIVE_FORM_DIRECTIVES, OptionsPickerControl],
     styles: [`
         :host >>> .control-container > div {      
             flex: 1 0 100%!important;            
@@ -60,7 +65,7 @@ export class OptionsFilterComponent extends FilterComponent {
         { name: 'op2', description: 'super-option9' },
         { name: 'op2', description: 'super-option10' }
     ];
-    
+
     constructor(filterController: FilterController) {
         super(filterController);
         this.form = new FormGroup({

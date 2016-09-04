@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl} from '@angular/forms';
-import {ConverterProvider, convertToView, FilterComponent, ColorConverter} from '../../../../shared/lib/';
-import {FilterController} from '../../../services/filterController';
-import {ColorPickerControl} from "../../../../shared/components/controls/colorPicker/colorPicker";
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { ConverterProvider, convertToView, FilterComponent, ColorConverter } from '../../../../../lib/';
+import { FilterController } from '../../../../services/filterController';
+import { ColorPickerControl } from "../../../../../shared/components";
 
 @Component({
     selector: 'color-filter',
@@ -22,8 +22,7 @@ import {ColorPickerControl} from "../../../../shared/components/controls/colorPi
                 </div>
             </div>                
       </div>
-  `,
-    directives: [REACTIVE_FORM_DIRECTIVES, ColorPickerControl]
+  `
 })
 @ConverterProvider({
     bindWith: ColorConverter
@@ -35,7 +34,7 @@ export class ColorFilterComponent extends FilterComponent {
     filterValue: any = {};
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
-    
+
     form: FormGroup;
     colors: FormControl = new FormControl([]);
 

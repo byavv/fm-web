@@ -1,42 +1,38 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router'
 
-import { CarFilterPanelComponent } from './filterPanel/panelBase';
 import { SHARED_SERVICES } from './services';
-
-import { CarsListComponent } from './components/regularSearch/resultsPanel/carList/carList';
-import { PaginationComponent } from './components/regularSearch/resultsPanel/pageSelector/searchPagination';
-import { StateFullComponent } from './components/regularSearch/resultsPanel/filterStatePanel/stateFull';
-import { StateSummaryPanel } from './components/regularSearch/resultsPanel/filterStatePanel/stateSummary';
-import { LastAddedComponent } from './components/regularSearch/lastAddedPanel/components/lastAdded';
-import { CarsSearchComponent } from './components/regularSearch/searchBase';
+import { SHARED_COMPONENTS } from './components';
 import { SHARED_DIRECTIVES } from "./directives";
-
-
+import { GUARDS } from "./guards";
+import { ACTIONS_PROVIDERS } from "./actions";
 
 @NgModule({
   declarations: [
-    CarsListComponent,
-    CarFilterPanelComponent,
-    StateFullComponent,
-    PaginationComponent,
-    StateSummaryPanel,
-    LastAddedComponent,
+    ...SHARED_COMPONENTS,
     ...SHARED_DIRECTIVES
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    FormsModule,
+    RouterModule    
   ],
   exports: [
-    ...SHARED_SERVICES
+    ...SHARED_COMPONENTS,
+    ...SHARED_DIRECTIVES,
+    CommonModule,
+    FormsModule
   ],
   providers: [
-    SHARED_SERVICES
+    ...SHARED_SERVICES,
+    ...ACTIONS_PROVIDERS,
+    ...GUARDS,
   ]
 })
-export default class SharedModule {
+export class SharedModule {
 
 }

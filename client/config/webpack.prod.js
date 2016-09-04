@@ -16,7 +16,7 @@ const IgnorePlugin = require('webpack/lib/IgnorePlugin');
 const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 /**
  * Webpack Constants
  */
@@ -93,7 +93,12 @@ module.exports = webpackMerge(commonConfig, {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
-
+    /*
+                    * Plugin: ExtractTextPlugin
+                    * Description: Extracts required entry into separate file. Used to avoid 'inline' css in javascript code.
+                    * See: https://github.com/webpack/extract-text-webpack-plugin
+                    */
+    new ExtractTextPlugin('assets/styles/[name].[hash].css'),
     /**
      * Plugin: WebpackMd5Hash
      * Description: Plugin to replace a standard webpack chunkhash with md5.
@@ -157,7 +162,7 @@ module.exports = webpackMerge(commonConfig, {
 
 
       beautify: false, //prod
-      mangle: { screw_ie8 : true, keep_fnames: true }, //prod
+      mangle: { screw_ie8: true, keep_fnames: true }, //prod
       compress: { screw_ie8: true }, //prod
       comments: false //prod
     }),

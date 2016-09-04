@@ -1,5 +1,5 @@
-import {ConverterBase} from "./ConverterBase";
-import {Converter} from "../decorators";
+import { ConverterBase } from "./ConverterBase";
+import { Converter } from "../decorators";
 
 @Converter({
     converterId: "milage",

@@ -1,6 +1,9 @@
-import {ConverterBase} from "./ConverterBase";
-import {Converter} from "../decorators";
-import {isNumber, NumberWrapper, StringWrapper, isString, isPresent} from "@angular/compiler/src/facade/lang";
+import { ConverterBase } from "./ConverterBase";
+import { Converter } from "../decorators";
+import {
+    isNumber, NumberWrapper,
+    StringWrapper, isString, isPresent
+} from "@angular/compiler/src/facade/lang";
 @Converter({
     converterId: "price",
     roteParams: ["price"]

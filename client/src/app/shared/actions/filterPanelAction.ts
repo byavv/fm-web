@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
-import { FilterModel } from '../models';
 
 @Injectable()
 export class FilterPanelActions {

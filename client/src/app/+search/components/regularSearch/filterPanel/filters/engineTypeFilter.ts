@@ -1,11 +1,17 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { REACTIVE_FORM_DIRECTIVES, FormGroup, FormControl } from '@angular/forms';
-import { ConverterProvider, convertToView, FilterComponent, EngineTypeConverter } from '../../../../shared/lib/';
-import { OptionsPickerControl } from "../../../../shared/components/controls/optionPicker/optionPicker";
-import { FilterController } from '../../../services/filterController';
+import { FormGroup, FormControl } from '@angular/forms';
+import {
+    ConverterProvider, convertToView,
+    FilterComponent, EngineTypeConverter
+} from '../../../../../lib/';
+import { OptionsPickerControl } from "../../../../../shared/components";
+import { FilterController } from '../../../../services';
 
-import { AppState, getEngineTypes } from "../../../../shared/reducers";
-import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../shared/actions";
+import { AppState, getEngineTypes } from "../../../../../lib/reducers";
+import {
+    QueryActions, FilterPanelActions,
+    CatalogActions
+} from "../../../../../shared/actions";
 import { Store } from '@ngrx/store'
 
 @Component({
@@ -28,7 +34,6 @@ import { Store } from '@ngrx/store'
          </div>
     </div>
   `,
-    directives: [REACTIVE_FORM_DIRECTIVES, OptionsPickerControl],
     styles: [`
          :host >>> .control-container > div {      
             flex: 1 0 50%;            

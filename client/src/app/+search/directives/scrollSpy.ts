@@ -1,6 +1,9 @@
-import { Directive, OnInit, Inject, ElementRef, Renderer, AfterContentInit, ContentChild, Input} from '@angular/core';
-import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
-import {Subject} from 'rxjs';
+import {
+    Directive, OnInit, Inject, ElementRef,
+    Renderer, AfterContentInit, ContentChild, Input
+} from '@angular/core';
+import { getDOM, DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
+import { Subject } from 'rxjs';
 
 @Directive({
     selector: '[scroll-spy]',

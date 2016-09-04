@@ -1,11 +1,11 @@
 import {Component, Input, Output, EventEmitter, OnDestroy, OnInit} from '@angular/core';
-import {FilterController} from '../../../services/filterController';
-//import {PAGINATION_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
+
+
 import {PaginationControlsCmp} from './_tempPaginationControl'
 import {Subscription} from "rxjs";
 import { Store } from "@ngrx/store";
 
-import {AppState, getQuery} from "../../../../shared/reducers";
+import {AppState, getQuery} from "../../../../../lib/reducers";
 @Component({
     selector: 'searchPage',
     template: `    
@@ -27,7 +27,7 @@ import {AppState, getQuery} from "../../../../shared/reducers";
                 
          
     `,
-    directives: [/*PAGINATION_DIRECTIVES*/PaginationControlsCmp] //<!---- https://github.com/valor-software/ng2-bootstrap/issues/61
+   // directives: [/*PAGINATION_DIRECTIVES*/PaginationControlsCmp] //<!---- https://github.com/valor-software/ng2-bootstrap/issues/61
 })
 export class PaginationComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;

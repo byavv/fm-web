@@ -1,8 +1,11 @@
-import {Component, EventEmitter, Input, Output, AfterViewInit, OnInit} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormBuilder, FormGroup, FormControl} from '@angular/forms';
-import {ConverterProvider, convertToView, FilterComponent, IFilterComponent, PriceConverter}  from "../../../../shared/lib/";
-import {PatternInput, DebounceInput} from "../../../../shared/directives";
-import {FilterController} from '../../../services/filterController';
+import { Component, EventEmitter, Input, Output, AfterViewInit, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import {
+    ConverterProvider, convertToView,
+    FilterComponent, IFilterComponent, PriceConverter
+} from "../../../../../lib/";
+import { PatternInput, DebounceInput } from "../../../../../shared/directives";
+import { FilterController } from '../../../../services';
 
 @Component({
     selector: 'priceWrapper',
@@ -40,8 +43,7 @@ import {FilterController} from '../../../services/filterController';
             </form>
         </div>                 
     </div>  
-  `,
-    directives: [REACTIVE_FORM_DIRECTIVES, PatternInput, DebounceInput]
+  `
 })
 @ConverterProvider({
     bindWith: PriceConverter

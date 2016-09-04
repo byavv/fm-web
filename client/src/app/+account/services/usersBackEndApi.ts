@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, Observer, BehaviorSubject } from 'rxjs';
-import { ExtHttp } from '../../shared/services/extHttp';
+import { ExtHttp } from '../../shared/services';
 
 @Injectable()
 export class UsersBackEndApi {
@@ -9,13 +9,13 @@ export class UsersBackEndApi {
     constructor(private _http: ExtHttp) { }
 
     public getUserCars(): Observable<any> {
-        return this._http           
+        return this._http
             .post("/private/cars/getusercars", null)
             .map(res => res.json());
     }
 
     public postNewCar(data: any) {
-        return this._http           
+        return this._http
             .post("/private/cars/new", JSON.stringify(data))
             .map(res => res.json());
     }
@@ -27,7 +27,7 @@ export class UsersBackEndApi {
 
 
     public deleteCar(id: string) {
-        return this._http           
+        return this._http
             .delete(`/private/cars/${id}`)
             .map(res => res.json());
     }
@@ -65,13 +65,13 @@ export class UsersBackEndApi {
             .map(res => res.json());
     }
 
-    public createOrUpdate(data: any, id?: string) {       
-          return (id
+    public createOrUpdate(data: any, id?: string) {
+        return (id
             ? this._http
                 .post(`/private/cars/update/${id}`, JSON.stringify(data))
             : this._http
                 .post(`/private/cars/new`, JSON.stringify(data)))
-            .map(res => res.json());      
+            .map(res => res.json());
     }
 
     public uploadImages(data, carId) {

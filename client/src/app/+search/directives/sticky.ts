@@ -1,7 +1,11 @@
-import { Directive, OnInit, ElementRef, Renderer, Output, Input, EventEmitter} from '@angular/core';
-import {Subscription, Subject, Observable} from 'rxjs';
-import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
-import {global, NumberWrapper} from '@angular/compiler/src/facade/lang';
+import {
+    Directive, OnInit, ElementRef,
+    Renderer, Output, Input, EventEmitter
+} from '@angular/core';
+import { Subscription, Subject, Observable } from 'rxjs';
+import { getDOM, DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
+import { NumberWrapper } from '@angular/compiler/src/facade/lang';
+
 @Directive({
     selector: '[sticky]',
 })

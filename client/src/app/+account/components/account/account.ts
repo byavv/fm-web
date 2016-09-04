@@ -1,14 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {REACTIVE_FORM_DIRECTIVES, FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {UsersBackEndApi} from "../../services/usersBackEndApi"
-import {Api, Identity} from "../../../shared/services";
-import {ShowError} from '../../directives/showError';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UsersBackEndApi } from "../../services/usersBackEndApi"
+import { Api, Identity } from "../../../shared/services";
+import { ShowError } from '../../directives/showError';
 
 @Component({
     selector: 'account',
     template: require('./account.html'),
-    directives: [ShowError, REACTIVE_FORM_DIRECTIVES],
     styles: [`       
         .panel-heading.red{
             color: #fff;

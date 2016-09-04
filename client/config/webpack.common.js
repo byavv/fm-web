@@ -13,7 +13,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 /*
  * Webpack Constants
  */
@@ -44,7 +44,7 @@ module.exports = {
    *
    * See: http://webpack.github.io/docs/configuration.html#cache
    */
-   //cache: false,
+  //cache: false,
 
   /*
    * The entry point for the bundle
@@ -55,8 +55,8 @@ module.exports = {
   entry: {
 
     'polyfills': './client/src/polyfills.browser.ts',
-    'vendor':    './client/src/vendor.browser.ts',
-    'main':      './client/src/main.browser.ts'
+    'vendor': './client/src/vendor.browser.ts',
+    'main': './client/src/main.browser.ts'
 
   },
 
@@ -150,11 +150,24 @@ module.exports = {
        * Returns file content as string
        *
        */
-      {
-        test: /\.css$/,
-        loaders: ['to-string-loader', 'css-loader']
-      },
+      // {
+      //    test: /\.css$/,
+      //     loaders: [/*'to-string-loader',*/ 'css-loader']
+      //   },
 
+      { test: /\.css$/, loader: "raw!postcss" },
+      // all styles for the application will be bundled into css file
+      {
+        test: /\.scss$/,
+        include: helpers.root('./assets'),
+        loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass'])
+      },
+      // all styles which are required for componenets will be bundled within javascript via raw loader
+      {
+        test: /\.scss$/,
+        include: helpers.root('./src/app'),
+        loader: 'raw!postcss!sass'
+      },
       /* Raw loader support for *.html
        * Returns file content as string
        *
@@ -172,7 +185,13 @@ module.exports = {
         test: /\.(jpg|png|gif)$/,
         loader: 'file'
       }
-    ]
+    ],
+    postcss: () => {
+      return [
+        autoprefixer({ browsers: ['last 2 versions'] }),
+        precss
+      ];
+    },
 
   },
 
@@ -182,7 +201,6 @@ module.exports = {
    * See: http://webpack.github.io/docs/configuration.html#plugins
    */
   plugins: [
-
     /*
      * Plugin: ForkCheckerPlugin
      * Description: Do type checking in a separate process, so webpack don't need to wait.

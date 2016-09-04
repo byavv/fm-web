@@ -5,7 +5,7 @@ import { Identity, AuthApi, Storage } from '../../../shared/services';
 
 @Component({
     selector: 'login',
-    template: require("./login.html")
+    template: require("./signIn.html")
 })
 
 export class SignInComponent {

@@ -1,11 +1,9 @@
-import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
-import {ROUTER_DIRECTIVES} from '@angular/router';
-import {Car} from '../../../../../shared/models/car';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Car } from '../../../../../../lib/models';
 
 @Component({
     selector: 'carItem',
     template: require("./carListItem.html"),
-    directives: [ROUTER_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush,
     styles: [require('./component.scss')]
 })

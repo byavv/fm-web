@@ -4,7 +4,7 @@ import {ExtHttp} from './extHttp';
 import { Store } from "@ngrx/store";
 import {Api} from "./backEndApi";
 import {ReplaySubject, Observable} from "rxjs";
-import {AppState, getEngineTypes} from "../../shared/reducers";
+import {AppState, getEngineTypes} from "../../lib/reducers";
 import {CatalogActions} from "../../shared/actions";
 @Injectable()
 export class AppController {

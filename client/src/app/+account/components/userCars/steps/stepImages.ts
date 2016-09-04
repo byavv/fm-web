@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild, Output, EventEmitter} from "@angular/core";
-import {Router} from "@angular/router";
-import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
-import {UsersBackEndApi} from "../../../services/usersBackEndApi";
-import {MasterController} from "../../../services/masterController";
-import {Car} from "../../../../shared/models";
-import {isFunction} from "@angular/compiler/src/facade/lang";
+import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
+import { Router } from "@angular/router";
+import { getDOM, DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
+import { UsersBackEndApi } from "../../../services/usersBackEndApi";
+import { MasterController } from "../../../services/masterController";
+import { Car } from "../../../../lib/models";
+import { isFunction } from "@angular/compiler/src/facade/lang";
 
 @Component({
     selector: "carImages",

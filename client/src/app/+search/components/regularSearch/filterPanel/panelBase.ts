@@ -1,19 +1,17 @@
-import { Component, OnInit, EventEmitter, Output, ViewQuery, OnDestroy, QueryList } from '@angular/core';
-import { FilterController } from '../../services/filterController';
+import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy, QueryList } from '@angular/core';
 import { FilterWrapperComponent } from './filterWrapper'
 import * as filters from './filters';
-import { TotalCounter } from '../../services/totalCounter';
-import { Api} from "../../../shared/services";
-import { FilterModel, FilterStateModel } from "../../../shared/models";
-import { LoaderComponent } from "../../../shared/components/loader/loader";
+import { TotalCounter } from '../../../services';
+import { Api } from "../../../../shared/services";
+import { FilterModel, FilterStateModel } from "../../../../lib/models";
+import { LoaderComponent } from "../../../../shared/components/loader/loader";
 import { Subscription, Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AppState, getFilter } from "../../../shared/reducers";
-import { QueryActions } from "../../../shared/actions";
+import { AppState, getFilter } from "../../../../lib/reducers";
+import { QueryActions } from "../../../../shared/actions";
 @Component({
     selector: 'carFilterPanel',
     template: require("./panelBase.html"),
-    directives: [FilterWrapperComponent, LoaderComponent],
     styles: [`
         .sch-button {
             width: 100%;
@@ -55,7 +53,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
         private queryActions: QueryActions,
         private counter: TotalCounter,
         private apiService: Api,
-        @ViewQuery("wrapper") private wrappers: QueryList<FilterWrapperComponent>) { }
+        @ViewChild("wrapper") private wrappers: QueryList<FilterWrapperComponent>) { }
 
     ngOnInit() {
         this._counterSubscr = this.counter.subscribe((count: any) => {

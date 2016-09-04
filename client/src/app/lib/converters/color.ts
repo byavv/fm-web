@@ -1,6 +1,6 @@
-import {ConverterBase} from "./ConverterBase";
-import {Converter} from "../decorators";
-import {FilterModel} from "../../models/filter"
+import { ConverterBase } from "./ConverterBase";
+import { Converter } from "../decorators";
+import { FilterModel } from "../models/filter";
 @Converter({
     converterId: "color",
     roteParams: ["colors"]

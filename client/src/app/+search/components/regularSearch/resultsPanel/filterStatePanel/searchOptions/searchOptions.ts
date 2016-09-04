@@ -1,14 +1,10 @@
-import {Component, Output, Input, EventEmitter, OnInit, OnDestroy, ChangeDetectionStrategy} from '@angular/core';
-import {FilterController} from '../../../../services/';
-import {Subscription} from "rxjs";
-import { DROPDOWN_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
-import {SortPipe} from '../../../../pipes/sortType'
+import { Component, Output, Input, EventEmitter, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { FilterController } from '../../../../../services/';
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'searchOptions',
     template: require("./searchOptions.html"),
-    directives: [...DROPDOWN_DIRECTIVES],
-    pipes: [SortPipe],
     styles: [
         `       
         .dropdown-menu{
@@ -20,11 +16,9 @@ import {SortPipe} from '../../../../pipes/sortType'
         }
         .options .dropdown-item {
             padding-left: 10px;
-        }    
-      
+        }          
         `
-    ],
-    //  changeDetection: ChangeDetectionStrategy.OnPush
+    ]
 })
 export class SearchOptionsComponent {
     @Output()
