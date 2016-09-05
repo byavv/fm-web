@@ -61,7 +61,7 @@ export class RegularSearchBase implements OnInit {
             })
             .subscribe((routeParams) => {
                 if (!!routeParams) {
-                    this.router.navigate(['/search/', routeParams.maker, routeParams]/*, { queryParams: routeParams }*/);
+                    this.router.navigate(['/search/', routeParams]/*, { queryParams: routeParams }*/);
                 }
             });
     }

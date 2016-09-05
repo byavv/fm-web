@@ -23,7 +23,7 @@ if ('production' === ENV) {
   ];
 
 } else {
-
+  enableProdMode(); //<-- TODO: solve changed after checked in forms
   _decorateModuleRef = (modRef: any) => {
     const appRef = modRef.injector.get(ApplicationRef);
     const cmpRef = appRef.components[0];

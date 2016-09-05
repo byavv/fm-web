@@ -2,7 +2,7 @@ var Webpack = require('webpack');
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("../config/webpack.dev");
 
-const debug = require('debug')('ms:*');
+const debug = require('debug')('ms:web');
 
 const PORT = process.env.PORT || 3000;
 webpackConfig.entry.polyfills.unshift(`webpack-dev-server/client?http://localhost:${PORT}`, "webpack/hot/dev-server");
@@ -13,11 +13,11 @@ webpackConfig.entry.main.unshift(`webpack-dev-server/client?http://localhost:${P
 var compiler = Webpack(webpackConfig);
 var bundleStart = null;
 compiler.plugin('compile', function () {
-    console.log('Bundling...');
+    debug('Start bundling...');
     bundleStart = Date.now();
 });
 compiler.plugin('done', function (info) {
-    console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
+    debug('Bundle completed, time:' + (Date.now() - bundleStart) + 'ms!');
 });
 
 const server = new WebpackDevServer(compiler, {
@@ -45,5 +45,5 @@ const server = new WebpackDevServer(compiler, {
     }
 });
 server.listen(PORT, () => {
-    console.log(`Starting webpack-dev-server on http://localhost:${PORT}`);
+    debug(`Starting webpack-dev-server on http://localhost:${PORT}`);
 });

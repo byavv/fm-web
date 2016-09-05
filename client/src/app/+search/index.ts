@@ -26,6 +26,8 @@ import { PaginationModule, DropdownModule, CarouselModule } from 'ng2-bootstrap/
 import { SharedModule } from '../shared';
 import { SortPipe } from './pipes/sortPipe';
 
+//import { FiltersModule } from './components/regularSearch/filterPanel/filters'
+
 export const routes: Routes = [
   {
     path: '',
@@ -63,6 +65,8 @@ export const routes: Routes = [
   ],
   imports: [
     SharedModule,
+
+   // FiltersModule,
     //CommonModule,
     //ReactiveFormsModule,
     RouterModule.forChild(routes),

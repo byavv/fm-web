@@ -1,8 +1,12 @@
 import {
     Component, EventEmitter, Input,
     Output, ComponentFactoryResolver, ComponentMetadata,
-    ComponentFactory, ViewContainerRef, OnInit, ReflectiveInjector
+    ComponentFactory, ViewContainerRef, OnInit, ReflectiveInjector,
+    Compiler, NgModule, Type, ModuleWithComponentFactories,
 } from '@angular/core';
+
+import { SharedModule } from '../../../../shared';
+
 import * as filters from './filters';
 import { allFilters } from './filters';
 import { FilterModel } from '../../../../lib/models';
@@ -35,33 +39,42 @@ export class FilterWrapperComponent implements OnInit {
     changed: EventEmitter<any> = new EventEmitter();
     private _componentInstance: IFilterComponent;
 
-    constructor(private resolver: ComponentFactoryResolver, private viewContainerRef: ViewContainerRef) { }
+    constructor(private resolver: ComponentFactoryResolver,
+        private viewContainerRef: ViewContainerRef,
+        private compiler: Compiler
+    ) { }
     ngOnInit() {
         let filter = allFilters.find((key: any) => key.filterId === this.filter.id)
         if (filter) {
-            /*  this.dcl.resolveComponentFactory()
-                  .loadNextToLocation(filter, this.viewContainerRef)
-                  .then((component) => {
-                      this._componentInstance = component.instance;
-                      this._componentInstance.filterValue = this.filter.value;
-                      this._componentInstance.changed.subscribe((value) => {
-                          this.changed.next(value);
-                      });
-                  });*/
-            //    let factory = this.dcl.resolveComponentFactory<typeof filter>(new Type<typeof filter>)
-       //     const metadata = new ComponentMetadata({
-        //        selector: 'dynamic-html',
-        //        template: this.src,
-        //    });
-        //    let factory = this.createComponentFactory()
-            let injector = ReflectiveInjector.fromResolvedProviders([], this.viewContainerRef.parentInjector);
-       //     this.viewContainerRef
-       //         .createComponent(factory, 0, injector, []);
+            this.compiler
+                .compileModuleAndAllComponentsAsync(this.createComponentModule(filter))
+                .then((moduleWithFactories) => {
+                    let factory = moduleWithFactories.componentFactories
+                        .find((f) => f.componentType == filter);
+                    let injector = ReflectiveInjector
+                        .fromResolvedProviders([], this.viewContainerRef.parentInjector);
+                    let componentRef = this.viewContainerRef
+                        .createComponent(factory, 0, injector, []);
+                    this._componentInstance = componentRef.instance;
+                    this._componentInstance.filterValue = this.filter.value;
+                    this._componentInstance.changed.subscribe((value) => {
+                        this.changed.next(value);
+                    })
+                })
         }
     }
-    createComponentFactory(cmpClass: any, metadata: ComponentMetadata): ComponentFactory<any> {
-        //   const cmpClass = class DynamicComponent { };
-        const decoratedCmp = Component(metadata)(cmpClass);
-        return this.resolver.resolveComponentFactory(decoratedCmp);
+
+    createComponentModule(componentType: any): Type<any> {
+        @NgModule({
+            imports: [
+                SharedModule,
+            ],
+            declarations: [
+                componentType
+            ],
+        })
+        class RuntimeComponentModule {
+        }
+        return RuntimeComponentModule;
     }
 }

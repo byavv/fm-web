@@ -48,7 +48,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
     filterState$: Observable<any>;
-     @ViewChild(FilterWrapperComponent) wrappers: QueryList<FilterWrapperComponent>;
+    @ViewChild(FilterWrapperComponent) wrappers: QueryList<FilterWrapperComponent>;
     constructor(
         private store: Store<AppState>,
         private queryActions: QueryActions,
