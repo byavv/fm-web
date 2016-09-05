@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router'
@@ -17,14 +17,15 @@ import { ACTIONS_PROVIDERS } from "./actions";
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule,
-    FormsModule,
-    RouterModule    
+    RouterModule
   ],
   exports: [
     ...SHARED_COMPONENTS,
     ...SHARED_DIRECTIVES,
     CommonModule,
+    ReactiveFormsModule,
     FormsModule
   ],
   providers: [

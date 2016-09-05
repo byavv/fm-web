@@ -1,10 +1,12 @@
 import { NgModule, ApplicationRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts } from '@angularclass/hmr';
 import { CommonModule } from '@angular/common';
+
+import { LOCALE_ID } from '@angular/core';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -29,9 +31,9 @@ import reducer from './lib/reducers';
 // Application modules and dependencies
 import { AppState } from './app.service';
 import { InertLink } from "./shared/directives";
-import { AccountModule } from "./+account";
 
 import { QuickSearchComponent } from "./_home/landingForm/quickSearchBase";
+import { Err404 } from "./_err404/err404";
 // Redux actions, common services, components, directives to be used throughout the app 
 import { SharedModule } from "./shared";
 
@@ -54,24 +56,26 @@ const PROVIDERS = [
   bootstrap: [App],
   declarations: [
     App,
-    QuickSearchComponent
+    QuickSearchComponent,
+    Err404
   ],
   imports: [
     // import Angular's modules
     BrowserModule,
-   // FormsModule,
     HttpModule,
 
     // import third-party modules
     RouterModule.forRoot(routes, { useHash: false }),
     StoreModule.provideStore(reducer),
 
-    // import shared module
+    // import Shared module
     SharedModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ...PROVIDERS,
-    ...GUARDS
+    ...GUARDS,
+    // in your component / module providers definition
+    { provide: LOCALE_ID, useValue: window.navigator.language }
   ]
 })
 export class AppModule {

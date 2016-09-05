@@ -14,10 +14,10 @@ import { QueryActions, FilterPanelActions, VehicleActions } from "../../../share
 
 @Component({
     selector: 'carSearch',
-    template: require('./searchBase.html'),   
+    template: require('./regularSearchBase.html'),   
     styles: [require('./component.scss')]
 })
-export class CarsSearchComponent implements OnInit {
+export class RegularSearchBase implements OnInit {
     totalCount: number;
     loading: boolean;
     search

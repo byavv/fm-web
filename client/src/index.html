@@ -1,44 +1,25 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Funny market</title>
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <base href="/">
-    <link rel="stylesheet" href="/static/assets/vendors/bootstrap.css">
-</head>
-
-<body>
-    <app> Loading... </app>
-    <app-footer></app-footer>
-</body>
-
-</html>
-
-
 <!DOCTYPE html>
 <html lang="">
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title><%= webpackConfig.metadata.title %></title>
+  <title>
+    <%= webpackConfig.metadata.title %>
+  </title>
 
   <meta name="description" content="<%= webpackConfig.metadata.title %>">
 
   <% if (webpackConfig.htmlElements.headTags) { %>
-  <!-- Configured Head Tags  -->
-  <%= webpackConfig.htmlElements.headTags %>
-  <% } %>
+    <!-- Configured Head Tags  -->
+    <%= webpackConfig.htmlElements.headTags %>
+      <% } %>
 
-  <!-- base url -->
-  <base href="<%= webpackConfig.metadata.baseUrl %>">
-
-
+        <!-- base url -->
+        <base href="<%= webpackConfig.metadata.baseUrl %>">
+   
 </head>
 
 <body>
@@ -57,11 +38,12 @@
     ga('send', 'pageview');
   </script>
 
-  <% if (webpackConfig.metadata.isDevServer && webpackConfig.metadata.HMR !== true) { %>
-  <!-- Webpack Dev Server reload -->
-  <script src="/webpack-dev-server.js"></script>
-  <% } %>
-
+ <!-- <% if (webpackConfig.metadata.isDevServer && webpackConfig.metadata.HMR !== true) { %>
+    
+    <script src="/webpack-dev-server.js"></script>
+    <% } %>
+-->
 
 </body>
+
 </html>

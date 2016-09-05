@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -52,13 +52,13 @@ export const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ],
   providers: [
     ...ACCOUNT_SERVICES_PROVIDERS
   ]
 })
-export class AccountModule {
+export default class AccountModule {
   static routes = routes;
 }

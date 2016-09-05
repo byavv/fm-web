@@ -1,11 +1,12 @@
-import {Injectable, NgZone} from '@angular/core';
-import {Http, Response} from '@angular/http';
-import {ExtHttp} from './extHttp';
+import { Injectable, NgZone } from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { ExtHttp } from './extHttp';
 import { Store } from "@ngrx/store";
-import {Api} from "./backEndApi";
-import {ReplaySubject, Observable} from "rxjs";
-import {AppState, getEngineTypes} from "../../lib/reducers";
-import {CatalogActions} from "../../shared/actions";
+import { Api } from "./backEndApi";
+import { ReplaySubject, Observable } from "rxjs";
+import { AppState, getEngineTypes } from "../../lib/reducers";
+import { CatalogActions } from "../../shared/actions";
+
 @Injectable()
 export class AppController {
     init$: ReplaySubject<any> = new ReplaySubject<any>();

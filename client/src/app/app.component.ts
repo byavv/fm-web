@@ -16,7 +16,7 @@ import { Observable } from "rxjs/Observable";
 import '../../assets/styles/main.scss';
 
 @Component({
-  selector: 'app',  
+  selector: 'app',
   template: `
     <div class="page-wrap">
       <loader [active]='loading' [async]='init$' (completed)='loading=false'></loader>      
@@ -41,8 +41,7 @@ export class App {
     private catalogActions: CatalogActions,
     appController: AppController) {
     this.init$ = this.store
-      .let(getCatalogReady())
-
+      .let(getCatalogReady());     
     appController.start();
     identity.update(JSON.parse(storage.getItem("authorizationData")));
   }

@@ -22,6 +22,14 @@ export class MakerConverter extends ConverterBase {
                 active: active
             }
         }
+        if (!value)
+            return {
+                value: {
+                    maker: '',
+                    model: ''
+                },
+                active: active
+            }
         var params = value.split(',');
         if (params[0] === "any")
             return {

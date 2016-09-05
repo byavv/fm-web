@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -28,8 +28,10 @@ export const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes),
   ]
 })
-export default class RegularSearchModule { }
+export default class RegularSearchModule {
+  static routes = routes;
+}

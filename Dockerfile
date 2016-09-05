@@ -7,17 +7,13 @@ MAINTAINER Aksenchyk V. <aksenchyk.v@gmail.com>
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-# Install pm2
-RUN npm install -g gulp typings
-
 # Copy app source
 COPY . /usr/src/app
 
 # Install dependencies and build client
 RUN \ 
-    npm install \ 
-    && typings install \
-    && npm run build
+    npm install \    
+    && npm run build:prod
 
 
 CMD [ "npm", "start" ]

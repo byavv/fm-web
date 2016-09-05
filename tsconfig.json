@@ -9,8 +9,8 @@
     "sourceMap": true,
     "noEmitHelpers": true,
     "strictNullChecks": false,
-    "baseUrl": "./src",
-    "paths": {},
+    "baseUrl": "./client/src",
+    "paths": [],
     "lib": [
       "dom",
       "es6"

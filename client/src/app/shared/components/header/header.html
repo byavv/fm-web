@@ -3,7 +3,7 @@
         <a [routerLink]="['/']" class="navbar-brand">CAR MARKET</a>
         <ul class="nav navbar-nav  pull-xs-right" *ngIf="!isAuthenticated">
             <li class="nav-item">
-                <a [routerLink]="['/login']" class="nav-link">Log In</a>
+                <a [routerLink]="['/auth/signin']" class="nav-link">Sign in</a>
             </li>
         </ul>
         <ul class="nav navbar-nav  pull-xs-right" *ngIf="isAuthenticated">

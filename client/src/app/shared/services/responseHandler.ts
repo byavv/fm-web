@@ -19,7 +19,7 @@ export class ResponseHandler {
     public handle401(): any {
         this.identity.update(null);
         this.storage.removeItem("authorizationData");
-        this.router.navigate(['Login']);
+        this.router.navigate(['/auth/signin']);
     }
 
     public handle500(): any {

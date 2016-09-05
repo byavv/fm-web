@@ -47,13 +47,13 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
 
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
-    filterState$: Observable<any>
+    filterState$: Observable<any>;
+     @ViewChild(FilterWrapperComponent) wrappers: QueryList<FilterWrapperComponent>;
     constructor(
         private store: Store<AppState>,
         private queryActions: QueryActions,
         private counter: TotalCounter,
-        private apiService: Api,
-        @ViewChild("wrapper") private wrappers: QueryList<FilterWrapperComponent>) { }
+        private apiService: Api) { }
 
     ngOnInit() {
         this._counterSubscr = this.counter.subscribe((count: any) => {

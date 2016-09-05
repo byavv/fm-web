@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
                     observer.complete();
                     this.identity.update(null);
                     this.storage.removeItem("authorizationData");
-                    this.router.navigate(["/login", { from: state.url }]);
+                    this.router.navigate(["/auth/signin", { from: state.url }]);
                 })
         });
     }

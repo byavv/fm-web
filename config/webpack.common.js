@@ -20,7 +20,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const METADATA = {
   title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
   baseUrl: '/',
-  isDevServer: helpers.isWebpackDevServer()
+  isDevServer: helpers.isWebpackDevServer() 
 };
 
 /*
@@ -54,9 +54,9 @@ module.exports = {
    */
   entry: {
 
-    'polyfills': './client/src/polyfills.browser.ts',
-    'vendor': './client/src/vendor.browser.ts',
-    'main': './client/src/main.browser.ts'
+    'polyfills': ['./client/src/polyfills.browser.ts'],
+    'vendor': ['./client/src/vendor.browser.ts'],
+    'main': ['./client/src/main.browser.ts']
 
   },
 
@@ -159,13 +159,13 @@ module.exports = {
       // all styles for the application will be bundled into css file
       {
         test: /\.scss$/,
-        include: helpers.root('./assets'),
+        exclude: [helpers.root('client/src')],
         loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass'])
       },
       // all styles which are required for componenets will be bundled within javascript via raw loader
       {
         test: /\.scss$/,
-        include: helpers.root('./src/app'),
+        exclude: [helpers.root('client/assets')],
         loader: 'raw!postcss!sass'
       },
       /* Raw loader support for *.html
@@ -231,7 +231,14 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: 'client/assets',
       to: 'assets'
-    }]),
+    }]//, {
+        //ignore: [
+       //   '*.scss',
+          // Doesn't copy any file, even if they start with a dot 
+      //    { glob: '**/*', dot: true }
+     //   ]
+     // }
+      ),
 
     /*
      * Plugin: HtmlWebpackPlugin

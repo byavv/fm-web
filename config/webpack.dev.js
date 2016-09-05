@@ -6,13 +6,13 @@ const helpers = require('./helpers');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-let extractSASS = new ExtractTextPlugin('assets/styles/[name].scss');
+let extractSASS = new ExtractTextPlugin('assets/styles/[name].css');
 /**
  * Webpack Plugins
  */
 const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
-
+const HotModuleReplacementPlugin = require('webpack/lib/HotModuleReplacementPlugin');
 /**
  * Webpack Constants
  */
@@ -54,7 +54,7 @@ module.exports = webpackMerge(commonConfig, {
    * See: http://webpack.github.io/docs/configuration.html#devtool
    * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
    */
-  devtool: 'cheap-module-source-map',
+  devtool: '#inline-source-map',
 
   /**
    * Options affecting the output of the compilation.
@@ -95,6 +95,7 @@ module.exports = webpackMerge(commonConfig, {
 
     library: 'ac_[name]',
     libraryTarget: 'var',
+    publicPath: '/static/'
   },
 
   plugins: [
@@ -103,7 +104,7 @@ module.exports = webpackMerge(commonConfig, {
      * Description: Extracts required entry into separate file. Used to avoid 'inline' css in javascript code.
      * See: https://github.com/webpack/extract-text-webpack-plugin
      */
-     extractSASS,
+    extractSASS,
     /**
      * Plugin: DefinePlugin
      * Description: Define free variables.
@@ -131,6 +132,7 @@ module.exports = webpackMerge(commonConfig, {
        * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
        */
     new NamedModulesPlugin(),
+    new HotModuleReplacementPlugin()
 
   ],
 
@@ -143,7 +145,7 @@ module.exports = webpackMerge(commonConfig, {
   tslint: {
     emitErrors: false,
     failOnHint: false,
-    resourcePath: 'src'
+    resourcePath: 'client/src'
   },
 
   /**
@@ -162,7 +164,11 @@ module.exports = webpackMerge(commonConfig, {
       aggregateTimeout: 300,
       poll: 1000
     },
-    outputPath: helpers.root('dist')
+    outputPath: helpers.root('dist'),
+
+    //  contentBase: "http://localhost:3000",
+  //  inline: true,
+   // hot: true
   },
 
   /*

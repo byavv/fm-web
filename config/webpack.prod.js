@@ -17,6 +17,7 @@ const DedupePlugin = require('webpack/lib/optimize/DedupePlugin');
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 /**
  * Webpack Constants
  */
@@ -83,8 +84,8 @@ module.exports = webpackMerge(commonConfig, {
      *
      * See: http://webpack.github.io/docs/configuration.html#output-chunkfilename
      */
-    chunkFilename: '[id].[chunkhash].chunk.js'
-
+    chunkFilename: '[id].[chunkhash].chunk.js',
+    publicPath: '/static/'
   },
 
   /**
@@ -196,10 +197,10 @@ module.exports = webpackMerge(commonConfig, {
      * See: https://github.com/webpack/compression-webpack-plugin
      */
     //  install compression-webpack-plugin
-    // new CompressionPlugin({
-    //   regExp: /\.css$|\.html$|\.js$|\.map$/,
-    //   threshold: 2 * 1024
-    // })
+    new CompressionWebpackPlugin({
+      regExp: /\.css$|\.html$|\.js$|\.map$/,
+      threshold: 2 * 1024
+    })
 
   ],
 
@@ -247,5 +248,4 @@ module.exports = webpackMerge(commonConfig, {
     clearImmediate: false,
     setImmediate: false
   }
-
 });

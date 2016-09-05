@@ -33,13 +33,9 @@
   "session": {},
   "auth": {},
   "parse": {},
+  
   "routes": {},
-  "files": {
-    "loopback#static": {
-      "paths": "/static",
-      "params": "$!../build"
-    }
-  },
+  "files": {},
   "final": {
     "loopback#urlNotFound": {}
   },

@@ -48,7 +48,10 @@ export class QuickSearchComponent implements OnDestroy {
             model: this.model,
             yearFrom: this.yearFrom,
             priceUp: this.priceUp
-        })
+        });
+
+        console.log('HELLO WORLD4306');
+        
     }
 
     ngAfterViewInit() {
@@ -139,6 +142,6 @@ export class QuickSearchComponent implements OnDestroy {
         const queryParams = {
             'year': routeParams.year, price: routeParams.price
         };
-        this.router.navigate(['/search/', routeParams.maker, routeParams]);
+        this.router.navigate(['/search/', routeParams]);
     }
 }

@@ -3,6 +3,7 @@
 const loopback = require('loopback'),
   boot = require('loopback-boot'),
   logger = require('./lib/logger'),
+  path = require('path'),
   app = module.exports = loopback();
 
 const http_port = process.env.HTTP_PORT || 3000,
@@ -12,12 +13,17 @@ const http_port = process.env.HTTP_PORT || 3000,
 
 if (!process.env.ETCD_HOST) { logger.warn(`ETCD_HOST environment is not set, try default ${etcd_host}`); }
 
-
 app.set("mongo_host", mongo_host);
 app.set("http_port", http_port);
 app.set("etcd_host", etcd_host);
 app.set("ms_name", 'web');
 
+if (process.env.NODE_ENV == 'development') {
+  console.log('Running in dev mode'); 
+}
+
+app.use('/static',
+  loopback.static(path.join(__dirname, '../dist'), { index: false }));
 
 app.start = function () {
   // start the web server
