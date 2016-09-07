@@ -10,7 +10,7 @@ import * as catalog  from './catalog';
 import { filterReducer }  from './filter';
 import { queryReducer, SearchQueryState }  from './query';
 import { catalogReducer, CatalogState }  from './catalog';
-import { FilterStateModel, FilterModel, Catalog } from '../models';
+import { FilterStateModel, FilterModel, Catalog } from '../../lib/models';
 
 export interface AppState {
   vehicle: VehicleState,

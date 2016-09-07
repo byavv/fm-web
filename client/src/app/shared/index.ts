@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router'
 import { SHARED_SERVICES } from './services';
 import { SHARED_COMPONENTS } from './components';
 import { SHARED_DIRECTIVES } from "./directives";
-import { GUARDS } from "./guards";
-import { ACTIONS_PROVIDERS } from "./actions";
 
 @NgModule({
   declarations: [
@@ -19,7 +17,8 @@ import { ACTIONS_PROVIDERS } from "./actions";
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    HttpModule
   ],
   exports: [
     ...SHARED_COMPONENTS,
@@ -29,9 +28,7 @@ import { ACTIONS_PROVIDERS } from "./actions";
     FormsModule
   ],
   providers: [
-    ...SHARED_SERVICES,
-    ...ACTIONS_PROVIDERS,
-    ...GUARDS,
+    ...SHARED_SERVICES   
   ]
 })
 export class SharedModule {

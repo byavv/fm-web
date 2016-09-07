@@ -7,11 +7,11 @@ import {
 import { OptionsPickerControl } from "../../../../../shared/components";
 import { FilterController } from '../../../../services';
 
-import { AppState, getEngineTypes } from "../../../../../lib/reducers";
+import { AppState, getEngineTypes } from "../../../../../core/reducers";
 import {
     QueryActions, FilterPanelActions,
     CatalogActions
-} from "../../../../../shared/actions";
+} from "../../../../../core/actions";
 import { Store } from '@ngrx/store'
 
 @Component({

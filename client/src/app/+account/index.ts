@@ -9,7 +9,7 @@ import { MasterBaseComponent } from './components/userCars/masterBase';
 import { UserCarsListComponent } from './components/userCars/carList';
 import { UserCarsBaseComponent } from './components/userCars/userCarsBase';
 import { AccountBase } from './components/accountBase';
-import { AuthGuard } from '../shared/guards';
+import { AuthGuard } from '../core/guards';
 
 import { SharedModule } from '../shared';
 

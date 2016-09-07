@@ -1,18 +1,18 @@
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Api } from '../../shared/services/backEndApi';
+import { MakerApi, CarApi } from '../../shared/services';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { convertToRoute, construct } from '../../lib/';
 import * as converters from "../../lib/converters";
 import { FilterStateModel } from '../../lib/models';
 
-import { AppState, getMakers, getCatalogReady } from "../../lib/reducers";
-import { CatalogActions } from "../../shared/actions";
+import { AppState, getMakers, getCatalogReady } from "../../core/reducers";
+import { CatalogActions } from "../../core/actions";
 import { Store } from '@ngrx/store';
 
 @Component({
-    selector: 'quickSerch',
+    selector: 'quickSearch',
     template: require('./quickSearchBase.html'),
     styles: [require('./component.css')]
 })
@@ -36,9 +36,10 @@ export class QuickSearchComponent implements OnDestroy {
     priceUp: FormControl = new FormControl();
     model: FormControl = new FormControl();
     maker: FormControl = new FormControl();
-
+    ready$: Observable<any>;
     constructor(
-        private apiService: Api,
+        private makerApi: MakerApi,
+        private carApi: CarApi,
         private router: Router,
         private store: Store<AppState>,
         private catalogActions: CatalogActions
@@ -49,25 +50,25 @@ export class QuickSearchComponent implements OnDestroy {
             yearFrom: this.yearFrom,
             priceUp: this.priceUp
         });
-
-        console.log('HELLO WORLD4306');
-        
     }
 
     ngAfterViewInit() {
         for (let i = 1980; i <= new Date().getFullYear(); i++) {
             this.yearFroms.push(i)
         }
-        this.appStoreSubscr =
-            this.store
-                .let(getCatalogReady())
-                .flatMap(() => this.store.let(getMakers()))
-                .do((makers) => {
-                    this.loading = true;
-                    this.carMakers = makers;
-                })
-                .switchMap((value) => this._operateCount())
-                .subscribe(this.count$);
+
+        this.ready$ = this.store
+            .let(getCatalogReady());
+
+        this.appStoreSubscr = this.ready$
+            .do(() => { console.log('--------------Catalog ready----------------') })
+            .flatMap(() => this.store.let(getMakers()))
+            .do((makers) => {
+                this.loading = true;
+                this.carMakers = makers;
+            })
+            .switchMap((value) => this._operateCount())
+            .subscribe(this.count$);
 
         this.form
             .controls["maker"]
@@ -78,7 +79,7 @@ export class QuickSearchComponent implements OnDestroy {
             })
             .switchMap((value) => {
                 return Observable.zip(
-                    this.apiService.getMakerModels(value.id),
+                    this.makerApi.getCarModels(value.id),
                     this._operateCount({ maker: value }),
                     (models, count) => {
                         return { models: models, count: count }
@@ -121,7 +122,7 @@ export class QuickSearchComponent implements OnDestroy {
         var searchRequest = Object.assign({}, this.form.value, value);
         if (!!searchRequest.maker)
             searchRequest.maker = searchRequest.maker.name;
-        return this.apiService.getCarsCount(searchRequest)
+        return this.carApi.count(searchRequest)
             .finally(() => { this.loading = false; })
             .map((count: any) => +count.count);
     }

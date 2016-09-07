@@ -13,6 +13,7 @@ import { LOCALE_ID } from '@angular/core';
  */
 import { ENV_PROVIDERS } from './environment';
 import { routes, GUARDS } from './app.routes';
+import { APP_CORE_API_PROVIDERS } from './core'
 
 // App is our top level component
 import { App } from './app.component';
@@ -26,7 +27,7 @@ import {
 
 // Redux
 import { StoreModule } from '@ngrx/store';
-import reducer from './lib/reducers';
+import reducer from './core/reducers';
 
 // Application modules and dependencies
 import { AppState } from './app.service';
@@ -46,6 +47,7 @@ const PROVIDERS = [
   },
   ...ENV_PROVIDERS,
   ...APP_RESOLVER_PROVIDERS,
+  ...APP_CORE_API_PROVIDERS,
   AppState
 ];
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersBackEndApi } from "../../services/usersBackEndApi";
 
 @Component({
     selector: 'usercars',
@@ -10,8 +9,7 @@ import { UsersBackEndApi } from "../../services/usersBackEndApi";
                 </router-outlet>
             </div>
         </div>
-    `,
-    providers: [UsersBackEndApi],
+    `   
 })
 
 export class UserCarsBaseComponent { }

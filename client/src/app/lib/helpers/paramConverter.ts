@@ -1,4 +1,4 @@
-import { FilterModel, FilterStateModel, IFilterStateModel } from "../models";
+import { FilterModel, FilterStateModel, IFilterStateModel } from '../models';
 
 export function convertFromRoute(converters, routeParams): FilterStateModel {
     let filterState: FilterStateModel = new FilterStateModel();
@@ -13,9 +13,9 @@ export function convertFromRoute(converters, routeParams): FilterStateModel {
         
         });
     Object.assign(filterState,
-        { page: +routeParams["page"] || 1 },
-        { sort: routeParams["sort"] || "price-" },
-        { limit: +routeParams["limit"] || 20 });
+        { page: +routeParams['page'] || 1 },
+        { sort: routeParams['sort'] || 'price-' },
+        { limit: +routeParams['limit'] || 20 });
     return filterState
 }
 
@@ -45,7 +45,7 @@ export function convertToRoute(converters, filterState: IFilterStateModel): any 
         });
     if (filterState.page != 1)
         Object.assign(route, { page: filterState.page })
-    if (filterState.sort != "price-")
+    if (filterState.sort != 'price-')
         Object.assign(route, { sort: filterState.sort })
     if (filterState.limit != 20)
         Object.assign(route, { limit: filterState.limit })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Identity, AuthApi, Storage } from '../../services';
+import { LoopBackAuth } from '../../../core';
+import { Identity, AuthApi, UserApi } from '../../services';
 
 @Component({
     selector: 'app-header',
@@ -11,27 +12,31 @@ export class Header implements OnInit {
     shouldRedirect: boolean;
     username: string;
 
-    constructor(private identity: Identity, private auth: AuthApi, private router: Router, private storage: Storage) { }
+    constructor(      
+        private auth: LoopBackAuth,
+        private router: Router,
+        private userApi: UserApi
+    ) { }
 
     ngOnInit() {
-        this.username = this.identity.user.name || "Guest";
-        this.isAuthenticated = this.identity.user.isAuthenticated();
-        this.identity.identity$
-            .subscribe((user) => {
-                this.isAuthenticated = user.isAuthenticated();
-                this.username = user.name;
-            });
+        var currentUser = this.auth.user;
+        this.username = currentUser
+            ? currentUser.username
+            : "Guest";
+        this.isAuthenticated = currentUser.isAuthenticated();
+        this.auth.identity$.subscribe((user) => {
+            this.isAuthenticated = user.isAuthenticated();
+            this.username = user
+                ? user.username
+                : "Guest";
+        })     
+
+
     }
     signOut() {
-        this.auth.signOut().subscribe(
-            (res) => {
-                this.identity.update();
-                this.storage.removeItem("authorizationData")
-            },
-            (err) => {
-                this.identity.update();
-                this.storage.removeItem("authorizationData");
-            }
-        );
+        this.userApi.logout()
+            .subscribe((res) => {
+                this.router.navigate(['/'])
+            }, console.error);
     }
 }

@@ -1,2 +1,2 @@
-export * from "./paramConverter";
-export * from "./objectConstructor";
+export * from './paramConverter';
+export * from './objectConstructor';

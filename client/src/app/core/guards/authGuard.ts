@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { AuthApi, Identity, Storage } from "../services";
+import { LoopBackAuth } from "../auth.service";
 import { Observable, Observer } from "rxjs";
+import { ProfileApi } from "../../shared/services/custom/Profile";
 
 import {
     CanActivate,
@@ -11,12 +12,12 @@ import {
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor(private permService: AuthApi, private router: Router, private identity: Identity, private storage: Storage) { }
+    constructor(private auth: LoopBackAuth, private profileApi: ProfileApi, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
         return Observable.create((observer: Observer<boolean>) => {
-            this.permService
-                .authorize()               
+            this.profileApi
+                .me()
                 .toPromise()
                 .then(result => {
                     observer.next(true);
@@ -25,8 +26,8 @@ export class AuthGuard implements CanActivate {
                 .catch((err) => {
                     observer.next(false);
                     observer.complete();
-                    this.identity.update(null);
-                    this.storage.removeItem("authorizationData");
+                    this.auth.update(null);
+                    this.auth.clearStorage();
                     this.router.navigate(["/auth/signin", { from: state.url }]);
                 })
         });

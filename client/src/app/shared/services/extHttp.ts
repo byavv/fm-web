@@ -17,8 +17,8 @@ export class ExtHttp {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         });
-        if (!!identityData && identityData.token) {
-            headers.append('authorization', `${identityData.token}`)
+        if (!!identityData && identityData.accessToken) {
+            headers.append('authorization', `${identityData.accessToken}`)
         }
         return headers;
     }
@@ -81,8 +81,8 @@ export class ExtHttp {
             let xhr: XMLHttpRequest = new XMLHttpRequest();
             xhr.open(method, url, true);
             let identityData = this.identity.user;
-            if (!!identityData && identityData.token) {
-                xhr.setRequestHeader('Authorization', `${identityData.token}`);
+            if (!!identityData && identityData.accessToken) {
+                xhr.setRequestHeader('Authorization', `${identityData.accessToken}`);
             }
             xhr.addEventListener("error", function (event) {
                 observer.error(xhr.response);

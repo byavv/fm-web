@@ -1,6 +1,7 @@
 import { ConverterBase } from "./ConverterBase";
 import { Converter } from "../decorators";
-import { FilterModel } from "../models/filter";
+import { FilterModel } from "../models";
+
 @Converter({
     converterId: "typeng",
     roteParams: ["engineTypes"]

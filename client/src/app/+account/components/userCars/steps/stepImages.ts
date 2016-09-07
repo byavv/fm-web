@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
 import { Router } from "@angular/router";
 import { getDOM, DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
-import { UsersBackEndApi } from "../../../services/usersBackEndApi";
+import { ImageApi } from '../../../../shared/services';
 import { MasterController } from "../../../services/masterController";
 import { Car } from "../../../../lib/models";
 import { isFunction } from "@angular/compiler/src/facade/lang";
@@ -25,7 +25,7 @@ export class StepImagesComponent implements OnInit {
     constructor(
         private master: MasterController,
         private router: Router,
-        private backEnd: UsersBackEndApi) { this._domAdapter = getDOM() }
+        private imageApi: ImageApi) { this._domAdapter = getDOM() }
 
     ngOnInit() {
         console.log("INIT");
@@ -54,7 +54,7 @@ export class StepImagesComponent implements OnInit {
     delete(image) {
         var index = this.images.indexOf(image);
         if (!!this.car.id && image.key) {
-            this.backEnd.deleteImage(this.car.id, image.key).subscribe((res) => {
+            this.imageApi.deleteImage(this.car.id, image.key).subscribe((res) => {
                 console.log(res);
                 this.images.splice(index, 1);
             }, err => {

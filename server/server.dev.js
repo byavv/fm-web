@@ -28,20 +28,48 @@ const server = new WebpackDevServer(compiler, {
     quiet: false,
     noInfo: true,
     publicPath: '/static',
-    contentBase: "./dist",   
+    contentBase: "./dist",
     setup: (app) => {
     },
+    /* proxy: {
+         '/public/cars/*': "http://localhost",
+         '/profiles/*': "http://localhost",
+         '/tracker/*': "http://localhost",
+         '/public/makers/*': "http://localhost",
+         '/public/enginetypes/*': "http://localhost",
+         '/tracks/*': "http://localhost",
+         '/auth/*': "http://localhost",
+         '/private/cars/*': "http://localhost",
+         '/users/*': "http://localhost",
+         '/image/*': "http://localhost"
+     }*/
     proxy: {
-        '/public/cars/*': "http://localhost",
-        '/profiles/*': "http://localhost",
-        '/tracker/*': "http://localhost",
-        '/public/makers/*': "http://localhost",
-        '/public/enginetypes/*': "http://localhost",
-        '/tracks/*': "http://localhost",
-        '/auth/*': "http://localhost",
-        '/private/cars/*': "http://localhost",
-        '/users/*': "http://localhost",
-        '/image/*': "http://localhost"
+
+        '/profiles/*': "http://localhost:3001",
+        '/tracker/*': "http://localhost:3001",
+
+        '/tracks/*': "http://localhost:3001",
+        //   '/auth/*': "http://localhost:3001",
+
+        //  '/users/*': "http://localhost:3001",
+
+        '/private/api/cars/*': "http://localhost:3001",
+        '/public/api/cars/*': "http://localhost:3001",
+        '/private/api/Cars/*': "http://localhost:3001",
+        '/public/api/Cars/*': "http://localhost:3001",
+
+        '/public/api/makers/*': "http://localhost:3001",
+        '/public/api/enginetypes/*': "http://localhost:3001",
+
+
+        '/public/api/Makers/*': "http://localhost:3001",
+        '/public/api/EngineTypes/*': "http://localhost:3001",
+
+        '/public/api/Users/*': "http://localhost:3001",
+        '/private/api/Users/*': "http://localhost:3001",
+        '/private/api/profiles/*': "http://localhost:3001",
+
+        '/api/image/*': "http://localhost:3001"
     }
 });
 server.listen(PORT, () => {

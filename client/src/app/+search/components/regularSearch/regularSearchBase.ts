@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Api } from '../../../shared/services';
+import { CarApi } from '../../../shared/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject, Observable, Subscription } from "rxjs";
 
@@ -9,12 +9,12 @@ import { Store } from "@ngrx/store";
 import {
     AppState, getVehicleState, getFoundVehicles, getFilter,
     getQuery, getCatalogReady, getConvertedToRouteParamsQuery
-} from "../../../lib/reducers";
-import { QueryActions, FilterPanelActions, VehicleActions } from "../../../shared/actions";
+} from "../../../core/reducers";
+import { QueryActions, FilterPanelActions, VehicleActions } from "../../../core/actions";
 
 @Component({
     selector: 'carSearch',
-    template: require('./regularSearchBase.html'),   
+    template: require('./regularSearchBase.html'),
     styles: [require('./component.scss')]
 })
 export class RegularSearchBase implements OnInit {
@@ -25,7 +25,7 @@ export class RegularSearchBase implements OnInit {
     state$: Observable<any>
     routSbscr: Subscription;
     constructor(
-        private apiService: Api,
+        private apiService: CarApi,
         private router: Router,
         private route: ActivatedRoute,
 
@@ -74,9 +74,9 @@ export class RegularSearchBase implements OnInit {
         this.loading = true;
         Observable.zip(
             this.apiService
-                .searchCars(filter),
+                .search(filter),
             this.apiService
-                .getCarsCount(filter),
+                .count(filter),
             (cars, count) => [cars, count])
             .subscribe((result: any) => {
                 if (result) {

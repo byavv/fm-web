@@ -1,12 +1,12 @@
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { Vehicle } from '../models';
-import { QueryActions } from '../../shared/actions/queryAction';
-import { FilterStateModel, IFilterStateModel } from "../models/";
-import { convertFromRoute, convertToRoute, buildFilterListFromRoute } from "../";
-import * as converters from "../converters";
-import { construct } from "../helpers";
-import { ConverterBase } from "../converters/ConverterBase";
+import { Vehicle } from '../../lib/models';
+import { QueryActions } from '../../core/actions/queryAction';
+import { FilterStateModel, IFilterStateModel } from "../../lib/models/";
+import { convertFromRoute, convertToRoute, buildFilterListFromRoute } from "../../lib/";
+import * as converters from "../../lib/converters";
+import { construct } from "../../lib/helpers";
+import { ConverterBase } from "../../lib/converters/ConverterBase";
 
 
 export interface SearchQueryState {

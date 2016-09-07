@@ -1,12 +1,12 @@
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
-import { Vehicle } from '../models';
-import { FilterPanelActions } from '../../shared/actions/filterPanelAction';
-import { FilterModel } from "../models/";
-import * as converters from "../converters";
-import { construct } from "../helpers";
-import { ConverterBase } from "../converters/ConverterBase";
-import { buildFilterListFromRoute } from "../";
+import { Vehicle, FilterModel } from '../../lib/models';
+import { FilterPanelActions } from '../../core/actions/filterPanelAction';
+
+import * as converters from "../../lib/converters";
+import { construct } from "../../lib/helpers";
+import { ConverterBase } from "../../lib/converters/ConverterBase";
+import { buildFilterListFromRoute } from "../../lib";
 
 export interface FilterState {
     filter: Array<FilterModel>,

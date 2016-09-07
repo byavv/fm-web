@@ -7,7 +7,7 @@ import { StringWrapper } from "@angular/compiler/src/facade/lang";
 export class Api {
 
   constructor(private _http: ExtHttp) { }
-
+/*
   public getCarsCount(query): Rx.Observable<any> {
     return this._http
       .post("/public/cars/count", JSON.stringify(query))
@@ -42,5 +42,5 @@ export class Api {
     return this._http
       .get("/public/enginetypes", null)
       .map(res => res.json());
-  }
+  }*/
 }

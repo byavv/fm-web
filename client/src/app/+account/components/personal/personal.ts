@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsersBackEndApi } from "../../services/usersBackEndApi"
-import { Api, Identity } from "../../../shared/services";
-
+import { ProfileApi } from '../../../shared/services'
+import { LoopBackAuth } from '../../../core'
 @Component({
     selector: 'settings',
     template: require('./personal.html')
@@ -14,7 +13,7 @@ export class ProfileComponent implements OnInit {
     model: any = {};
     error;
     info;
-    constructor(private usersBackEnd: UsersBackEndApi, private identity: Identity) {
+    constructor(private usersBackEnd: ProfileApi, private identity: LoopBackAuth) {
         this.personalForm = new FormGroup({
             name: new FormControl(),
             location: new FormControl()
@@ -22,7 +21,7 @@ export class ProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.usersBackEnd.getProfileData().subscribe((result) => {
+        this.usersBackEnd.getProfile().subscribe((result) => {
             this.model = result || {};
         }, (err) => {
             err = err.json();
@@ -31,7 +30,7 @@ export class ProfileComponent implements OnInit {
     }
 
     onSubmit() {
-        this.usersBackEnd.setProfileData(this.personalForm.value)
+        this.usersBackEnd.updateProfile(this.personalForm.value)
             .subscribe((result) => {
                 this.error = null;
                 this.info = 'Profile data was updated successfully';

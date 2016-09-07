@@ -2,10 +2,10 @@ import { Injectable, NgZone } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { ExtHttp } from './extHttp';
 import { Store } from "@ngrx/store";
-import { Api } from "./backEndApi";
+import { EngineTypeApi, MakerApi } from "./custom";
 import { ReplaySubject, Observable } from "rxjs";
-import { AppState, getEngineTypes } from "../../lib/reducers";
-import { CatalogActions } from "../../shared/actions";
+import { AppState, getEngineTypes } from "../../core/reducers";
+import { CatalogActions } from "../../core/actions";
 
 @Injectable()
 export class AppController {
@@ -16,7 +16,7 @@ export class AppController {
     makers: Array<any> = [];
     engineTypes: Array<any> = [];
     // todo: car colors     
-    constructor(private _backEnd: Api, private store: Store<AppState>, private _ngZone: NgZone, private catalogActions: CatalogActions) { }
+    constructor(private etApi: EngineTypeApi, private MakerApi: MakerApi, private store: Store<AppState>, private _ngZone: NgZone, private catalogActions: CatalogActions) { }
     start() {
         this._ngZone.runOutsideAngular(() => {
             this._loadAppDefaults((defaults) => {
@@ -31,8 +31,8 @@ export class AppController {
 
     _loadAppDefaults(doneCallback: (defaults: any) => void) {
         Observable.zip(
-            this._backEnd.getMakers(),
-            this._backEnd.getEngineTypes(),
+            this.MakerApi.find(),
+            this.etApi.find(),
             (makers, engineTypes) => [makers, engineTypes])
             .subscribe(value => {
                 [this.makers, this.engineTypes] = value;

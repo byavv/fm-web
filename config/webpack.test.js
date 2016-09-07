@@ -137,7 +137,14 @@ module.exports = {
        * See: https://github.com/webpack/raw-loader
        */
       { test: /\.css$/, loaders: ['to-string-loader', 'css-loader'], exclude: [helpers.root('src/index.html')] },
-
+ 
+      // all styles for the application will be bundled into css file
+      {
+        test: /\.scss$/,       
+        loaders: ['to-string-loader', 'css-loader', 'sass-loader']
+      },
+      // all styles which are required for componenets will be bundled within javascript via raw loader
+     
       /**
        * Raw loader support for *.html
        * Returns file content as string
@@ -163,7 +170,7 @@ module.exports = {
        */
       {
         test: /\.(js|ts)$/, loader: 'istanbul-instrumenter-loader',
-        include: helpers.root('src'),
+        include: helpers.root('client/src'),
         exclude: [
           /\.(e2e|spec)\.ts$/,
           /node_modules/

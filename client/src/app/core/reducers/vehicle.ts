@@ -1,8 +1,8 @@
 import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
-import { Vehicle } from '../models';
-import { VehicleActions } from '../../shared/actions/vehicleAction';
+import { Vehicle } from '../../lib/models';
+import { VehicleActions } from '../../core/actions/vehicleAction';
 
 export interface VehicleState {
   found: any[];

@@ -4,7 +4,7 @@
         <span class="link">Last added</span>
     </div>
     <div class='car-list'>
-        <a *ngFor="let car of  lastAdded" [routerLink]="['Details', { id: car.carId }]" class='car-container'>
+        <a *ngFor="let car of  lastAdded" [routerLink]="['/search/details', car.carId ]" class='car-container'>
             <div class='model-info'>
                 <label>{{car.description}} {{car.url}}</label>
             </div>

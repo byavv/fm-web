@@ -2,18 +2,20 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Router } from "@angular/router";
-import { Identity, Storage, AppController } from "./shared/services";
-import { ACTIONS_PROVIDERS } from "./shared/actions";
+import { AppController } from "./shared/services";
+import { ACTIONS_PROVIDERS, CatalogActions } from "./core/actions";
 import { Header } from "./shared/components/header/header";
 
+import { LoopBackAuth } from './core';
 import { LoaderComponent } from "./shared/components/loader/loader";
+import { AppState, getCatalogReady } from "./core/reducers";
 
-import { AppState, getCatalogReady } from "./lib/reducers";
-import { CatalogActions } from "./shared/actions";
 import { Store } from '@ngrx/store';
 import { Observable } from "rxjs/Observable";
 
 import '../../assets/styles/main.scss';
+
+import { LoopBackConfig } from './app.config';
 
 @Component({
   selector: 'app',
@@ -26,8 +28,9 @@ import '../../assets/styles/main.scss';
               <router-outlet>
               </router-outlet>
           </div>
-      </div>
-    </div>         
+      </div>     
+    </div>      
+     <app-footer></app-footer>   
   `,
   providers: []
 })
@@ -35,14 +38,17 @@ export class App {
   loading = true;
   init$: Observable<any>;
   constructor(
-    private identity: Identity,
-    private storage: Storage,
+    private auth: LoopBackAuth,   
     private store: Store<AppState>,
     private catalogActions: CatalogActions,
     appController: AppController) {
+
+    LoopBackConfig.setBaseURL('http://localhost:3000');
+    LoopBackConfig.setApiVersion('api');
+
     this.init$ = this.store
-      .let(getCatalogReady());     
+      .let(getCatalogReady());
     appController.start();
-    identity.update(JSON.parse(storage.getItem("authorizationData")));
+    auth.update(auth.initFromStorage());
   }
 }

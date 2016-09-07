@@ -7,8 +7,8 @@ import { FilterModel, FilterStateModel } from "../../../../lib/models";
 import { LoaderComponent } from "../../../../shared/components/loader/loader";
 import { Subscription, Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { AppState, getFilter } from "../../../../lib/reducers";
-import { QueryActions } from "../../../../shared/actions";
+import { AppState, getFilter } from "../../../../core/reducers";
+import { QueryActions } from "../../../../core/actions";
 @Component({
     selector: 'carFilterPanel',
     template: require("./panelBase.html"),

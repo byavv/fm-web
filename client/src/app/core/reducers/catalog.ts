@@ -1,8 +1,8 @@
 import '@ngrx/core/add/operator/select';
 import { Observable } from 'rxjs/Observable';
 import { Action } from '@ngrx/store';
-import { Catalog } from '../models';
-import { CatalogActions } from '../../shared/actions/catalogAction';
+import { Catalog } from '../../lib/models';
+import { CatalogActions } from '../../core/actions/catalogAction';
 
 export interface CatalogState {
     catalogId: string,
@@ -18,16 +18,16 @@ const initialState: CatalogState = {
     init: false
 };
 
-export function catalogReducer(state = initialState, action: Action): CatalogState {
+export function catalogReducer(state = initialState, action: Action): CatalogState {    
     switch (action.type) {
         case CatalogActions.CHANGE_CATALOG: {
-            const catalog = action.payload;
+            const catalogId = action.payload;
             return Object.assign({}, state, {
-                catalog: catalog,
+                catalogId: catalogId,
                 init: true
             });
         }
-        case CatalogActions.CHANGE_LOOKUPS: {
+        case CatalogActions.CHANGE_LOOKUPS: {            
             const lookups = action.payload;
             return Object.assign({}, state, {
                 engineTypes: lookups.engineTypes,
@@ -52,7 +52,7 @@ export function getCurrentMakers() {
 }
 
 
-export function catalogInit() {
+export function catalogInit() {   
     return (state$: Observable<CatalogState>) => state$
-        .filter(state => state.init)
+        .filter(state => state.init)       
 }

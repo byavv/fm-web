@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Api } from '../../../shared/services';
+import { CarApi } from '../../../shared/services';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -13,11 +13,11 @@ export class CarDetailsComponent implements OnInit {
         images: []
     };
 
-    constructor(private apiService: Api, private activeRoute: ActivatedRoute) { }
+    constructor(private apiService: CarApi, private activeRoute: ActivatedRoute) { }
 
     ngOnInit() {
         this.apiService
-            .getCar(this.activeRoute.snapshot.params['id'])
+            .findById(this.activeRoute.snapshot.params['id'])
             .subscribe((car: any) => {
                 this.car = car;
             })

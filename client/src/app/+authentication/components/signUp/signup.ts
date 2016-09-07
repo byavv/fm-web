@@ -1,7 +1,7 @@
 import { Component, Injector } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Identity, AuthApi, Storage } from '../../../shared/services';
+import { UserApi } from '../../../shared/services';
 
 @Component({
     selector: 'signup',
@@ -13,8 +13,8 @@ export class SignUpComponent {
     error: string;
     constructor(builder: FormBuilder,
         private router: Router,
-        private authService: AuthApi,
-        private identityService: Identity, private storage: Storage
+        private userApi: UserApi,
+      //  private storage: Storage
     ) {
         this.signInForm = builder.group({
             "username": ["admin"],
@@ -24,23 +24,14 @@ export class SignUpComponent {
     }
 
     onSubmit(value) {
-        this.authService.signUp(value).subscribe(
+        this.userApi.signup(value).subscribe(
             data => this.onSuccess(data),
             err => this.onError(err)
         );
     }
-// TODO:AUTH
-  /*  routerOnActivate() {
-        if (this.identityService.user.isAuthenticated()) {
-            this.router.navigate(['/Home']);
-        }
-    }*/
-
     onSuccess(data) {
-
         console.log(data);
-        this.router.navigate(['/Home']);
-
+        this.router.navigate(['/auth/login']);
     }
 
     onError(err) {

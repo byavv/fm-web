@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild, QueryList} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
-import {STEP_COMPONENTS} from "./steps";
-import {MasterController} from "../../services/masterController";
-import {UsersBackEndApi} from "../../services/usersBackEndApi";
-import {Api} from "../../../shared/services";
-import {Car} from "../../../lib/models";
-import {UiTabs, UiPane} from '../../directives/uiTabs';
-import {LoaderComponent} from "../../../shared/components/loader/loader";
-import {isString} from "@angular/compiler/src/facade/lang";
-import {Observable} from "rxjs";
+import { Component, OnInit, ViewChild, QueryList } from "@angular/core";
+import { Router, ActivatedRoute } from "@angular/router";
+import { STEP_COMPONENTS } from "./steps";
+import { MasterController } from "../../services/masterController";
+import { Api } from "../../../shared/services";
+import { Car } from "../../../lib/models";
+import { UiTabs, UiPane } from '../../directives/uiTabs';
+import { isString } from "@angular/compiler/src/facade/lang";
+import { Observable } from "rxjs";
+import { CarApi, ImageApi } from '../../../shared/services';
+
 @Component({
     selector: "carEdit",
     template: `
@@ -32,7 +32,7 @@ import {Observable} from "rxjs";
             </ui-tabs>
         </div>
     </div>
-    `,  
+    `,
     styles: [require('./steps/styles/master.css'),
         `
     :host >>> .loader-container {
@@ -58,14 +58,14 @@ export class MasterBaseComponent {
         private router: Router,
         private activeRoute: ActivatedRoute,
         private master: MasterController,
-        private userBackEnd: UsersBackEndApi,
-        private api: Api) {
+        private carApi: CarApi,
+        private imageApi: ImageApi) {
     }
 
     ngOnInit() {
-        this.id = this.activeRoute.snapshot.params['id']//this.params.get("id");
+        this.id = this.activeRoute.snapshot.params['id']
         if (this.id) {
-            this.api.getCar(this.id).subscribe((car: Car) => {
+            this.carApi.findById(this.id).subscribe((car: any) => {
                 this.master.init$.next(car);
             });
         } else {
@@ -81,15 +81,20 @@ export class MasterBaseComponent {
         this.master
             .validate$
             .do(() => { this.loading = true; })
-            .flatMap(() => this.userBackEnd.createOrUpdate(this.master.info, this.id))
+            .flatMap(() => {                
+                return this.id
+                    ? this.carApi.updateCurrent(this.id, this.master.info)
+                    : this.carApi.createNew(this.master.info)
+            })
             .flatMap((result) => {
+                console.log(result)
                 let form = new FormData();
                 this.master.images.forEach((image) => {
                     let file = new File([image.blob], image.name, { type: "image/jpeg" });
                     form.append("images", file, file.name);
                 });
                 if (result && result.car) {
-                    return this.userBackEnd.uploadImages(form, result.car.id)
+                    return this.imageApi.uploadImages(form, result.car.id)
                 } else {
                     return Observable.throw("car creation error");
                 }

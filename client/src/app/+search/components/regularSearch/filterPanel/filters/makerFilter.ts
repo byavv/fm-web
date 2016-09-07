@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, AfterViewInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Api } from '../../../../../shared/services/';
+import { MakerApi } from '../../../../../shared/services/';
 import { Observable, Subscription } from 'rxjs';
 import {
     ConverterProvider, convertToView,
@@ -8,8 +8,8 @@ import {
 } from '../../../../../lib/';
 import { isString, isBlank } from '@angular/compiler/src/facade/lang';
 import { FilterController } from '../../../../services';
-import { AppState, getMakers } from "../../../../../lib/reducers";
-import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../../shared/actions";
+import { AppState, getMakers } from "../../../../../core/reducers";
+import { QueryActions, FilterPanelActions, CatalogActions } from "../../../../../core/actions";
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -49,7 +49,7 @@ export class MakerFilterComponent extends FilterComponent {
     oldValue: any;
     subscription: Subscription;
 
-    constructor(private apiService: Api,
+    constructor(private makerApi: MakerApi,
         filterController: FilterController,
         private store: Store<AppState>,
         private catalogActions: CatalogActions
@@ -71,7 +71,7 @@ export class MakerFilterComponent extends FilterComponent {
             .valueChanges
             .distinctUntilChanged()
             .do(() => { this.loading = true })
-            .switchMap((value: any) => (value && value.id) ? this.apiService.getMakerModels(value.id) : Observable.of([]))
+            .switchMap((value: any) => (value && value.id) ? this.makerApi.getCarModels(value.id) : Observable.of([]))
             .subscribe((models: Array<any>) => {
                 this.loading = false;
                 this.models = models || [];

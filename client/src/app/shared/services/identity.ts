@@ -20,9 +20,9 @@ export class Identity {
     }
     public update(identityData?: User): void {
         let user = new User();
-        if (!!identityData && !!identityData.token) {
-            user.token = identityData.token;
-            user.name = identityData.name;
+        if (!!identityData && !!identityData.accessToken) {
+            user.accessToken = identityData.accessToken;
+            user.username = identityData.username;
         }
         this.user = user;
         this._dispatch.next(this.user);

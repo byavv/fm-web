@@ -24,7 +24,7 @@ import { IFilterComponent } from '../../../../lib/';
     `]
 })
 export class FilterWrapperComponent implements OnInit {
-    private _filter: FilterModel
+    private _filter: FilterModel;
     @Input()
     get filter(): FilterModel {
         return this._filter;
@@ -43,9 +43,11 @@ export class FilterWrapperComponent implements OnInit {
         private viewContainerRef: ViewContainerRef,
         private compiler: Compiler
     ) { }
+
     ngOnInit() {
         let filter = allFilters.find((key: any) => key.filterId === this.filter.id)
         if (filter) {
+            this.compiler.clearCacheFor(filter);
             this.compiler
                 .compileModuleAndAllComponentsAsync(this.createComponentModule(filter))
                 .then((moduleWithFactories) => {
