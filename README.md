@@ -12,6 +12,9 @@ $ git clone https://github.com/byavv/fm-web.git
 $ cd fm-web
 
 # install 
+
+$ npm install webpack nodemon -g 
+
 $ npm install
 $ typings install
 

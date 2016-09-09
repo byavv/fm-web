@@ -1,0 +1,22 @@
+<header>
+    <nav class="navbar navbar-light app-header">
+        <a [routerLink]="['/']" class="navbar-brand">CAR MARKET</a>
+        <ul class="nav navbar-nav  pull-xs-right" *ngIf="!isAuthenticated">
+            <li class="nav-item">
+                <a [routerLink]="['/auth/signin']" class="nav-link">Sign in</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav  pull-xs-right" *ngIf="isAuthenticated">
+            <li class="nav-item">
+                <a [routerLink]="['/personal/account']" class="nav-link">
+                    <span>Hello, {{username}}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" (click)="signOut()" class="nav-link">
+                    <span>Log off</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
