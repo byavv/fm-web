@@ -34,7 +34,6 @@ export class StateFullComponent implements OnInit {
     private _sort;
     sortType: string;
     sortArow: string;
-    // canCollapse: boolean = true;
     closedByUser: boolean = false;
 
     private requireCollapse: boolean;
@@ -67,6 +66,7 @@ export class StateFullComponent implements OnInit {
     label: string = 'updating value';
     activeFilters = [];
     limit: number;
+    page: number;
     get sort() {
         return this._sort;
     };
@@ -78,8 +78,9 @@ export class StateFullComponent implements OnInit {
             this.sortType = value.replace(/[+-]/, ' ');
         }
     }
-    page: number;
+
     constructor(private element: ElementRef, private cd: ChangeDetectorRef) { }
+
     ngOnInit() {
         this.state
             .do(() => { this.loading = true; })
@@ -102,7 +103,7 @@ export class StateFullComponent implements OnInit {
         var stop = start + this.limit;
         if (this.totalCount) {
             stop = stop > this.totalCount ? this.totalCount : stop;
-            this.label = `${start + 1}..${stop} of ${this.totalCount}`
+            this.label = `${start + 1}..${stop} of ${this.totalCount}`;
         } else {
             this.label = '0';
         }

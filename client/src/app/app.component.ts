@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { AppController } from "./shared/services";
 import { ACTIONS_PROVIDERS, CatalogActions } from "./core/actions";
 import { Header } from "./shared/components/header/header";
@@ -30,7 +30,7 @@ import { LoopBackConfig } from './app.config';
           </div>
       </div>     
     </div>      
-     <app-footer></app-footer>   
+    <app-footer></app-footer>   
   `,
   providers: []
 })
@@ -38,14 +38,16 @@ export class App {
   loading = true;
   init$: Observable<any>;
   constructor(
-    private auth: LoopBackAuth,   
+    private auth: LoopBackAuth,
     private store: Store<AppState>,
     private catalogActions: CatalogActions,
     appController: AppController) {
-
-    LoopBackConfig.setBaseURL('http://localhost:3000');
+    if ('production' === ENV) {
+      LoopBackConfig.setBaseURL('http://localhost');
+    } else {
+      LoopBackConfig.setBaseURL('http://localhost:3000');
+    }
     LoopBackConfig.setApiVersion('api');
-
     this.init$ = this.store
       .let(getCatalogReady());
     appController.start();

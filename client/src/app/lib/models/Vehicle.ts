@@ -23,13 +23,13 @@ export interface VehicleInterface {
 
 export class Vehicle implements VehicleInterface {
     images = [];
-    description = "";
+    description = '';
     price: number;
-    makerName: string = "";
-    modelName: string = "";
+    makerName: string = '';
+    modelName: string = '';
     milage: number;
-    color = "";
-    engineType = "";
+    color = '';
+    engineType = '';
     year?: number;
     gear?: string;
     options?: string;

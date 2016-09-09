@@ -1,15 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Http, Headers, RequestOptions, RequestOptionsArgs, Response, RequestMethod, Request} from '@angular/http';
-import {Subject, Observable, Observer} from 'rxjs';
-import {Identity} from "./identity";
-import {ResponseHandler} from "./responseHandler";
+import { Injectable } from '@angular/core';
+import {
+    Http, Headers, RequestOptions,
+    RequestOptionsArgs, Response, RequestMethod, Request
+} from '@angular/http';
+import { Subject, Observable, Observer } from 'rxjs';
 export enum Action { QueryStart, QueryStop };
+import { LoopBackAuth } from '../../core/auth.service';
 
 @Injectable()
 export class ExtHttp {
     process: Subject<any> = new Subject<any>();
-    constructor(private _http: Http, private identity: Identity, private responseHandler: ResponseHandler) {
-    }
+
+    constructor(private _http: Http, private identity: LoopBackAuth) { }
 
     private _createAuthHeaders(): Headers {
         let identityData = this.identity.user;
@@ -18,7 +20,7 @@ export class ExtHttp {
             'Content-Type': 'application/json'
         });
         if (!!identityData && identityData.accessToken) {
-            headers.append('authorization', `${identityData.accessToken}`)
+            headers.append('authorization', `${identityData.accessToken}`);
         }
         return headers;
     }
@@ -39,7 +41,8 @@ export class ExtHttp {
         return this._request(RequestMethod.Delete, url, null, options);
     }
 
-    private _request(method: RequestMethod, url: string, body?: string, options?: RequestOptionsArgs): Observable<any> {
+    private _request(method: RequestMethod, url: string,
+        body?: string, options?: RequestOptionsArgs): Observable<any> {
         let requestOptions = new RequestOptions(Object.assign({
             method: method,
             url: url,
@@ -60,19 +63,17 @@ export class ExtHttp {
                 (err) => {
                     switch (err.status) {
                         case 401:
-                            this.responseHandler.handle401();
                             observer.complete();
                             break;
                         case 500:
-                            this.responseHandler.handle500();
                             observer.error(err);
                             break;
                         default:
                             observer.error(err);
                             break;
                     }
-                })
-        })
+                });
+        });
     }
 
     // I hope it's temp design
@@ -84,20 +85,20 @@ export class ExtHttp {
             if (!!identityData && identityData.accessToken) {
                 xhr.setRequestHeader('Authorization', `${identityData.accessToken}`);
             }
-            xhr.addEventListener("error", function (event) {
+            xhr.addEventListener('error', function (event) {
                 observer.error(xhr.response);
             });
-            xhr.onreadystatechange = () => {                
+            xhr.onreadystatechange = () => {
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
-                        observer.next(<any>JSON.parse(xhr.response))
+                        observer.next(<any>JSON.parse(xhr.response));
                         observer.complete();
                     } else {
                         observer.error(xhr.response);
                     }
                 }
             };
-            xhr.send(body)
+            xhr.send(body);
         });
     }
 }

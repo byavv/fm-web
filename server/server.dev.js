@@ -45,31 +45,38 @@ const server = new WebpackDevServer(compiler, {
      }*/
     proxy: {
 
-        '/profiles/*': "http://localhost:3001",
+ '/profiles/*': "http://localhost",
+        '/tracker/*': "http://localhost",
+        '/tracks/*': "http://localhost",
+        '/private/api/cars/*': "http://localhost",
+        '/public/api/cars/*': "http://localhost",
+        '/private/api/Cars/*': "http://localhost",
+        '/public/api/Cars/*': "http://localhost",
+        '/public/api/makers/*': "http://localhost",
+        '/public/api/enginetypes/*': "http://localhost",
+        '/public/api/Makers/*': "http://localhost",
+        '/public/api/EngineTypes/*': "http://localhost",
+        '/public/api/Users/*': "http://localhost",
+        '/private/api/Users/*': "http://localhost",
+        '/private/api/profiles/*': "http://localhost",
+        '/api/image/*': "http://localhost"
+
+
+      /*  '/profiles/*': "http://localhost:3001",
         '/tracker/*': "http://localhost:3001",
-
         '/tracks/*': "http://localhost:3001",
-        //   '/auth/*': "http://localhost:3001",
-
-        //  '/users/*': "http://localhost:3001",
-
         '/private/api/cars/*': "http://localhost:3001",
         '/public/api/cars/*': "http://localhost:3001",
         '/private/api/Cars/*': "http://localhost:3001",
         '/public/api/Cars/*': "http://localhost:3001",
-
         '/public/api/makers/*': "http://localhost:3001",
         '/public/api/enginetypes/*': "http://localhost:3001",
-
-
         '/public/api/Makers/*': "http://localhost:3001",
         '/public/api/EngineTypes/*': "http://localhost:3001",
-
         '/public/api/Users/*': "http://localhost:3001",
         '/private/api/Users/*': "http://localhost:3001",
         '/private/api/profiles/*': "http://localhost:3001",
-
-        '/api/image/*': "http://localhost:3001"
+        '/api/image/*': "http://localhost:3001"*/
     }
 });
 server.listen(PORT, () => {

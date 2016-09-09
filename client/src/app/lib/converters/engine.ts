@@ -1,24 +1,22 @@
-import { ConverterBase } from "./ConverterBase";
-import { Converter } from "../decorators";
-import { FilterModel } from "../models";
+import { ConverterBase } from './ConverterBase';
+import { Converter } from '../decorators';
+import { FilterModel } from '../models';
 
 @Converter({
-    converterId: "typeng",
-    roteParams: ["engineTypes"]
+    converterId: 'typeng',
+    roteParams: ['engineTypes']
 })
 export class EngineTypeConverter extends ConverterBase {
 
     public convert(value): any {
         value = value[0];
-
         if (!value) {
             return {
                 value: { engineTypes: [] },
                 active: false
-            }
+            };
         } else {
-            var params: Array<string> = value.split(',');
-
+            let params: Array<string> = value.split(',');
             return {
                 value: {
                     engineTypes: params
@@ -38,11 +36,11 @@ export class EngineTypeConverter extends ConverterBase {
         }
     }
     public convertToView(value) {
-        var filterValue = value.engineTypes;
+        let filterValue = value.engineTypes;
         if (Array.isArray(filterValue) && filterValue.length > 0) {
             return `${filterValue.length} engine types`;
         } else {
-            return "all types"
+            return 'all types';
         }
     }
     public resetValue() {

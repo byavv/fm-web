@@ -1,10 +1,18 @@
-import { Component, Self, forwardRef, EventEmitter, Output, Optional, Attribute } from '@angular/core';
-import { NgControl, NgModel, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { allColors } from "./carColors";
+import {
+    Component, Self, forwardRef,
+    EventEmitter, Output, Optional,
+    Attribute
+} from '@angular/core';
+import {
+    NgControl, NgModel,
+    ControlValueAccessor, NG_VALUE_ACCESSOR
+} from '@angular/forms';
+import { allColors } from './carColors';
 import { isString } from '@angular/compiler/src/facade/lang';
+
 @Component({
     selector: `colorPicker`,
-    template: require("./colorPicker.html"),
+    template: require('./colorPicker.html'),
     styles: [`
         .color-picker{           
             height: 40px;          
@@ -40,8 +48,8 @@ export class ColorPickerControl implements ControlValueAccessor {
             this._colors = allColors().map((color) => {
                 return value.indexOf(color) > -1
                     ? { active: true, color: color }
-                    : { active: false, color: color }
-            })
+                    : { active: false, color: color };
+            });
         }
     }
     get colors() {
@@ -53,20 +61,20 @@ export class ColorPickerControl implements ControlValueAccessor {
             return {
                 active: false,
                 color: color
-            }
-        })
+            };
+        });
     }
     selectColor(index) {
         if (this.single != null) {
             this.colors.forEach(color => {
                 color.active = false;
-            })
+            });
             this.colors[index].active = true;
         } else {
             this.colors[index].active = !this.colors[index].active;
         }
-        var activeColors = this.colors.filter((color) => color.active);
-        var newValue = activeColors.map((color) => color.color);
+        let activeColors = this.colors.filter((color) => color.active);
+        let newValue = activeColors.map((color) => color.color);
         if (this.single != null) {
             newValue = newValue[0] || '';
         }

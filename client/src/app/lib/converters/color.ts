@@ -1,35 +1,33 @@
-import { ConverterBase } from "./ConverterBase";
-import { Converter } from "../decorators";
-import { FilterModel } from "../models";
+import { ConverterBase } from './ConverterBase';
+import { Converter } from '../decorators';
+import { FilterModel } from '../models';
+
 @Converter({
-    converterId: "color",
-    roteParams: ["colors"]
+    converterId: 'color',
+    roteParams: ['colors']
 })
 export class ColorConverter extends ConverterBase {
-
     // convert from route to filter value
-    // "red,green" --> ["red", "green"]
+    // 'red,green' --> ['red', 'green']
     public convert(value): any {
         value = value[0];
-
         if (!value) {
             return {
                 value: { colors: [] },
                 active: false
-            }
+            };
         } else {
-            var params: Array<string> = value.split(',');
-
+            let params: Array<string> = value.split(',');
             return {
                 value: {
                     colors: params
                 },
                 active: true
             };
-        }
+        };
     }
 
-    // ["red", "green"] --> "red,green"
+    // ['red', 'green'] --> 'red,green'
     public convertToRoute(value): any {
         if (value) {
             value = value.colors || [];
@@ -43,11 +41,11 @@ export class ColorConverter extends ConverterBase {
 
     // how to present filter value to user
     public convertToView(value) {
-        var filterValue = value.colors;
+        let filterValue = value.colors;
         if (Array.isArray(filterValue) && filterValue.length > 0) {
             return `${filterValue.length} colors`;
         } else {
-            return "all colors"
+            return 'all colors';
         }
     }
     public resetValue() {
@@ -55,5 +53,4 @@ export class ColorConverter extends ConverterBase {
             colors: []
         };
     }
-
 }

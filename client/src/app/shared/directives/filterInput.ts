@@ -1,19 +1,29 @@
-import { Component, Output, EventEmitter, Input, ViewChild, ElementRef, Optional, QueryList, Self, HostListener } from '@angular/core';
-import { ControlValueAccessor, NgModel, NgControl, FormGroupDirective, FormControl, FormGroup, Validators, FormBuilder} from '@angular/forms';
+import {
+    Component,
+    Output, EventEmitter, Input,
+    ViewChild, ElementRef, Optional,
+    QueryList, Self, HostListener
+} from '@angular/core';
+import {
+    ControlValueAccessor, NgModel,
+    NgControl, FormGroupDirective, FormControl,
+    FormGroup, Validators, FormBuilder
+} from '@angular/forms';
 import { ReplaySubject, Observable } from 'rxjs/Rx';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
-import { PatternInput } from './patternInput'
+import { PatternInput } from './patternInput';
 
 @Component({
     selector: 'input-wrapper[ngControl],input-wrapper[ngModel]',
-    template: ` <input #input 
-                       [class]="css"
-                       [(ngModel)] = 'value' 
-                       type="text"
-                       [attr.pattern] = "only"
-                       [id] = "id"                               
-                       [placeholder] = "placeholder"/> `,
-
+    template:
+    ` <input #input 
+            [class]="css"
+            [(ngModel)] = 'value' 
+            type="text"
+            [attr.pattern] = "only"
+            [id] = "id"                               
+            [placeholder] = "placeholder"/> 
+     `
 })
 export class DebounceInput implements ControlValueAccessor {
     private _value;
@@ -31,7 +41,10 @@ export class DebounceInput implements ControlValueAccessor {
     }
     eventStream: ReplaySubject<any> = new ReplaySubject();
     preventPropagation: boolean = true;
-    constructor( @Optional() @Self() private ngModel: NgModel, @Optional() @Self() private ngControl: NgControl) {
+
+    constructor(
+        @Optional() @Self() private ngModel: NgModel,
+        @Optional() @Self() private ngControl: NgControl) {
         if (ngModel) ngModel.valueAccessor = this;
         if (ngControl) ngControl.valueAccessor = this;
     }
@@ -45,11 +58,11 @@ export class DebounceInput implements ControlValueAccessor {
                 this.onChange.next(value);
                 if (this.ngModel) this.ngModel.viewToModelUpdate(value);
                 if (this.ngControl) this.ngControl.viewToModelUpdate(value);
-            })
-    }
+            });
+    };
 
     @Output()
-    onChange: EventEmitter<any> = new EventEmitter()
+    onChange: EventEmitter<any> = new EventEmitter();
     onTouched = () => {
     };
     writeValue(value) {

@@ -33,7 +33,6 @@ export class FilterState implements OnInit {
     sortArow: string;
     // canCollapse: boolean = true;
     closedByUser: boolean = false;
-
     private requireCollapse: boolean;
     private _collapsed: boolean;
     @Output()
@@ -64,6 +63,7 @@ export class FilterState implements OnInit {
     label: string = 'updating value';
     activeFilters = [];
     limit: number;
+    page: number;
     get sort() {
         return this._sort;
     };
@@ -71,12 +71,15 @@ export class FilterState implements OnInit {
         if (isString(value)) {
             this._sort = value;
             // milage+ --> milage ▲  ▼
-            this.sortArow = value.substr(-1).replace('-', '\u25BC').replace('+', '\u25B2');
+            this.sortArow = value.substr(-1)
+                .replace('-', '\u25BC')
+                .replace('+', '\u25B2');
             this.sortType = value.replace(/[+-]/, ' ');
         }
     }
-    page: number;
+
     constructor(private element: ElementRef, private cd: ChangeDetectorRef) { }
+
     ngOnInit() {
         this.state
             .do(() => { this.loading = true; })
@@ -90,7 +93,7 @@ export class FilterState implements OnInit {
                     this.page = +searchOptions.page;
                     this.updateView();
                 }
-            })
+            });
     }
 
     updateView() {

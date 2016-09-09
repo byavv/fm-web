@@ -1,18 +1,18 @@
+/* tslint:disable */
 import { Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 import { Vehicle } from '../../lib/models';
 import { QueryActions } from '../../core/actions/queryAction';
-import { FilterStateModel, IFilterStateModel } from "../../lib/models/";
-import { convertFromRoute, convertToRoute, buildFilterListFromRoute } from "../../lib/";
-import * as converters from "../../lib/converters";
-import { construct } from "../../lib/helpers";
-import { ConverterBase } from "../../lib/converters/ConverterBase";
-
+import { FilterStateModel, IFilterStateModel } from '../../lib/models/';
+import { convertFromRoute, convertToRoute, buildFilterListFromRoute } from '../../lib/';
+import * as converters from '../../lib/converters';
+import { construct } from '../../lib/helpers';
+import { ConverterBase } from '../../lib/converters/ConverterBase';
 
 export interface SearchQueryState {
-    query: IFilterStateModel,
-    navigate: boolean,
-    loaded: boolean
+    query: IFilterStateModel;
+    navigate: boolean;
+    loaded: boolean;
 };
 
 const initialState: SearchQueryState = {
@@ -42,7 +42,7 @@ export function queryReducer(state = initialState, action: Action): SearchQueryS
         }
         case QueryActions.UPDATE_VALUE: {
             const newValue = action.payload;
-            Object.assign(state.query, newValue)
+            Object.assign(state.query, newValue);
             return Object.assign({}, state, {
                 navigate: true
             });
@@ -59,7 +59,7 @@ export function getConvertedToRouteQueryState() {
             return {
                 route: convertToRoute(convertersPipe(), s.query),
                 navigate: s.navigate
-            }
+            };
         });
 }
 

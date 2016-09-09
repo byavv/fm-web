@@ -60,7 +60,7 @@ export class EngineTypeFilterComponent extends FilterComponent {
         super(filterController);
         this.form = new FormGroup({
             engineTypes: this.engineTypes
-        })
+        });
     }
 
     ngOnInit() {

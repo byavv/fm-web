@@ -28,8 +28,7 @@ export class SearchOptionsComponent {
     sortType: string;
     @Input()
     get sort(): string {
-        var tt = this.sortType + (this.up ? '+' : '-');
-        return tt;
+        return this.sortType + (this.up ? '+' : '-');
     }
     set sort(value) {
         if (value) {
@@ -55,7 +54,6 @@ export class SearchOptionsComponent {
 
     constructor(private filterController: FilterController) { }
 
-
     changeSortBy() {
         this.up = !this.up;
         this.changed.next({ sort: this.sort });
@@ -69,13 +67,3 @@ export class SearchOptionsComponent {
         this.changed.next({ limit: value });
     }
 }
-
-/*
-
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #333;
-    background-color: #fff;
-
- */

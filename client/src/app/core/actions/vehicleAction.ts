@@ -6,7 +6,7 @@ import { Vehicle } from '../../lib/models';
 export class VehicleActions {
   static SEARCH = '[Vehicle] Search';
   static SEARCH_COMPLETE_SUCCESS = '[Vehicle] Search Complete Success';
-  static SEARCH_COMPLETE_ERROR = '[Vehicle] Search Complete Error'; 
+  static SEARCH_COMPLETE_ERROR = '[Vehicle] Search Complete Error';
 
   search(query: any): Action {
     return {

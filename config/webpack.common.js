@@ -18,7 +18,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
  * Webpack Constants
  */
 const METADATA = {
-  title: 'Angular2 Webpack Starter by @gdi2290 from @AngularClass',
+  title: 'Funny-market - proof-of-concept app',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer() 
 };

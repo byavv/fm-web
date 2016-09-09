@@ -1,5 +1,11 @@
-import { Component, EventEmitter, Output, Input, AfterViewInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
+import {
+    Component, EventEmitter,
+    Output, Input, AfterViewInit
+} from '@angular/core';
+import {
+    FormControl, FormGroup,
+    Validators, FormBuilder
+} from '@angular/forms';
 import {
     ConverterProvider, convertToView,
     FilterComponent, YearConverter
@@ -46,7 +52,7 @@ import { FilterController } from '../../../../services';
             </form>
         </div>                 
     </div> 
-  `,    
+  `,
     styles: [
         `
             .hidden {
@@ -88,7 +94,7 @@ export class YearFilterComponent extends FilterComponent {
             .distinctUntilChanged()
             .subscribe(value => {
                 this.changed.next({ filterValue: value, immidiate: true });
-            })
+            });
     }
     setValue(value) {
         this.filterValue = value;

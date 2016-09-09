@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter } from "@angular/core";
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { getDOM, DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
 import { ImageApi } from '../../../../shared/services';
 import { MasterController } from "../../../services/masterController";

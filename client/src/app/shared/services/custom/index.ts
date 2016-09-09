@@ -1,4 +1,3 @@
-/* tslint:disable */
 import { UserApi } from './User';
 import { MakerApi } from './Maker';
 import { CarApi } from './Car';
@@ -15,4 +14,4 @@ export * from './Image';
 
 export const APP_CUSTOM_API_PROVIDERS = [
     UserApi, MakerApi, CarApi, EngineTypeApi, ProfileApi, ImageApi
-]
+];

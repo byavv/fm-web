@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, QueryList } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from '@angular/router';
 import { STEP_COMPONENTS } from "./steps";
 import { MasterController } from "../../services/masterController";
-import { Api } from "../../../shared/services";
 import { Car } from "../../../lib/models";
 import { UiTabs, UiPane } from '../../directives/uiTabs';
 import { isString } from "@angular/compiler/src/facade/lang";
@@ -63,7 +62,7 @@ export class MasterBaseComponent {
     }
 
     ngOnInit() {
-        this.id = this.activeRoute.snapshot.params['id']
+        this.id = this.activeRoute.snapshot.params['id'];
         if (this.id) {
             this.carApi.findById(this.id).subscribe((car: any) => {
                 this.master.init$.next(car);
@@ -81,10 +80,10 @@ export class MasterBaseComponent {
         this.master
             .validate$
             .do(() => { this.loading = true; })
-            .flatMap(() => {                
+            .flatMap(() => {
                 return this.id
                     ? this.carApi.updateCurrent(this.id, this.master.info)
-                    : this.carApi.createNew(this.master.info)
+                    : this.carApi.createNew(this.master.info);
             })
             .flatMap((result) => {
                 console.log(result)
@@ -94,15 +93,15 @@ export class MasterBaseComponent {
                     form.append("images", file, file.name);
                 });
                 if (result && result.car) {
-                    return this.imageApi.uploadImages(form, result.car.id)
+                    return this.imageApi.uploadImages(form, result.car.id);
                 } else {
                     return Observable.throw("car creation error");
                 }
             })
             .subscribe((result) => {
-                console.log(result)
+                console.log(result);
                 //todo
-                this.router.navigate(['../UserCars']);
+                this.router.navigate(['personal/cars/list']);
             }, (err) => {
                 if (isString(err))
                     this.tab.goTo(err);

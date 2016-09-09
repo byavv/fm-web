@@ -1,11 +1,11 @@
 import { Component, Injector } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { UserApi } from '../../../shared/services';
 
 @Component({
     selector: 'signup',
-    template: require("./signup.html")
+    template: require('./signup.html')
 })
 
 export class SignUpComponent {
@@ -13,13 +13,12 @@ export class SignUpComponent {
     error: string;
     constructor(builder: FormBuilder,
         private router: Router,
-        private userApi: UserApi,
-      //  private storage: Storage
+        private userApi: UserApi
     ) {
         this.signInForm = builder.group({
-            "username": ["admin"],
-            "email": ["myemail@gmail.com"],
-            "password": ["admin"]
+            'username': ['admin'],
+            'email': ['myemail@gmail.com'],
+            'password': ['admin']
         });
     }
 
@@ -35,6 +34,6 @@ export class SignUpComponent {
     }
 
     onError(err) {
-        this.error = "Login failed"
+        this.error = 'Login failed';
     }
 }

@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { ApplicationRef, Component } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -7,9 +8,7 @@ import { MakerApi, CarApi } from '../../shared/services';
 import { SharedModule } from '../../shared';
 import reducers from '../../core/reducers';
 import { StoreModule } from '@ngrx/store';
-
-import { APP_CORE_API_PROVIDERS } from '../../core'
-//import { MockRouter, MockAppController, MockApiService } from '../helpers/mocks';
+import { APP_CORE_API_PROVIDERS } from '../../core';
 import { Router, RouterModule } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
 import { TestBed, async, inject } from '@angular/core/testing'
@@ -25,6 +24,7 @@ class TestComponent { }
 class MockRouter {
     navigate(value) { }
 }
+
 describe('COMPONENTS TESTS', () => {
     describe("Quich search component tests", () => {
         beforeEach(() => TestBed.configureTestingModule({
@@ -62,9 +62,9 @@ describe('COMPONENTS TESTS', () => {
 
         it('should init', async(() => {
             TestBed.compileComponents().then(() => {
-                var fixture = TestBed.createComponent(TestComponent);
+                let fixture = TestBed.createComponent(TestComponent);
                 fixture.detectChanges();
-                var compiled = fixture.debugElement.nativeElement;
+                let compiled = fixture.debugElement.nativeElement;
                 expect(compiled.innerHTML).toContain('Made by');
             });
         }));
@@ -77,9 +77,9 @@ describe('COMPONENTS TESTS', () => {
                     catalogActions: CatalogActions) => {
 
                     TestBed.compileComponents().then(() => {
-                        var fixture = TestBed.createComponent(QuickSearchComponent);
+                        let fixture = TestBed.createComponent(QuickSearchComponent);
 
-                        var beingTestedCompInst: QuickSearchComponent = fixture
+                        let beingTestedCompInst: QuickSearchComponent = fixture
                             .debugElement
                             .componentInstance;
 
@@ -90,13 +90,10 @@ describe('COMPONENTS TESTS', () => {
                                 fixture
                                     .whenStable()
                                     .then(() => {
-                                        var buttonDe = fixture.debugElement.query(By.css('.btn'));
+                                        let buttonDe = fixture.debugElement.query(By.css('.btn'));
                                         expect(buttonDe.nativeElement.innerHTML).toContain('Show 412');
                                     })
                             });
-
-
-
 
                         //   beingTestedCompInst.ready$                              
                         //        .do(() => { console.log('ready') })
@@ -106,47 +103,8 @@ describe('COMPONENTS TESTS', () => {
                             makers: [],
                             engineTypes: []
                         }));
-
                     });
-
                 })
-        ))
-
-        // it('should seed default fields', async(inject([AppController], (appController) => {
-        //     var compiled = componentFxt.debugElement.nativeElement;
-        //     appController.init$.subscribe(value => {
-        //         expect(value.makers).toBeDefined();
-        //     });
-        //     componentFxt.debugElement.componentInstance.count$.subscribe((value) => {
-        //         expect(value).toBe(42);
-        //         componentFxt.whenStable().then(() => {
-        //             expect(componentFxt.componentInstance.carMakers[0].name).toBe('gravitsapa_motors');
-        //             expect(compiled.querySelector('#maker')
-        //                 .options.item(1).innerHTML).toBe('gravitsapa_motors');
-        //             expect(compiled.querySelector('button').innerText).toBe('Show 42');
-        //         })//.detectChanges();
-
-        //     })
-        //     appController.start();
-        // })));
-
-        // xit('should require cars models when maker change', async(inject([AppController, Api], (appController, apiBackend) => {
-        //     var compiled = componentFxt.debugElement.nativeElement;
-
-        //     appController.init$.subscribe(value => {
-        //         //   let select = componentFxt.debugElement.query(By.css("select#maker"));
-        //         //   dispatchEvent(select.nativeElement, "change");
-        //         componentFxt.debugElement.componentInstance.carFormModel.maker = value.makers[0];
-        //         componentFxt.detectChanges();
-        //         componentFxt.whenStable().then(() => {
-        //             expect(apiBackend.getMakerModels).toHaveBeenCalledWith(1)
-        //         })
-        //     });
-        //     appController.start();
-        // })));
-        // xit('should submit and build search request params', async(inject([Router, Api], (router, apiBackend) => {
-        //     componentFxt.debugElement.componentInstance.submit();
-        //     expect(router.navigate).toHaveBeenCalledWith(['SearchList', {}]);
-        // })));
+        ));      
     });
 });

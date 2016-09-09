@@ -2,21 +2,21 @@ import { Observable } from 'rxjs/Observable';
 import { compose } from '@ngrx/core/compose';
 import { combineReducers } from '@ngrx/store';
 
-import { vehicleReducer, VehicleState }  from './vehicle';
-import * as vehicle  from './vehicle';
-import * as query  from './query';
-import * as filter  from './filter';
-import * as catalog  from './catalog';
-import { filterReducer }  from './filter';
-import { queryReducer, SearchQueryState }  from './query';
-import { catalogReducer, CatalogState }  from './catalog';
+import { vehicleReducer, VehicleState } from './vehicle';
+import * as vehicle from './vehicle';
+import * as query from './query';
+import * as filter from './filter';
+import * as catalog from './catalog';
+import { filterReducer } from './filter';
+import { queryReducer, SearchQueryState } from './query';
+import { catalogReducer, CatalogState } from './catalog';
 import { FilterStateModel, FilterModel, Catalog } from '../../lib/models';
 
 export interface AppState {
-  vehicle: VehicleState,
-  filter: FilterModel,
-  query: SearchQueryState,
-  catalog: CatalogState
+  vehicle: VehicleState;
+  filter: FilterModel;
+  query: SearchQueryState;
+  catalog: CatalogState;
 }
 
 export default combineReducers({
@@ -33,17 +33,17 @@ export function getVehicleState() {
 
 export function getFilterState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.filter)
+    .select(s => s.filter);
 }
 
 export function getCatalogState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.catalog)
+    .select(s => s.catalog);
 }
 
 export function getQueryState() {
   return (state$: Observable<AppState>) => state$
-    .select(s => s.query)
+    .select(s => s.query);
 }
 
 export function getMakers() {

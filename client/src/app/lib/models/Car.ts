@@ -1,5 +1,3 @@
-import { Vehicle } from "./Vehicle";
+import { Vehicle } from './Vehicle';
 
-export class Car extends Vehicle {  
-     
-}
+export class Car extends Vehicle { }

@@ -8,13 +8,13 @@ export interface IFilterComponent {
 
 export abstract class FilterComponent {
     constructor(private _controller: any) {
-        var child = <any>this.constructor
+        let child = <any>this.constructor;
         _controller.resetFilter$
             .pluck(child.filterId)
             .filter(value => !!value)
             .subscribe(value => {
                 this.setValue(value);
-            })
+            });
     }
     abstract setValue(value);
 }

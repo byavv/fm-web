@@ -1,4 +1,4 @@
-import { FilterInterface } from "./Filter";
+import { FilterInterface } from './Filter';
 
 export class Catalog {
     id: string;

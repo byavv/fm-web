@@ -23,4 +23,4 @@ export const APP_CORE_API_PROVIDERS = [
     BaseLoopBackApi,
     ...ACTIONS_PROVIDERS,
     ...GUARDS
-]
+];

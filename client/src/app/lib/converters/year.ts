@@ -1,25 +1,25 @@
-import { ConverterBase } from "./ConverterBase";
-import { Converter } from "../decorators";
+import { ConverterBase } from './ConverterBase';
+import { Converter } from '../decorators';
 
 @Converter({
-    converterId: "year",
-    roteParams: ["year"]
+    converterId: 'year',
+    roteParams: ['year']
 })
 export class YearConverter extends ConverterBase {
 
     public convert(value) {
         value = value[0];
         let yearFrom, yearUp;
-        yearFrom = yearUp = "";
+        yearFrom = yearUp = '';
         let active = false;
 
         if (this.isNumeric(value)) {
             yearFrom = yearUp = value;
         } else {
-            if (this.isString(value) && value.includes("..")) {
+            if (this.isString(value) && value.includes('..')) {
                 let params = value.split('..');
-                yearFrom = +params[0] || "";
-                yearUp = +params[1] || "";
+                yearFrom = +params[0] || '';
+                yearUp = +params[1] || '';
                 active = true;
             }
         }
@@ -42,25 +42,24 @@ export class YearConverter extends ConverterBase {
     }
 
     public convertToView(value) {
-        var from = value.yearFrom, up = value.yearUp;
+        let from = value.yearFrom, up = value.yearUp;
         if (from && up) {
             return `year: ${from}...${up}`;
-        }
-        if (from) {
-            return `year: from ${from}`;
-        }
-        if (up) {
-            return `year: up ${up}`;
-        }
-        else {
-            return "year: any"
-        }
+        } else
+            if (from) {
+                return `year: from ${from}`;
+            } else
+                if (up) {
+                    return `year: up ${up}`;
+                } else {
+                    return 'year: any';
+                }
     }
 
     public resetValue() {
         return {
-            yearFrom: "",
-            yearUp: ""
+            yearFrom: '',
+            yearUp: ''
         };
     }
 }

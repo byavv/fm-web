@@ -1,8 +1,11 @@
 import {
     Component, EventEmitter, Input,
-    Output, ComponentFactoryResolver, ComponentMetadata,
-    ComponentFactory, ViewContainerRef, OnInit, ReflectiveInjector,
-    Compiler, NgModule, Type, ModuleWithComponentFactories,
+    Output, ComponentFactoryResolver,
+    ComponentMetadata,
+    ComponentFactory, ViewContainerRef,
+    OnInit, ReflectiveInjector,
+    Compiler, NgModule, Type,
+    ModuleWithComponentFactories,
 } from '@angular/core';
 
 import { SharedModule } from '../../../../shared';
@@ -45,7 +48,8 @@ export class FilterWrapperComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        let filter = allFilters.find((key: any) => key.filterId === this.filter.id)
+        let filter = allFilters
+            .find((key: any) => key.filterId === this.filter.id);
         if (filter) {
             this.compiler.clearCacheFor(filter);
             this.compiler
@@ -61,8 +65,8 @@ export class FilterWrapperComponent implements OnInit {
                     this._componentInstance.filterValue = this.filter.value;
                     this._componentInstance.changed.subscribe((value) => {
                         this.changed.next(value);
-                    })
-                })
+                    });
+                });
         }
     }
 

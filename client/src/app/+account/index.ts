@@ -10,12 +10,9 @@ import { UserCarsListComponent } from './components/userCars/carList';
 import { UserCarsBaseComponent } from './components/userCars/userCarsBase';
 import { AccountBase } from './components/accountBase';
 import { AuthGuard } from '../core/guards';
-
 import { SharedModule } from '../shared';
-
 import { ACCOUNT_SERVICES_PROVIDERS } from "./services";
 import { ACCOUNT_DIRECTIVES } from "./directives";
-
 import { STEP_COMPONENTS } from "./components/userCars/steps";
 
 export const routes: Routes = [
@@ -37,7 +34,6 @@ export const routes: Routes = [
     ]
   }
 ];
-
 
 @NgModule({
   declarations: [

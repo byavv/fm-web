@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Input, Output, AfterViewInit, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+    Component, EventEmitter,
+    Input, Output, AfterViewInit,
+    OnInit, ViewEncapsulation
+} from '@angular/core';
 import {
     ConverterProvider, convertToView,
     FilterComponent, MilageConverter
@@ -61,6 +65,7 @@ export class MilageFilterComponent extends FilterComponent {
     milageFrom: FormControl;
     milageUp: FormControl;
     form: FormGroup;
+
     constructor(filterController: FilterController) {
         super(filterController)
         this.milageFrom = new FormControl();

@@ -1,5 +1,10 @@
-import { Component, Input, ChangeDetectorRef, ChangeDetectionStrategy, OnDestroy, OnInit } from '@angular/core';
-import { CarItemComponent } from './carListItem/carListItem'
+import {
+    Component, Input,
+    ChangeDetectorRef,
+    ChangeDetectionStrategy,
+    OnDestroy, OnInit
+} from '@angular/core';
+import { CarItemComponent } from './carListItem/carListItem';
 import { Observable, Subscription } from "rxjs";
 
 @Component({
@@ -18,7 +23,7 @@ import { Observable, Subscription } from "rxjs";
             </div>
        </div>     
      </div>
-    `,   
+    `,
     styles: [`
         .cars-list{
             list-style: none;
@@ -38,7 +43,9 @@ export class CarsListComponent implements OnInit, OnDestroy {
     private _subscription: Subscription;
     init: boolean;
     found: boolean = true;
+
     constructor(private cd: ChangeDetectorRef) { }
+
     ngOnInit() {
         this._subscription =
             this.cars.subscribe((cars: Array<any>) => {

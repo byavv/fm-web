@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Input, Output, AfterViewInit, OnInit } from '@angular/core';
+import {
+    Component, EventEmitter,
+    Input, Output, AfterViewInit,
+    OnInit
+} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import {
     ConverterProvider, convertToView,
@@ -73,7 +77,7 @@ export class PriceFilterComponent extends FilterComponent implements IFilterComp
             .distinctUntilChanged()
             .subscribe(value => {
                 this.changed.next({ filterValue: value, immidiate: true });
-            })
+            });
     }
     viewValue() {
         return this.filterValue;

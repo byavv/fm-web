@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CarApi } from '../../../shared/services';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
     selector: 'carDetails',
     template: require("./carDetails.html"),
@@ -20,6 +19,6 @@ export class CarDetailsComponent implements OnInit {
             .findById(this.activeRoute.snapshot.params['id'])
             .subscribe((car: any) => {
                 this.car = car;
-            })
+            });
     }
 }

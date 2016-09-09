@@ -1,6 +1,7 @@
 /*jslint node: true */
 'use strict';
-const path = require("path");
+const path = require("path"),
+  logger = require('../lib/logger');
 
 module.exports = function (app) {
   var router = app.loopback.Router();

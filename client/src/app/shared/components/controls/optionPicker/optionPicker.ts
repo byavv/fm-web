@@ -4,15 +4,22 @@ interface ICarOption {
     active?: boolean;
 }
 
-import { Component, Self, Input, forwardRef, EventEmitter, Output, Optional, Attribute } from '@angular/core';
-import { NgControl, NgModel, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+    Component, Self, Input,
+    forwardRef, EventEmitter, Output,
+    Optional, Attribute
+} from '@angular/core';
+import {
+    NgControl, NgModel,
+    ControlValueAccessor, NG_VALUE_ACCESSOR
+} from '@angular/forms';
 
 import { isString } from '@angular/compiler/src/facade/lang';
 
 @Component({
     selector: 'optionPicker',
     template: require('./template.html'),
-    styles: [require("./component.css")],
+    styles: [require('./component.css')],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -27,7 +34,6 @@ export class OptionsPickerControl implements ControlValueAccessor {
     private _options = [];
     @Input()
     options: Array<ICarOption>;
-
     set selectedOptions(arrayOfSelected) {
         this._selectedOptions = arrayOfSelected;
     }
@@ -39,17 +45,16 @@ export class OptionsPickerControl implements ControlValueAccessor {
         this._options = this.options.map((option) => {
             return this.selectedOptions.indexOf(option.name) > -1
                 ? Object.assign(option, { active: true })
-                : Object.assign(option, { active: false })
-        })
+                : Object.assign(option, { active: false });
+        });
     }
 
     onCheck(index) {
         this.options[index].active = !this.options[index].active;
         let activeOptions = this._options.filter((option) => option.active);
         let newValue = activeOptions.map((option) => option.name);
-        this.onChange.next(newValue);     
+        this.onChange.next(newValue);
     }
-
     /**
      * ControlValueAccessor
      */

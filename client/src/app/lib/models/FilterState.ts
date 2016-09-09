@@ -15,7 +15,7 @@ export interface IFilterStateModel {
     engineTypes?: Array<string>;
 }
 
-export class FilterStateModel implements IFilterStateModel{
+export class FilterStateModel implements IFilterStateModel {
     maker: string;
     model: string;
     yearUp: number;
@@ -25,14 +25,14 @@ export class FilterStateModel implements IFilterStateModel{
     colors: Array<any>;
     milageFrom: number;
     milageUp: number;
-    sort: string;;
+    sort: string;
     limit: number;
     page: number;
     options: Array<string>;
     engineTypes: Array<string>;
 
     constructor() {
-        this.maker = "";
+        this.maker = '';
         this.priceUp = 0;
         this.priceFrom = 0;
         this.model = '';
@@ -41,7 +41,7 @@ export class FilterStateModel implements IFilterStateModel{
         this.colors = [];
         this.milageFrom = 0;
         this.milageUp = 0;
-        this.sort = "price-"
+        this.sort = 'price-';
         this.limit = 20;
         this.page = 1;
         this.options = [];

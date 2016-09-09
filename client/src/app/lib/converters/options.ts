@@ -1,24 +1,22 @@
-import { ConverterBase } from "./ConverterBase";
-import { Converter } from "../decorators";
-import { FilterModel } from "../models";
+import { ConverterBase } from './ConverterBase';
+import { Converter } from '../decorators';
+import { FilterModel } from '../models';
 
 @Converter({
-    converterId: "options",
-    roteParams: ["options"]
+    converterId: 'options',
+    roteParams: ['options']
 })
 export class OptionsConverter extends ConverterBase {
 
     public convert(value): any {
         value = value[0];
-
         if (!value) {
             return {
                 value: { options: [] },
                 active: false
-            }
+            };
         } else {
-            var params: Array<string> = value.split(',');
-
+            let params: Array<string> = value.split(',');
             return {
                 value: {
                     options: params
@@ -38,11 +36,11 @@ export class OptionsConverter extends ConverterBase {
         }
     }
     public convertToView(value) {
-        var filterValue = value.options;
+        let filterValue = value.options;
         if (Array.isArray(filterValue) && filterValue.length > 0) {
             return `${filterValue.length} options`;
         } else {
-            return "not care"
+            return 'not care';
         }
     }
     public resetValue() {

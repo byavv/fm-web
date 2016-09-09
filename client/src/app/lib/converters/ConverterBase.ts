@@ -4,14 +4,11 @@ export abstract class ConverterBase {
     isNumeric(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
-
     isString(s) {
-        return typeof s === 'string' || s instanceof String
+        return typeof s === 'string' || s instanceof String;
     }
-
     abstract convert(value: any): any;
     abstract convertToRoute(value: any);
     abstract convertToView(value: any);
     abstract resetValue();
-
 }

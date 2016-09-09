@@ -1,26 +1,26 @@
-import { ConverterBase } from "./ConverterBase";
-import { Converter } from "../decorators";
+import { ConverterBase } from './ConverterBase';
+import { Converter } from '../decorators';
 
 @Converter({
-    converterId: "maker",
-    roteParams: ["maker"]
+    converterId: 'maker',
+    roteParams: ['maker']
 })
 export class MakerConverter extends ConverterBase {
 
     public convert(paramValue: Array<string>) {
-        var value = paramValue[0];
+        let value = paramValue[0];
         let active = false;
-        var maker, model;
-        maker = model = "";
-        var result = {}
-        if (this.isString(value) && value == 'any') {
+        let maker, model;
+        maker = model = '';
+        let result = {};
+        if (this.isString(value) && value === 'any') {
             return {
                 value: {
                     maker: '',
                     model: ''
                 },
                 active: active
-            }
+            };
         }
         if (!value)
             return {
@@ -29,17 +29,17 @@ export class MakerConverter extends ConverterBase {
                     model: ''
                 },
                 active: active
-            }
-        var params = value.split(',');
-        if (params[0] === "any")
+            };
+        let params = value.split(',');
+        if (params[0] === 'any')
             return {
                 value: {
                     maker: '',
                     model: ''
                 },
                 active: active
-            }
-        if (params[1] === "any") {
+            };
+        if (params[1] === 'any') {
             active = true;
             return {
                 value: {
@@ -47,7 +47,7 @@ export class MakerConverter extends ConverterBase {
                     model: ''
                 },
                 active: active
-            }
+            };
         } else {
             active = true;
             return {
@@ -56,7 +56,7 @@ export class MakerConverter extends ConverterBase {
                     model: params[1]
                 },
                 active: active
-            }
+            };
         }
     }
 
@@ -80,8 +80,8 @@ export class MakerConverter extends ConverterBase {
     }
     public resetValue() {
         return {
-            maker: "",
-            model: ""
+            maker: '',
+            model: ''
         };
     }
 }

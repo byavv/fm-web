@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
 
 import { SHARED_SERVICES } from './services';
 import { SHARED_COMPONENTS } from './components';
-import { SHARED_DIRECTIVES } from "./directives";
+import { SHARED_DIRECTIVES } from './directives';
 
 @NgModule({
   declarations: [
@@ -28,9 +28,7 @@ import { SHARED_DIRECTIVES } from "./directives";
     FormsModule
   ],
   providers: [
-    ...SHARED_SERVICES   
+    ...SHARED_SERVICES
   ]
 })
-export class SharedModule {
-
-}
+export class SharedModule {}

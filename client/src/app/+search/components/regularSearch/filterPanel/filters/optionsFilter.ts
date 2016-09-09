@@ -5,7 +5,8 @@ import {
 import { FormGroup, FormControl } from '@angular/forms';
 import {
     ConverterProvider,
-    convertToView, FilterComponent, OptionsConverter
+    convertToView, FilterComponent,
+    OptionsConverter
 } from '../../../../../lib/';
 import { OptionsPickerControl } from "../../../../../shared/components/";
 import { FilterController } from '../../../../services';
@@ -37,7 +38,6 @@ import { FilterController } from '../../../../services';
             flex: 1 0 100%!important;            
         }
     `]
-
 })
 
 @ConverterProvider({
@@ -50,7 +50,6 @@ export class OptionsFilterComponent extends FilterComponent {
     filterValue: any;
     @Output()
     changed: EventEmitter<any> = new EventEmitter();
-
     form: FormGroup;
     options: FormControl = new FormControl([]);
     defaults: Array<any> = [
@@ -70,7 +69,7 @@ export class OptionsFilterComponent extends FilterComponent {
         super(filterController);
         this.form = new FormGroup({
             options: this.options
-        })
+        });
     }
 
     ngOnInit() {
@@ -79,9 +78,9 @@ export class OptionsFilterComponent extends FilterComponent {
                 return {
                     filterValue: value,
                     immidiate: true
-                }
+                };
             })
-            .subscribe(this.changed)
+            .subscribe(this.changed);
     }
 
     onOptionSelected(value) {

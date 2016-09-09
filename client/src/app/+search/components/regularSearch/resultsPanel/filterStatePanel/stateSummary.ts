@@ -6,7 +6,11 @@ import {
 import { SearchOptionsComponent } from './searchOptions/searchOptions';
 import { ActiveFiltersComponent } from './activeFilters/activeFilters';
 import { FilterController } from '../../../../services';
-import { Subscription, Subject, Observable } from 'rxjs';
+import {
+    Subscription,
+    Subject,
+    Observable
+} from 'rxjs';
 import { FilterModel, FilterStateModel } from "../../../../../lib/models";
 import { isString } from '@angular/compiler/src/facade/lang';
 
@@ -30,7 +34,6 @@ export class StateSummaryPanel implements OnInit {
     private _sort;
     sortType: string;
     sortArow: string;
-    // canCollapse: boolean = true;
     closedByUser: boolean = false;
 
     private requireCollapse: boolean;
@@ -61,7 +64,7 @@ export class StateSummaryPanel implements OnInit {
     }
     loading: boolean = true;
     label: string = 'updating value';
-
+    page: number;
     limit: number;
     get sort() {
         return this._sort;
@@ -73,8 +76,9 @@ export class StateSummaryPanel implements OnInit {
             this.sortType = value.replace(/[+-]/, ' ');
         }
     }
-    page: number;
+
     constructor(private element: ElementRef, private cd: ChangeDetectorRef) { }
+
     ngOnInit() {
         this.state
             .do(() => { this.loading = true; })
@@ -88,7 +92,7 @@ export class StateSummaryPanel implements OnInit {
                     this.page = +searchOptions.page;
                     this.updateView();
                 }
-            })
+            });
     }
 
     updateView() {
@@ -96,7 +100,7 @@ export class StateSummaryPanel implements OnInit {
         var stop = start + this.limit;
         if (this.totalCount) {
             stop = stop > this.totalCount ? this.totalCount : stop;
-            this.label = `${start + 1}..${stop} of ${this.totalCount}`
+            this.label = `${start + 1}..${stop} of ${this.totalCount}`;
         } else {
             this.label = '0';
         }

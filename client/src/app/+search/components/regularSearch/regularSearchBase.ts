@@ -7,10 +7,17 @@ import { TotalCounter } from '../../services';
 import { Store } from "@ngrx/store";
 
 import {
-    AppState, getVehicleState, getFoundVehicles, getFilter,
-    getQuery, getCatalogReady, getConvertedToRouteParamsQuery
+    AppState, getVehicleState,
+    getFoundVehicles, getFilter,
+    getQuery, getCatalogReady,
+    getConvertedToRouteParamsQuery
 } from "../../../core/reducers";
-import { QueryActions, FilterPanelActions, VehicleActions } from "../../../core/actions";
+
+import {
+    QueryActions,
+    FilterPanelActions,
+    VehicleActions
+} from "../../../core/actions";
 
 @Component({
     selector: 'carSearch',
@@ -28,7 +35,6 @@ export class RegularSearchBase implements OnInit {
         private apiService: CarApi,
         private router: Router,
         private route: ActivatedRoute,
-
         private totalCounter: TotalCounter,
         private store: Store<AppState>,
         private vehicleActions: VehicleActions,
@@ -54,10 +60,10 @@ export class RegularSearchBase implements OnInit {
 
         this.store.let(getConvertedToRouteParamsQuery())
             .filter(state => {
-                return state.navigate
+                return state.navigate;
             })
             .map(state => {
-                return state.route
+                return state.route;
             })
             .subscribe((routeParams) => {
                 if (!!routeParams) {

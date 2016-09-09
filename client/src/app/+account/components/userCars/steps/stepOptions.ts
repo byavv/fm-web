@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter, OnDestroy, Host, Optional } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ShowError } from '../../../directives/showError';
 
@@ -14,7 +14,6 @@ import { Car } from '../../../../lib/models';
     styles: [require('./styles/stepInfo.css')]
 })
 export class StepOptionsComponent implements OnInit {
-
     @Output()
     next: EventEmitter<any> = new EventEmitter();
     form: FormGroup;
@@ -22,6 +21,7 @@ export class StepOptionsComponent implements OnInit {
     car: any = {};
     loading: boolean = false;
     submitted: boolean = false;
+    
     constructor(
         private master: MasterController,
         fb: FormBuilder) {

@@ -42,7 +42,7 @@ export class ColorFilterComponent extends FilterComponent {
         super(filterController);
         this.form = new FormGroup({
             colors: this.colors
-        })
+        });
     }
 
     ngOnInit() {

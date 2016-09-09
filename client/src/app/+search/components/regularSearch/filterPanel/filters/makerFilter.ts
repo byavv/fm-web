@@ -58,7 +58,7 @@ export class MakerFilterComponent extends FilterComponent {
         this.form = new FormGroup({
             maker: this.makerControl,
             model: this.modelControl
-        })
+        });
     }
 
     ngAfterViewInit() {
@@ -77,7 +77,7 @@ export class MakerFilterComponent extends FilterComponent {
                 this.models = models || [];
                 this.model = this.models.find((model) => model.name == this.filterValue.model) || '';
                 this.filterValue = { maker: this.maker ? this.maker.name : '' }
-            })
+            });
 
         this.modelControl
             .valueChanges
@@ -86,7 +86,7 @@ export class MakerFilterComponent extends FilterComponent {
                 // model may be undefined or '', the latter is correct for 'any' value
                 if (model != undefined)
                     this.filterValue = { model: this.model ? this.model.name : '' }
-            })
+            });
     }
 
     _resetView() {
@@ -127,7 +127,7 @@ export class MakerFilterComponent extends FilterComponent {
 
     resetFilter() {
         this.filterValue.model = this.filterValue.maker = null;
-        this.changed.next({ filterValue: this.filterValue, immidiate: true })
+        this.changed.next({ filterValue: this.filterValue, immidiate: true });
     }
     setValue(value) {
         this.filterValue = value;

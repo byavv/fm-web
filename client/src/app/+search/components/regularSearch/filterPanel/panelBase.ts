@@ -1,14 +1,19 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, OnDestroy, QueryList } from '@angular/core';
-import { FilterWrapperComponent } from './filterWrapper'
+import {
+    Component, OnInit,
+    EventEmitter,
+    Output, ViewChild,
+    OnDestroy, QueryList
+} from '@angular/core';
+import { FilterWrapperComponent } from './filterWrapper';
 import * as filters from './filters';
 import { TotalCounter } from '../../../services';
-import { Api } from "../../../../shared/services";
 import { FilterModel, FilterStateModel } from "../../../../lib/models";
 import { LoaderComponent } from "../../../../shared/components/loader/loader";
 import { Subscription, Observable } from "rxjs";
 import { Store } from "@ngrx/store";
 import { AppState, getFilter } from "../../../../core/reducers";
 import { QueryActions } from "../../../../core/actions";
+
 @Component({
     selector: 'carFilterPanel',
     template: require("./panelBase.html"),
@@ -52,8 +57,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
     constructor(
         private store: Store<AppState>,
         private queryActions: QueryActions,
-        private counter: TotalCounter,
-        private apiService: Api) { }
+        private counter: TotalCounter) { }
 
     ngOnInit() {
         this._counterSubscr = this.counter.subscribe((count: any) => {
@@ -66,7 +70,7 @@ export class CarFilterPanelComponent implements OnInit, OnDestroy {
                     this.filters = state;
                     this.alreadyLoaded = true;
                 }
-            })
+            });
     }
     ngOnDestroy() {
         if (this._filterSrvSubscr)

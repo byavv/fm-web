@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { MakerApi, CarApi } from '../../shared/services';
 import { Observable, Subscription, Subject } from 'rxjs';
 import { convertToRoute, construct } from '../../lib/';
-import * as converters from "../../lib/converters";
+import * as converters from '../../lib/converters';
 import { FilterStateModel } from '../../lib/models';
 
-import { AppState, getMakers, getCatalogReady } from "../../core/reducers";
-import { CatalogActions } from "../../core/actions";
+import { AppState, getMakers, getCatalogReady } from '../../core/reducers';
+import { CatalogActions } from '../../core/actions';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -18,9 +18,9 @@ import { Store } from '@ngrx/store';
 })
 export class QuickSearchComponent implements OnDestroy {
     carFormModel: any = {
-        maker: "",
-        model: "",
-        year: ""
+        maker: '',
+        model: '',
+        year: ''
     };
 
     carMakers: Array<any> = [];
@@ -54,14 +54,14 @@ export class QuickSearchComponent implements OnDestroy {
 
     ngAfterViewInit() {
         for (let i = 1980; i <= new Date().getFullYear(); i++) {
-            this.yearFroms.push(i)
+            this.yearFroms.push(i);
         }
 
         this.ready$ = this.store
             .let(getCatalogReady());
 
         this.appStoreSubscr = this.ready$
-            .do(() => { console.log('--------------Catalog ready----------------') })
+            .do(() => { console.log('--------------Catalog ready----------------'); })
             .flatMap(() => this.store.let(getMakers()))
             .do((makers) => {
                 this.loading = true;
@@ -71,7 +71,7 @@ export class QuickSearchComponent implements OnDestroy {
             .subscribe(this.count$);
 
         this.form
-            .controls["maker"]
+            .controls['maker']
             .valueChanges
             .do((value) => {
                 this.loading = true;
@@ -82,7 +82,7 @@ export class QuickSearchComponent implements OnDestroy {
                     this.makerApi.getCarModels(value.id),
                     this._operateCount({ maker: value }),
                     (models, count) => {
-                        return { models: models, count: count }
+                        return { models: models, count: count };
                     });
             })
             .subscribe((val: any) => {
@@ -91,14 +91,14 @@ export class QuickSearchComponent implements OnDestroy {
             }, console.error);
 
         this.form
-            .controls["model"]
+            .controls['model']
             .valueChanges
             .do(() => { this.loading = true; })
             .switchMap((value) => this._operateCount({ model: value }))
             .subscribe(this.count$, console.error);
 
         this.form
-            .controls["priceUp"]
+            .controls['priceUp']
             .valueChanges
             .debounceTime(500)
             .do(() => { this.loading = true; })
@@ -106,7 +106,7 @@ export class QuickSearchComponent implements OnDestroy {
             .subscribe(this.count$, console.error);
 
         this.form
-            .controls["yearFrom"]
+            .controls['yearFrom']
             .valueChanges
             .do(() => { this.loading = true; })
             .switchMap((value) => this._operateCount({ yearFrom: value }))
@@ -119,7 +119,7 @@ export class QuickSearchComponent implements OnDestroy {
     }
 
     _operateCount(value = {}): Observable<number> {
-        var searchRequest = Object.assign({}, this.form.value, value);
+        let searchRequest = Object.assign({}, this.form.value, value);
         if (!!searchRequest.maker)
             searchRequest.maker = searchRequest.maker.name;
         return this.carApi.count(searchRequest)
@@ -136,7 +136,7 @@ export class QuickSearchComponent implements OnDestroy {
     }
 
     submit() {
-        var query = this.form.value;
+        let query = this.form.value;
         let model = new FilterStateModel();
         let searchRequest = Object.assign(model, query, { maker: query.maker.name });
         let routeParams = convertToRoute(this.convertersPipe(), searchRequest);

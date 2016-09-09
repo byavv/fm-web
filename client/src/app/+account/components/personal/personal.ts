@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit {
     model: any = {};
     error;
     info;
-    constructor(private usersBackEnd: ProfileApi, private identity: LoopBackAuth) {
+    constructor(private usersBackEnd: ProfileApi) {
         this.personalForm = new FormGroup({
             name: new FormControl(),
             location: new FormControl()

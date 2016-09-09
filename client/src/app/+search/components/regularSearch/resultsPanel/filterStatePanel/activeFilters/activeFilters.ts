@@ -20,9 +20,9 @@ export class ActiveFiltersComponent {
     private _appliedFilters: Array<any> = [];
     private _converters: Array<ConverterBase> = [];
     private _subscription: Subscription;
+    
     @Output()
     reset: EventEmitter<any> = new EventEmitter<any>();
-
     @Input()
     set filters(array: Array<any>) {
         this._appliedFilters = array.map(filter => {
@@ -31,7 +31,7 @@ export class ActiveFiltersComponent {
             return {
                 id: filter.id,
                 viewValue: converter ? converter.convertToView(filter.value) : "Converter not found"
-            }
+            };
         })
     }
     get filters() {
@@ -47,12 +47,12 @@ export class ActiveFiltersComponent {
     }
 
     resetFilter(filterId) {
-        var converter = this._converters.find((converter) => converter.converterId === filterId);
+        var converter = this._converters
+            .find((converter) => converter.converterId === filterId);
         var o = {
             [filterId]: converter.resetValue(),
         }
-        this.filterController.resetFilter$.next(o)
-        //this.reset.next(converter.resetValue());
+        this.filterController.resetFilter$.next(o);       
     }
     ngOnDestroy() {
         if (this._subscription) {

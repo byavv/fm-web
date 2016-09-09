@@ -1,4 +1,8 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+    Component,
+    ChangeDetectionStrategy,
+    Input
+} from '@angular/core';
 import { Car } from '../../../../../../lib/models';
 
 @Component({
