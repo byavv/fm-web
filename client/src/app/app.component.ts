@@ -43,7 +43,7 @@ export class App {
     private catalogActions: CatalogActions,
     appController: AppController) {
     if ('production' === ENV) {
-      LoopBackConfig.setBaseURL('http://localhost');
+      LoopBackConfig.setBaseURL('');
     } else {
       LoopBackConfig.setBaseURL('http://localhost:3000');
     }
