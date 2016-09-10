@@ -1,19 +1,24 @@
 FROM node:6.3
 
-# File Author / Maintainer
+# Maintainer
 MAINTAINER Aksenchyk V. <aksenchyk.v@gmail.com>
+
+# Define app directory
+WORKDIR /usr/src/app
 
 # Create app directory
 RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
 
-# Copy app source
-COPY . /usr/src/app
+# Install app dependencies
+COPY package.json /usr/src/app/
 
-# Install dependencies and build client
-RUN \ 
-    npm install \    
-    && npm run build:prod
+RUN npm install
 
+# Copy client sources
+COPY . /usr/src/app/
+# Build client
+RUN npm run build:prod
 
-CMD [ "npm", "start" ]
+EXPOSE 3009
+
+CMD [ "npm", "start"]
