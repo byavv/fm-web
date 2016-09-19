@@ -1,11 +1,9 @@
 import {
     Component, EventEmitter, Input,
-    Output, ComponentFactoryResolver,
-    ComponentMetadata,
+    Output, ComponentFactoryResolver,   
     ComponentFactory, ViewContainerRef,
     OnInit, ReflectiveInjector,
-    Compiler, NgModule, Type,
-    ModuleWithComponentFactories,
+    Compiler, NgModule, Type    
 } from '@angular/core';
 
 import { SharedModule } from '../../../../shared';
@@ -14,6 +12,7 @@ import * as filters from './filters';
 import { allFilters } from './filters';
 import { FilterModel } from '../../../../lib/models';
 import { IFilterComponent } from '../../../../lib/';
+
 @Component({
     selector: 'filterWrapper',
     template: `
