@@ -11,7 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { APP_CORE_API_PROVIDERS } from '../../core';
 import { Router, RouterModule } from '@angular/router';
 import { Subject, Observable } from 'rxjs';
-import { TestBed, async, inject } from '@angular/core/testing'
+import { TestBed, async, inject, fakeAsync, tick } from '@angular/core/testing'
 import { Store } from '@ngrx/store';
 import { CatalogActions } from "../../core/actions";
 import { AppState, getMakers, getCatalogReady } from "../../core/reducers";
@@ -29,8 +29,8 @@ describe('COMPONENTS TESTS', () => {
     describe("Quich search component tests", () => {
         beforeEach(() => TestBed.configureTestingModule({
             imports: [
-                RouterModule,        
-                StoreModule.provideStore(reducers),               
+                RouterModule,
+                StoreModule.provideStore(reducers),
                 SharedModule
             ],
             providers: [
@@ -63,36 +63,29 @@ describe('COMPONENTS TESTS', () => {
             expect(compiled.innerHTML).toContain('Made by');
         }));
 
-        it('should contain count', async(
+        it('should contain count', fakeAsync(
             inject([Store, CatalogActions],
                 (store: Store<AppState>, catalogActions: CatalogActions) => {
 
                     let fixture = TestBed.createComponent(QuickSearchComponent);
+                    fixture.detectChanges();
 
-                    let beingTestedCompInst: QuickSearchComponent = fixture
+                    let compInst: QuickSearchComponent = fixture
                         .debugElement
                         .componentInstance;
-
-                    beingTestedCompInst
+                    compInst
                         .count$
-                        .subscribe((value) => {
+                        .subscribe((value) => {                           
                             expect(value).toBe(42);
-                            fixture
-                                .whenStable()
-                                .then(() => {
-                                    let buttonDe = fixture.debugElement.query(By.css('.btn'));
-                                    expect(buttonDe.nativeElement.innerHTML).toContain('Show 412');
-                                })
                         });
-
-                    //   beingTestedCompInst.ready$                              
-                    //        .do(() => { console.log('ready') })
-                    //        .subscribe(() => { })
-
                     store.dispatch(catalogActions.setAppLookups({
-                        makers: [],
-                        engineTypes: []
+                        makers: [{ name: 'BMW' }, {}],
+                        engineTypes: [{}, {}, {}]
                     }));
+                    tick();
+                    fixture.detectChanges();
+                    let buttonDe = fixture.debugElement.query(By.css('.btn'));
+                    expect(buttonDe.nativeElement.innerHTML).toContain('Show 42');
                 })
         ));
     });
