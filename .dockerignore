@@ -3,3 +3,6 @@ node_modules
 build
 typings
 nodemon.json
+coverage
+dist
+*deprecated*
