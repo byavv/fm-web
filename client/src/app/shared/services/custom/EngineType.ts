@@ -53,8 +53,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public findByIdCars(id: any, fk: any) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars/:fk";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -80,8 +80,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public destroyByIdCars(id: any, fk: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars/:fk";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -114,8 +114,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public updateByIdCars(id: any, fk: any, data: Car = undefined) {
     let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars/:fk";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -146,8 +146,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public getCars(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars";
     let routeParams: any = {
       id: id
     };
@@ -178,8 +178,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public createCars(id: any, data: Car = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars";
     let routeParams: any = {
       id: id
     };
@@ -204,8 +204,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public deleteCars(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars";
     let routeParams: any = {
       id: id
     };
@@ -232,8 +232,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public countCars(id: any, where: any = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars/count";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars/count";
     let routeParams: any = {
       id: id
     };
@@ -262,8 +262,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public create(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -291,8 +291,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public patchOrCreate(data: any = undefined) {
     let method: string = "PATCH";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -320,8 +320,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public replaceOrCreate(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/replaceOrCreate";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/replaceorcreate";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -346,8 +346,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public exists(id: any) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/exists";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/exists";
     let routeParams: any = {
       id: id
     };
@@ -375,8 +375,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id";
     let routeParams: any = {
       id: id
     };
@@ -407,8 +407,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public replaceById(id: any, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/replace";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/replace";
     let routeParams: any = {
       id: id
     };
@@ -436,8 +436,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -464,8 +464,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/findOne";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/findone";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -491,8 +491,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/update";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/update";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -519,8 +519,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public deleteById(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id";
     let routeParams: any = {
       id: id
     };
@@ -545,8 +545,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public count(where: any = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/count";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/count";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -575,8 +575,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public patchAttributes(id: any, data: any = undefined) {
     let method: string = "PATCH";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id";
     let routeParams: any = {
       id: id
     };
@@ -604,8 +604,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    *  - `changes` – `{ReadableStream}` - 
    */
   public createChangeStream() {
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/change-stream";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
       let emit = (msg) => subject.next(JSON.parse(msg.data));
@@ -637,8 +637,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public createManyCars(id: any, data: Car = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes/:id/cars";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes/:id/cars";
     let routeParams: any = {
       id: id
     };
@@ -668,8 +668,8 @@ export class EngineTypeApi extends BaseLoopBackApi {
    */
   public createMany(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/EngineTypes";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/enginetypes";
     let routeParams: any = {};
     let postBody: any = {
       data: data

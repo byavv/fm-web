@@ -28,8 +28,8 @@ export class MakerApi extends BaseLoopBackApi {
 
   constructor(
     @Inject(Http) http: Http,
-    @Inject(LoopBackAuth) protected auth: LoopBackAuth, 
-    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams, 
+    @Inject(LoopBackAuth) protected auth: LoopBackAuth,
+    @Inject(JSONSearchParams) protected searchParams: JSONSearchParams,
     @Optional() @Inject(ErrorHandler) errorHandler: ErrorHandler
   ) {
     super(http, auth, searchParams, errorHandler);
@@ -53,8 +53,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public findByIdCarModels(id: any, fk: any) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels/:fk";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -80,8 +80,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public destroyByIdCarModels(id: any, fk: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels/:fk";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -114,8 +114,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public updateByIdCarModels(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels/:fk";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -146,8 +146,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public getCarModels(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels";
     let routeParams: any = {
       id: id
     };
@@ -178,8 +178,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public createCarModels(id: any, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels";
     let routeParams: any = {
       id: id
     };
@@ -204,8 +204,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public deleteCarModels(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels";
     let routeParams: any = {
       id: id
     };
@@ -232,8 +232,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public countCarModels(id: any, where: any = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels/count";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels/count";
     let routeParams: any = {
       id: id
     };
@@ -262,8 +262,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public create(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -291,8 +291,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public patchOrCreate(data: any = undefined) {
     let method: string = "PATCH";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -320,8 +320,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public replaceOrCreate(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/replaceOrCreate";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/replaceOrCreate";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -346,8 +346,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public exists(id: any) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/exists";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/exists";
     let routeParams: any = {
       id: id
     };
@@ -375,8 +375,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id";
     let routeParams: any = {
       id: id
     };
@@ -407,8 +407,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public replaceById(id: any, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/replace";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/replace";
     let routeParams: any = {
       id: id
     };
@@ -436,15 +436,15 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
     if (filter) urlParams.filter = filter;
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instances: Array<Maker>) =>
-        instances.map((instance: Maker) => new Maker(instance))
+      instances.map((instance: Maker) => new Maker(instance))
     );
   }
 
@@ -464,8 +464,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/findOne";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/findOne";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -491,8 +491,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/update";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/update";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -519,8 +519,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public deleteById(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id";
     let routeParams: any = {
       id: id
     };
@@ -545,8 +545,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public count(where: any = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/count";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/count";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -575,8 +575,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public patchAttributes(id: any, data: any = undefined) {
     let method: string = "PATCH";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id";
     let routeParams: any = {
       id: id
     };
@@ -604,16 +604,16 @@ export class MakerApi extends BaseLoopBackApi {
    *  - `changes` – `{ReadableStream}` - 
    */
   public createChangeStream() {
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/change-stream";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/change-stream";
     let subject = new Subject();
     if (typeof EventSource !== 'undefined') {
-      let emit    = (msg) => subject.next(JSON.parse(msg.data));
+      let emit = (msg) => subject.next(JSON.parse(msg.data));
       var source = new EventSource(url);
       source.addEventListener('data', emit);
       source.onerror = emit;
     } else {
-      console.warn('SDK Builder: EventSource is not supported'); 
+      console.warn('SDK Builder: EventSource is not supported');
     }
     return subject.asObservable();
   }
@@ -637,8 +637,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public createManyCarModels(id: any, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers/:id/carModels";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers/:id/carmodels";
     let routeParams: any = {
       id: id
     };
@@ -668,8 +668,8 @@ export class MakerApi extends BaseLoopBackApi {
    */
   public createMany(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-    "/Makers";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/makers";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -677,7 +677,7 @@ export class MakerApi extends BaseLoopBackApi {
     let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result.map((instances: Array<Maker>) =>
-        instances.map((instance: Maker) => new Maker(instance))
+      instances.map((instance: Maker) => new Maker(instance))
     );
   }
 

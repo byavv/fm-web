@@ -52,8 +52,8 @@ export class ProfileApi extends BaseLoopBackApi {
   */
   public getProfile(userId: any = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/profiles/getProfile";
+    let url: string = LoopBackConfig.getPath() +  LoopBackConfig.getApiVersion()+ "/private/" +
+      "/profiles/getprofile";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -84,8 +84,8 @@ export class ProfileApi extends BaseLoopBackApi {
    */
   public updateProfile(profile: any = undefined, userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/profiles/updateProfile";
+    let url: string = LoopBackConfig.getPath() +  LoopBackConfig.getApiVersion()+ "/private/" +
+      "/profiles/updateprofile";
     let routeParams: any = {};
     let postBody: any = profile;
     let urlParams: any = {};
@@ -115,7 +115,7 @@ export class ProfileApi extends BaseLoopBackApi {
    */
   public me(userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
+    let url: string = LoopBackConfig.getPath() +  LoopBackConfig.getApiVersion()+ "/private/" +
       "/profiles/me";
     let routeParams: any = {};
     let postBody: any = {

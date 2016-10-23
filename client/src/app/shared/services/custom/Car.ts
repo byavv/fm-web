@@ -55,7 +55,7 @@ export class CarApi extends BaseLoopBackApi {
   public getMaker(id: any, refresh: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/maker";
+      "/cars/:id/maker";
     let routeParams: any = {
       id: id
     };
@@ -85,7 +85,7 @@ export class CarApi extends BaseLoopBackApi {
   public getCarModel(id: any, refresh: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carModel";
+      "/cars/:id/carmodel";
     let routeParams: any = {
       id: id
     };
@@ -115,7 +115,7 @@ export class CarApi extends BaseLoopBackApi {
   public getCarType(id: any, refresh: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carType";
+      "/cars/:id/cartype";
     let routeParams: any = {
       id: id
     };
@@ -147,7 +147,7 @@ export class CarApi extends BaseLoopBackApi {
   public createCarType(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carType";
+      "/cars/:id/cartype";
     let routeParams: any = {
       id: id
     };
@@ -180,7 +180,7 @@ export class CarApi extends BaseLoopBackApi {
   public updateCarType(id: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carType";
+      "/cars/:id/cartype";
     let routeParams: any = {
       id: id
     };
@@ -206,7 +206,7 @@ export class CarApi extends BaseLoopBackApi {
   public destroyCarType(id: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carType";
+      "/cars/:id/cartype";
     let routeParams: any = {
       id: id
     };
@@ -235,7 +235,7 @@ export class CarApi extends BaseLoopBackApi {
   public findByIdCarOptions(id: any, fk: any) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/:fk";
+      "/cars/:id/caroptions/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -262,7 +262,7 @@ export class CarApi extends BaseLoopBackApi {
   public destroyByIdCarOptions(id: any, fk: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/:fk";
+      "/cars/:id/caroptions/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -296,7 +296,7 @@ export class CarApi extends BaseLoopBackApi {
   public updateByIdCarOptions(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/:fk";
+      "/cars/:id/caroptions/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -332,7 +332,7 @@ export class CarApi extends BaseLoopBackApi {
   public linkCarOptions(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/rel/:fk";
+      "/cars/:id/caroptions/rel/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -361,7 +361,7 @@ export class CarApi extends BaseLoopBackApi {
   public unlinkCarOptions(id: any, fk: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/rel/:fk";
+      "cars/:id/caroptions/rel/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -391,7 +391,7 @@ export class CarApi extends BaseLoopBackApi {
   public existsCarOptions(id: any, fk: any) {
     let method: string = "HEAD";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/rel/:fk";
+      "/cars/:id/caroptions/rel/:fk";
     let routeParams: any = {
       id: id,
       fk: fk
@@ -421,7 +421,7 @@ export class CarApi extends BaseLoopBackApi {
   public getEngineType(id: any, refresh: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/engineType";
+      "/cars/:id/enginetype";
     let routeParams: any = {
       id: id
     };
@@ -451,7 +451,7 @@ export class CarApi extends BaseLoopBackApi {
   public getCarOptions(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions";
+      "/cars/:id/caroptions";
     let routeParams: any = {
       id: id
     };
@@ -483,7 +483,7 @@ export class CarApi extends BaseLoopBackApi {
   public createCarOptions(id: any, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions";
+      "/cars/:id/caroptions";
     let routeParams: any = {
       id: id
     };
@@ -509,7 +509,7 @@ export class CarApi extends BaseLoopBackApi {
   public deleteCarOptions(id: any) {
     let method: string = "DELETE";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions";
+      "/cars/:id/caroptions";
     let routeParams: any = {
       id: id
     };
@@ -537,7 +537,7 @@ export class CarApi extends BaseLoopBackApi {
   public countCarOptions(id: any, where: any = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/carOptions/count";
+      "/cars/:id/caroptions/count";
     let routeParams: any = {
       id: id
     };
@@ -567,7 +567,7 @@ export class CarApi extends BaseLoopBackApi {
   public create(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars";
+      "/cars";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -596,7 +596,7 @@ export class CarApi extends BaseLoopBackApi {
   public patchOrCreate(data: any = undefined) {
     let method: string = "PATCH";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars";
+      "/cars";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -625,7 +625,7 @@ export class CarApi extends BaseLoopBackApi {
   public replaceOrCreate(data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/replaceOrCreate";
+      "/cars/replaceorcreate";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -651,7 +651,7 @@ export class CarApi extends BaseLoopBackApi {
   public exists(id: any) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id/exists";
+      "/cars/:id/exists";
     let routeParams: any = {
       id: id
     };
@@ -680,8 +680,8 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+      "/cars/:id";
     let routeParams: any = {
       id: id
     };
@@ -710,7 +710,7 @@ export class CarApi extends BaseLoopBackApi {
   public find(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars";
+      "/cars";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -738,7 +738,7 @@ export class CarApi extends BaseLoopBackApi {
   public findOne(filter: LoopBackFilter = undefined) {
     let method: string = "GET";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/findOne";
+      "/cars/findone";
     let routeParams: any = {};
     let postBody: any = {};
     let urlParams: any = {};
@@ -765,7 +765,7 @@ export class CarApi extends BaseLoopBackApi {
   public updateAll(where: any = undefined, data: any = undefined) {
     let method: string = "POST";
     let url: string = LoopBackConfig.getPath() + "/" + LoopBackConfig.getApiVersion() +
-      "/Cars/update";
+      "/cars/update";
     let routeParams: any = {};
     let postBody: any = {
       data: data
@@ -792,8 +792,8 @@ export class CarApi extends BaseLoopBackApi {
    */
   public deleteById(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/Cars/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+      "/cars/:id";
     let routeParams: any = {
       id: id
     };
@@ -803,7 +803,7 @@ export class CarApi extends BaseLoopBackApi {
     return result;
   }
 
-  
+
   /**
    * Create a new instance of the model and persist it into the data source.
    *
@@ -823,10 +823,10 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public createNew(car: any = undefined, userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/Cars/new";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+      "/cars/new";
     let routeParams: any = {};
-    let postBody: any = car;      
+    let postBody: any = car;
     let urlParams: any = {};
     if (car) urlParams.car = car;
     if (userId) urlParams.userId = userId;
@@ -854,13 +854,13 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public updateCurrent(id: any = undefined, car: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/Cars/update/:id";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+      "/cars/update/:id";
     let routeParams: any = {
       id: id
     };
     let postBody: any = car;
-    let urlParams: any = {};   
+    let urlParams: any = {};
     let result = this.request(method, url, routeParams, urlParams, postBody);
     return result;
   }
@@ -879,8 +879,8 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public getCarsByPrinciple(userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/private/" + LoopBackConfig.getApiVersion() +
-      "/Cars/getusercars";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+      "/cars/getusercars";
     let routeParams: any = {};
     let postBody: any = {
       userId: userId
@@ -908,8 +908,8 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public search(query: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/Cars/search";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/cars/search";
     let routeParams: any = {};
     let postBody: any = query;
     let urlParams: any = {};
@@ -936,8 +936,8 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public count(query: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
-      "/Cars/count";
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+      "/cars/count";
     let routeParams: any = {};
     let postBody: any = query;
     let urlParams: any = {};
