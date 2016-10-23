@@ -63,7 +63,7 @@ export class QuickSearchComponent implements OnDestroy {
         this.appStoreSubscr = this.ready$
             .do(() => { console.log('--------------Catalog ready----------------'); })
             .flatMap(() => this.store.let(getMakers()))
-            .do((makers) => {
+            .do((makers: any) => {
                 this.loading = true;
                 this.carMakers = makers;
             })
@@ -73,7 +73,7 @@ export class QuickSearchComponent implements OnDestroy {
         this.form
             .controls['maker']
             .valueChanges
-            .do((value) => {
+            .do((value: any) => {
                 this.loading = true;
                 this.carFormModel.model = '';
             })
@@ -94,7 +94,7 @@ export class QuickSearchComponent implements OnDestroy {
             .controls['model']
             .valueChanges
             .do(() => { this.loading = true; })
-            .switchMap((value) => this._operateCount({ model: value }))
+            .switchMap((value: any) => this._operateCount({ model: value }))
             .subscribe(this.count$, console.error);
 
         this.form
@@ -102,14 +102,14 @@ export class QuickSearchComponent implements OnDestroy {
             .valueChanges
             .debounceTime(500)
             .do(() => { this.loading = true; })
-            .switchMap((value) => this._operateCount({ priceUp: value }))
+            .switchMap((value: any) => this._operateCount({ priceUp: value }))
             .subscribe(this.count$, console.error);
 
         this.form
             .controls['yearFrom']
             .valueChanges
             .do(() => { this.loading = true; })
-            .switchMap((value) => this._operateCount({ yearFrom: value }))
+            .switchMap((value: any) => this._operateCount({ yearFrom: value }))
             .subscribe(this.count$, console.error);
     }
 

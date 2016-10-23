@@ -63,7 +63,7 @@ export class StepInfoComponent implements OnInit {
         this.store
             .let(getCatalogReady())
             .do(() => { this.loading = true })
-            .subscribe((defaults) => {
+            .subscribe((defaults: any) => {
                 this.makers = defaults.makers || [];
                 this.engineTypes = defaults.engineTypes || [];
                 this.master.init$.subscribe((car: Car) => {
@@ -91,7 +91,7 @@ export class StepInfoComponent implements OnInit {
             .valueChanges
             .filter(value => value)
             .do(() => { this.loading = true })
-            .switchMap(value => !!value.id ? this.makersApi.getCarModels(value.id) : Observable.of([]))
+            .switchMap((value: any) => !!value.id ? this.makersApi.getCarModels(value.id) : Observable.of([]))
             .subscribe((models: Array<any>) => {
                 this.loading = false;
                 this.models = models;

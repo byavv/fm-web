@@ -2,7 +2,7 @@ import { ConverterBase } from './ConverterBase';
 import { Converter } from '../decorators';
 import {
     isNumber, NumberWrapper,
-    StringWrapper, isString, isPresent
+    isString, isPresent
 } from '@angular/compiler/src/facade/lang';
 @Converter({
     converterId: 'price',
@@ -18,7 +18,7 @@ export class PriceConverter extends ConverterBase {
         if (this.isNumeric(value)) {
             priceFrom = priceUp = value;
         } else {
-            if (isString(value) && StringWrapper.contains(value, '..')) {
+            if (isString(value) && value.includes('..')) {
                 let params = value.split('..');
                 priceFrom = params[0] ? params[0] : '';
                 priceUp = params[1] ? params[1] : '';

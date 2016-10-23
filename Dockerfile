@@ -1,4 +1,4 @@
-FROM node:6.3
+FROM node:6.5.0
 
 # Maintainer
 MAINTAINER Aksenchyk V. <aksenchyk.v@gmail.com>
@@ -17,7 +17,7 @@ RUN npm install
 # Copy client sources
 COPY . /usr/src/app/
 # Build client
-RUN npm run build:prod
+RUN npm run build:dev
 
 EXPOSE 3009
 

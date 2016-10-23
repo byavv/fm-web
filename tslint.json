@@ -5,7 +5,7 @@
   "rules": {
     "member-access": false,
     "member-ordering": [
-      false,
+      true,
       "public-before-private",
       "static-before-instance",
       "variables-before-functions"
@@ -51,7 +51,6 @@
     ],
     "no-construct": true,
     "no-debugger": true,
-    "no-duplicate-key": true,
     "no-duplicate-variable": true,
     "no-empty": false,
     "no-eval": true,

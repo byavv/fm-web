@@ -67,7 +67,7 @@ const PROVIDERS = [
     HttpModule,
 
     // import third-party modules
-    RouterModule.forRoot(routes, { useHash: false }),
+    RouterModule.forRoot(routes, { useHash: false/*,  preloadingStrategy: PreloadAllModules*/ }),
     StoreModule.provideStore(reducer),
 
     // import Shared module

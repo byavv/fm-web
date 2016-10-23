@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "noEmitHelpers": true,
-    "strictNullChecks": false,
+    "noImplicitAny": false,
     "baseUrl": "./client/src",
     "paths": [],
     "lib": [
