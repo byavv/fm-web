@@ -908,7 +908,7 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public search(query: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public" +
       "/cars/search";
     let routeParams: any = {};
     let postBody: any = query;
@@ -936,7 +936,7 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public count(query: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public" +
       "/cars/count";
     let routeParams: any = {};
     let postBody: any = query;

@@ -764,7 +764,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public login(credentials: any, include: any = 'user') {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public" +
       "/users/login";
     let routeParams: any = {};
     let postBody: any = {
@@ -807,7 +807,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public signup(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public" +
       "/users/signup";
     let routeParams: any = {};
     let postBody: any = {
@@ -834,7 +834,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public logout() {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + "/public/" + LoopBackConfig.getApiVersion() +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public" +
       "/users/signout";
     let routeParams: any = {};
     let postBody: any = { accessToken: this.auth.user.accessToken };
