@@ -17,6 +17,7 @@ const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 /*
  * Webpack Constants
  */
@@ -34,7 +35,7 @@ module.exports = function (options) {
             'polyfills': ['./client/src/polyfills.browser.ts'],
             'vendor': ['./client/src/vendor.browser.ts'],
             'main': ['./client/src/main.browser.ts']
-        },        
+        },
         resolve: {
             extensions: ['.ts', '.js', '.json'],
             modules: [helpers.root('client/src'), 'node_modules']
@@ -57,30 +58,17 @@ module.exports = function (options) {
                 {
                     test: /\.css$/,
                     loaders: ['to-string-loader', 'css-loader']
-                },
+                },               
                 {
                     test: /\.scss$/,
                     exclude: [helpers.root('client/src')],
                     loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass'])
                 },
+                // all css required in src/app files will be merged in js files
                 {
                     test: /\.scss$/,
                     exclude: [helpers.root('client/assets')],
-                    use: [
-                        'raw-loader',
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: function () {
-                                    return [
-                                        require('precss')({ /* ...options */ }),
-                                        require('autoprefixer')({ /* ...options */ })
-                                    ];
-                                }
-                            }
-                        },
-                        'sass-loader'
-                    ]
+                    loader: 'raw!postcss!sass'
                 },
                 {
                     test: /\.html$/,
@@ -123,7 +111,17 @@ module.exports = function (options) {
             new HtmlElementsPlugin({
                 headTags: require('./head-config.common')
             }),
-            new LoaderOptionsPlugin({}),
+            new LoaderOptionsPlugin({
+                postcss: [
+                    autoprefixer({
+                        browsers: ['last 2 version']
+                    })
+                ],
+                tslint: {
+                    emitErrors: false,
+                    failOnHint: false
+                },
+            }),
             new ExtractTextPlugin("main.css")
         ],
         node: {
