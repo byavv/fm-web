@@ -58,13 +58,12 @@ module.exports = function (options) {
                 {
                     test: /\.css$/,
                     loaders: ['to-string-loader', 'css-loader']
-                },               
+                },
                 {
                     test: /\.scss$/,
                     exclude: [helpers.root('client/src')],
                     loader: ExtractTextPlugin.extract(['css', 'postcss', 'sass'])
                 },
-                // all css required in src/app files will be merged in js files
                 {
                     test: /\.scss$/,
                     exclude: [helpers.root('client/assets')],
