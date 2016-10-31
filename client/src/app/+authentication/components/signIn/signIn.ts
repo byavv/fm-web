@@ -18,8 +18,8 @@ export class SignInComponent {
         private authService: LoopBackAuth
     ) {
         this.signInForm = builder.group({
-            'username': ['admin'],
-            'password': ['admin']
+            'username': [''],
+            'password': ['']
         });
     }
     onSubmit(value) {

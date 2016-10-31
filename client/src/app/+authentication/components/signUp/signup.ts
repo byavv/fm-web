@@ -16,9 +16,9 @@ export class SignUpComponent {
         private userApi: UserApi
     ) {
         this.signInForm = builder.group({
-            'username': ['admin'],
-            'email': ['myemail@gmail.com'],
-            'password': ['admin']
+            'username': [''],
+            'email': [''],
+            'password': ['']
         });
     }
 

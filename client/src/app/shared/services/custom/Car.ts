@@ -680,7 +680,7 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public findById(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/public" +
       "/cars/:id";
     let routeParams: any = {
       id: id
@@ -792,7 +792,7 @@ export class CarApi extends BaseLoopBackApi {
    */
   public deleteById(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/cars/:id";
     let routeParams: any = {
       id: id
@@ -823,7 +823,7 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public createNew(car: any = undefined, userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/cars/new";
     let routeParams: any = {};
     let postBody: any = car;
@@ -854,7 +854,7 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public updateCurrent(id: any = undefined, car: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/cars/update/:id";
     let routeParams: any = {
       id: id
@@ -879,7 +879,7 @@ export class CarApi extends BaseLoopBackApi {
   //+
   public getCarsByPrinciple(userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/cars/getusercars";
     let routeParams: any = {};
     let postBody: any = {

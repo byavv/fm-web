@@ -45,7 +45,8 @@ export class App {
     if ('production' === ENV) {
       LoopBackConfig.setBaseURL('');
     } else {
-      LoopBackConfig.setBaseURL('http://localhost:3000');
+     // LoopBackConfig.setBaseURL('http://localhost:3001/');
+      LoopBackConfig.setBaseURL('');
     }
     LoopBackConfig.setApiVersion('api');
     this.init$ = this.store

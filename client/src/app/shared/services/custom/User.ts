@@ -112,7 +112,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public updateByIdAccessTokens(id: any, fk: any, data: any = undefined) {
     let method: string = "PUT";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/:id/accesstokens/:fk";
     let routeParams: any = {
       id: id,
@@ -144,7 +144,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public getAccessTokens(id: any, filter: LoopBackFilter = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/:id/accesstokens";
     let routeParams: any = {
       id: id
@@ -176,7 +176,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public createAccessTokens(id: any, data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/:id/accesstokens";
     let routeParams: any = {
       id: id
@@ -202,7 +202,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public deleteAccessTokens(id: any) {
     let method: string = "DELETE";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/:id/accesstokens";
     let routeParams: any = {
       id: id
@@ -318,7 +318,7 @@ export class UserApi extends BaseLoopBackApi {
   */
   public getUserByPrinciple(userId: any = undefined) {
     let method: string = "GET";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/getuser";
     let routeParams: any = {};
     let postBody: any = {};
@@ -348,7 +348,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public deleteUser(userId: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/deleteuserandprofile";
     let routeParams: any = {};
     let postBody: any = {
@@ -382,7 +382,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public updatePassword(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/updatepassword";
     let routeParams: any = {};
     let postBody: any = data;
@@ -413,7 +413,7 @@ export class UserApi extends BaseLoopBackApi {
    */
   public updateAccount(data: any = undefined) {
     let method: string = "POST";
-    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private/" +
+    let url: string = LoopBackConfig.getPath() + LoopBackConfig.getApiVersion() + "/private" +
       "/users/updateaccount";
     let routeParams: any = {};
     let postBody: any = data;

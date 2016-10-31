@@ -7,7 +7,7 @@ export class TrackerApi {
     constructor(private _http: ExtHttp) { }
     public getLastAdded(): Observable<any> {
         return this._http
-            .get("/tracks?filter[limit]=5&filter[order]=added%20DESC")
+            .get("/api/tracks?filter[limit]=5&filter[order]=added%20DESC")
             .map(res => res.json());
     }
 }
